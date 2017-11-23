@@ -16,6 +16,12 @@ namespace Laja.Models
             // Add custom user claims here
             return userIdentity;
         }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+        //nav
+        public Course Course { get; set; }
+
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -29,5 +35,9 @@ namespace Laja.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Laja.Models.Course> Courses { get; set; }
+
+        public System.Data.Entity.DbSet<Laja.Models.Module> Modules { get; set; }
     }
 }
