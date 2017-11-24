@@ -45,6 +45,8 @@ namespace Laja.Models
 
         public DbSet<ActivityType> ActivityTypes { get; set; }
 
+        public DbSet<Document> Documents { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Course>()
@@ -57,12 +59,15 @@ namespace Laja.Models
                 .WithRequired(a => a.Module)
                 .WillCascadeOnDelete(false);
 
+
             //modelBuilder.Entity<ActivityType>()
             //    .HasMany<Activity>(a => a.Activites)
             //    .WithRequired(a => a.ActivityType)
             //    .WillCascadeOnDelete(false);
 
-        public System.Data.Entity.DbSet<Laja.Models.Module> Modules { get; set; }
-        public System.Data.Entity.DbSet<Laja.Models.Document> Documents { get; set; }
+            base.OnModelCreating(modelBuilder);
+        }
+
+
     }
 }
