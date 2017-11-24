@@ -1,8 +1,8 @@
-﻿using System.Data.Entity;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Laja.Models
 {
@@ -36,8 +36,32 @@ namespace Laja.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<Laja.Models.Course> Courses { get; set; }
+        public DbSet<Course> Courses { get; set; }
 
-        public System.Data.Entity.DbSet<Laja.Models.Module> Modules { get; set; }
+        public DbSet<Module> Modules { get; set; }
+
+        public DbSet<Activity> Activities { get; set; }
+
+        public DbSet<ActivityType> ActivityTypes { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Course>()
+                .HasMany<Module>(m => m.Modules)
+                .WithRequired(m => m.Course)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Module>()
+                .HasMany<Activity>(a => a.Activities)
+                .WithRequired(a => a.Module)
+                .WillCascadeOnDelete(false);
+
+            //modelBuilder.Entity<ActivityType>()
+            //    .HasMany<Activity>(a => a.Activites)
+            //    .WithRequired(a => a.ActivityType)
+            //    .WillCascadeOnDelete(false);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
