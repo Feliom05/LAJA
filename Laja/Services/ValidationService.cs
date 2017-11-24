@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Laja.Models;
 using System.Linq;
-using System.Web;
-using Laja.Models;
 
 namespace Laja.Services
 {
@@ -28,6 +25,11 @@ namespace Laja.Services
             return isUniqe;
         }
 
-        
+        public bool UniqName(UserViewModels module)
+        {
+            bool isUniqe = false;
+            isUniqe = db.Modules.Any(c => c.Name.ToLower() == module.Name.ToLower() && c.CourseId == module.CourseId);
+            return isUniqe;
+        }
     }
 }
