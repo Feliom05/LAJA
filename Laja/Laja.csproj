@@ -190,6 +190,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ActivitiesController.cs" />
+    <Compile Include="Controllers\ActivityTypesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -198,25 +200,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711231041067_AddUserName.cs" />
-    <Compile Include="Migrations\201711231041067_AddUserName.Designer.cs">
-      <DependentUpon>201711231041067_AddUserName.cs</DependentUpon>
+    <Compile Include="Migrations\201711241050466_NewDb.cs" />
+    <Compile Include="Migrations\201711241050466_NewDb.Designer.cs">
+      <DependentUpon>201711241050466_NewDb.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711231218080_CourseModelAdded.cs" />
-    <Compile Include="Migrations\201711231218080_CourseModelAdded.Designer.cs">
-      <DependentUpon>201711231218080_CourseModelAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711231355277_ModuleModelAdded.cs" />
-    <Compile Include="Migrations\201711231355277_ModuleModelAdded.Designer.cs">
-      <DependentUpon>201711231355277_ModuleModelAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711231404298_CorrectedEndDate.cs" />
-    <Compile Include="Migrations\201711231404298_CorrectedEndDate.Designer.cs">
-      <DependentUpon>201711231404298_CorrectedEndDate.cs</DependentUpon>
+    <Compile Include="Migrations\201711241052253_Documents.cs" />
+    <Compile Include="Migrations\201711241052253_Documents.Designer.cs">
+      <DependentUpon>201711241052253_Documents.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Activity.cs" />
+    <Compile Include="Models\ActivityType.cs" />
     <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\DocType.cs" />
+    <Compile Include="Models\Document.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Module.cs" />
@@ -292,7 +290,6 @@
     <Content Include="Views\Modules\Details.cshtml" />
     <Content Include="Views\Modules\Edit.cshtml" />
     <Content Include="Views\Modules\Index.cshtml" />
-    <Content Include="Views\User\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -311,17 +308,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711231041067_AddUserName.resx">
-      <DependentUpon>201711231041067_AddUserName.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711241050466_NewDb.resx">
+      <DependentUpon>201711241050466_NewDb.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711231218080_CourseModelAdded.resx">
-      <DependentUpon>201711231218080_CourseModelAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711231355277_ModuleModelAdded.resx">
-      <DependentUpon>201711231355277_ModuleModelAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711231404298_CorrectedEndDate.resx">
-      <DependentUpon>201711231404298_CorrectedEndDate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711241052253_Documents.resx">
+      <DependentUpon>201711241052253_Documents.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
