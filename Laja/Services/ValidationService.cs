@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Laja.Models;
 using System.Linq;
-using System.Web;
-using Laja.Models;
 
 namespace Laja.Services
 {
