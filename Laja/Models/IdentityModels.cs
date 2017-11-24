@@ -21,7 +21,7 @@ namespace Laja.Models
 
         //nav
         public Course Course { get; set; }
-
+       // public ICOllection< MyProperty { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -39,5 +39,6 @@ namespace Laja.Models
         public System.Data.Entity.DbSet<Laja.Models.Course> Courses { get; set; }
 
         public System.Data.Entity.DbSet<Laja.Models.Module> Modules { get; set; }
+        public System.Data.Entity.DbSet<Laja.Models.Document> Documents { get; set; }
     }
 }

@@ -213,9 +213,15 @@
     <Compile Include="Migrations\201711231404298_CorrectedEndDate.Designer.cs">
       <DependentUpon>201711231404298_CorrectedEndDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711241052253_Documents.cs" />
+    <Compile Include="Migrations\201711241052253_Documents.Designer.cs">
+      <DependentUpon>201711241052253_Documents.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\DocType.cs" />
+    <Compile Include="Models\Document.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Module.cs" />
@@ -319,6 +325,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711231404298_CorrectedEndDate.resx">
       <DependentUpon>201711231404298_CorrectedEndDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711241052253_Documents.resx">
+      <DependentUpon>201711241052253_Documents.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
