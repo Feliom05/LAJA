@@ -203,10 +203,13 @@
     <Compile Include="Migrations\201711241301462_AfterMerge.cs" />
     <Compile Include="Migrations\201711241301462_AfterMerge.Designer.cs">
       <DependentUpon>201711241301462_AfterMerge.cs</DependentUpon>
+    <Compile Include="Migrations\201711241257056_User.cs" />
+    <Compile Include="Migrations\201711241257056_User.Designer.cs">
+      <DependentUpon>201711241257056_User.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711241408216_ActivityNavigationDeadline.cs" />
-    <Compile Include="Migrations\201711241408216_ActivityNavigationDeadline.Designer.cs">
-      <DependentUpon>201711241408216_ActivityNavigationDeadline.cs</DependentUpon>
+    <Compile Include="Migrations\201711241052253_Documents.cs" />
+    <Compile Include="Migrations\201711241052253_Documents.Designer.cs">
+      <DependentUpon>201711241052253_Documents.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -302,6 +305,17 @@
     <Content Include="Views\Activities\Details.cshtml" />
     <Content Include="Views\Activities\Edit.cshtml" />
     <Content Include="Views\Activities\Index.cshtml" />
+    <Content Include="Views\Activities\Create.cshtml" />
+    <Content Include="Views\Activities\Delete.cshtml" />
+    <Content Include="Views\Activities\Details.cshtml" />
+    <Content Include="Views\Activities\Edit.cshtml" />
+    <Content Include="Views\Activities\Index.cshtml" />
+    <Content Include="Views\ActivityTypes\Create.cshtml" />
+    <Content Include="Views\ActivityTypes\Delete.cshtml" />
+    <Content Include="Views\ActivityTypes\Details.cshtml" />
+    <Content Include="Views\ActivityTypes\Edit.cshtml" />
+    <Content Include="Views\ActivityTypes\Index.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -322,11 +336,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711241301462_AfterMerge.resx">
-      <DependentUpon>201711241301462_AfterMerge.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711241050466_NewDb.resx">
+      <DependentUpon>201711241050466_NewDb.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711241408216_ActivityNavigationDeadline.resx">
-      <DependentUpon>201711241408216_ActivityNavigationDeadline.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711241052253_Documents.resx">
+      <DependentUpon>201711241052253_Documents.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

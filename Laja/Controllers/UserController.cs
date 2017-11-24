@@ -1,5 +1,4 @@
 ﻿using Laja.Models;
-using Laja.Services;
 using Laja.ViewModels;
 using System.Web.Mvc;
 
@@ -25,7 +24,7 @@ namespace Laja.Controllers
         {
             if (ModelState.IsValid)
             {
-                var validateEmail = new ValidationService(db);
+
             }
 
             return View();
