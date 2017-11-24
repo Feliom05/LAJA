@@ -62,7 +62,7 @@ namespace Laja.Models
             //    .WithRequired(a => a.ActivityType)
             //    .WillCascadeOnDelete(false);
 
-            base.OnModelCreating(modelBuilder);
-        }
+        public System.Data.Entity.DbSet<Laja.Models.Module> Modules { get; set; }
+        public System.Data.Entity.DbSet<Laja.Models.Document> Documents { get; set; }
     }
 }
