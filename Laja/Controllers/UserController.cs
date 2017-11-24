@@ -26,10 +26,6 @@ namespace Laja.Controllers
             if (ModelState.IsValid)
             {
                 var validateEmail = new ValidationService(db);
-                if ()
-                {
-
-                }
             }
 
             return View();

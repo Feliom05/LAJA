@@ -24,12 +24,5 @@ namespace Laja.Services
             isUniqe = db.Modules.Any(c => c.Name.ToLower() == module.Name.ToLower() && c.CourseId == module.CourseId);
             return isUniqe;
         }
-
-        public bool UniqName(UserViewModels module)
-        {
-            bool isUniqe = false;
-            isUniqe = db.Modules.Any(c => c.Name.ToLower() == module.Name.ToLower() && c.CourseId == module.CourseId);
-            return isUniqe;
-        }
     }
 }
