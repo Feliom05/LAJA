@@ -3,7 +3,7 @@ namespace Laja.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class NewDb : DbMigration
+    public partial class AfterMerge : DbMigration
     {
         public override void Up()
         {
@@ -128,6 +128,30 @@ namespace Laja.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.Documents",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Description = c.String(),
+                        Name = c.String(),
+                        FileName = c.String(nullable: false, maxLength: 255),
+                        CreationTime = c.DateTime(nullable: false),
+                        UserId = c.String(maxLength: 128),
+                        CourseId = c.Int(),
+                        ModuleId = c.Int(),
+                        ActivityId = c.Int(),
+                        DocTypeId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Courses", t => t.CourseId)
+                .ForeignKey("dbo.Modules", t => t.ModuleId)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.FileName, unique: true, name: "IX_UniqeFileName")
+                .Index(t => t.UserId)
+                .Index(t => t.CourseId)
+                .Index(t => t.ModuleId);
+            
+            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -142,6 +166,9 @@ namespace Laja.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Documents", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Documents", "ModuleId", "dbo.Modules");
+            DropForeignKey("dbo.Documents", "CourseId", "dbo.Courses");
             DropForeignKey("dbo.Activities", "ActivityTypeId", "dbo.ActivityTypes");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
@@ -150,6 +177,10 @@ namespace Laja.Migrations
             DropForeignKey("dbo.Modules", "CourseId", "dbo.Courses");
             DropForeignKey("dbo.Activities", "ModuleId", "dbo.Modules");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Documents", new[] { "ModuleId" });
+            DropIndex("dbo.Documents", new[] { "CourseId" });
+            DropIndex("dbo.Documents", new[] { "UserId" });
+            DropIndex("dbo.Documents", "IX_UniqeFileName");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
@@ -161,6 +192,7 @@ namespace Laja.Migrations
             DropIndex("dbo.Activities", new[] { "ActivityTypeId" });
             DropIndex("dbo.Activities", "IX_UniqeActivityName");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Documents");
             DropTable("dbo.ActivityTypes");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
