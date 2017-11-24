@@ -37,7 +37,14 @@ namespace Laja.Models
         }
 
         public System.Data.Entity.DbSet<Laja.Models.Course> Courses { get; set; }
-
         public System.Data.Entity.DbSet<Laja.Models.Module> Modules { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Course>().HasMany<Module>(m => m.Modules).WithRequired(m => m.Course).WillCascadeOnDelete(false);
+           // modelBuilder.Entity<Module>().HasMany<Module>(m => m.Modules).WithRequired(m => m.Course).WillCascadeOnDelete(false);
+
+
+        }
     }
 }
