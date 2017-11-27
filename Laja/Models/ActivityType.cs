@@ -11,7 +11,7 @@ namespace Laja.Models
 
         //Navigation
 
-        public ICollection<Activity> Activites { get; set; }
+        public virtual ICollection<Activity> Activities { get; set; }
 
     }
 }

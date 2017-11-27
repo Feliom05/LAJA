@@ -29,8 +29,8 @@ namespace Laja.Models
         public DateTime EndDate { get; set; }
 
         //nav
-        public ICollection<ApplicationUser> Students { get; set; }
-        public ICollection<Module> Modules { get; set; }
+        public virtual ICollection<ApplicationUser> Students { get; set; }
+        public virtual ICollection<Module> Modules { get; set; }
 
     }
 }

@@ -199,13 +199,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711241050466_NewDb.cs" />
-    <Compile Include="Migrations\201711241050466_NewDb.Designer.cs">
-      <DependentUpon>201711241050466_NewDb.cs</DependentUpon>
+    <Compile Include="Migrations\201711270824166_RebuildingAfterFixingModels.cs" />
+    <Compile Include="Migrations\201711270824166_RebuildingAfterFixingModels.Designer.cs">
+      <DependentUpon>201711270824166_RebuildingAfterFixingModels.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711241052253_Documents.cs" />
-    <Compile Include="Migrations\201711241052253_Documents.Designer.cs">
-      <DependentUpon>201711241052253_Documents.cs</DependentUpon>
+    <Compile Include="Migrations\201711270846549_AddingVirtualTillIcollections.cs" />
+    <Compile Include="Migrations\201711270846549_AddingVirtualTillIcollections.Designer.cs">
+      <DependentUpon>201711270846549_AddingVirtualTillIcollections.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -316,11 +316,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711241050466_NewDb.resx">
-      <DependentUpon>201711241050466_NewDb.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711270824166_RebuildingAfterFixingModels.resx">
+      <DependentUpon>201711270824166_RebuildingAfterFixingModels.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711241052253_Documents.resx">
-      <DependentUpon>201711241052253_Documents.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711270846549_AddingVirtualTillIcollections.resx">
+      <DependentUpon>201711270846549_AddingVirtualTillIcollections.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

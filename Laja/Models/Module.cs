@@ -36,7 +36,7 @@ namespace Laja.Models
         //Navigation
 
         public Course Course { get; set; }
-        public ICollection<Activity> Activities { get; set; }
+        public virtual ICollection<Activity> Activities { get; set; }
 
     }
 }

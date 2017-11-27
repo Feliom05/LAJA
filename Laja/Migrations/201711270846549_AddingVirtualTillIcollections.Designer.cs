@@ -7,13 +7,13 @@ namespace Laja.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Documents : IMigrationMetadata
+    public sealed partial class AddingVirtualTillIcollections : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Documents));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddingVirtualTillIcollections));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711241052253_Documents"; }
+            get { return "201711270846549_AddingVirtualTillIcollections"; }
         }
         
         string IMigrationMetadata.Source

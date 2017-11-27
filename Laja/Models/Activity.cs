@@ -39,7 +39,7 @@ namespace Laja.Models
         //Navigation
 
         public Module Module { get; set; }
-        //public ActivityType ActivityType { get; set; }
+        public ActivityType ActivityType { get; set; }
 
 
     }
