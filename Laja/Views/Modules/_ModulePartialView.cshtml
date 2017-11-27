@@ -1,0 +1,115 @@
+﻿@model Laja.Models.Module
+<style>
+    .first-div {
+        width: 200px;
+        float: left;
+        background-color: white;
+    }
+
+    .second-div {
+        width: 400px;
+        float: left;
+        background-color: beige;
+    }
+
+    .third-div {
+        width: 400px;
+        float: left;
+        background-color: ghostwhite;
+    }
+</style>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<table class="table">
+    <tr class="alert-info">
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Start</th>
+        <th>Slut</th>
+        <th></th>
+        <th></th>
+
+
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.EndDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", "Modules", new { @Id = Model.Id}, null)
+        </td>
+    </tr>
+</table>
+<ul class="nav nav-tabs " role="tablist">
+    <li role="presentation" class="active"><a href="#">Aktivitet <span class="badge">@Model.Activities.Count</span></a>
+        <div id="Aktivitet">
+
+            <div class="col-lg-4 first-div">
+                <ul>
+                    @foreach (var activity in Model.Activities)
+                    {
+                        <li>
+                            @Html.ActionLink(activity.Name, "PartialActivities", "Activities", new { id = @activity.Id }, new { @class = "third" })
+                           
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div id="ActivityDetails" class=" second-div">
+               
+            </div>
+
+
+        </div>
+    </li>
+    <li role="presentation" class="active">
+        <a href="#">Dokument <span class="badge">@Model.Documents.Count</span></a>
+        <div class="col-lg-4 first-div">
+            <div id="Dokument">
+
+                @{
+                if (Model.Documents.Count > 0)
+                {
+            <table class="table">
+                <tr class="alert-info">
+                    <th>Namn</th>
+                    <th>Beskrivning</th>
+
+                </tr>
+                @foreach (var doc in Model.Documents)
+                {
+                        <tr>
+                            <td>@doc.Name</td>
+                            <td>@doc.Description</td>
+                        </tr>
+                        }
+            </table>
+                }
+
+                }
+            </div>
+        </div>
+</li>
+</ul>
+<script type="text/javascript">
+        $(function () {
+
+           
+            $(".third").click(function (e) {
+
+                e.preventDefault();
+                $("#ActivityDetails").load($(this).attr("href"))
+            });
+
+
+        });
+</script>

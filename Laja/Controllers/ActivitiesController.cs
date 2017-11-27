@@ -123,6 +123,12 @@ namespace Laja.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult PartialActivities(int id = 0)
+        {
+            var activity = db.Activities.Find(id);
+            return PartialView("_ActivitypartialView", activity);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

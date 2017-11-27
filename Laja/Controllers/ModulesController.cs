@@ -38,7 +38,7 @@ namespace Laja.Controllers
         }
 
         // GET: Modules/Create
-        public ActionResult Create()
+        public ActionResult Create(int? courseId)
         {
             ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name");
             return View();
@@ -133,6 +133,12 @@ namespace Laja.Controllers
             db.Modules.Remove(module);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult ModuleWithActivities(int id = 0)
+        {
+            var module = db.Modules.Find(id);
+            return PartialView("_ModulepartialView", module);
         }
 
         protected override void Dispose(bool disposing)

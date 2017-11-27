@@ -3,8 +3,32 @@
 @{
     ViewBag.Title = "Details";
 }
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+<style>
+    .first-div {
+        width: 200px;
+        
+        float: left;
+        background-color: white;
+    }
 
+    .second-div {
+        width: 400px;
+        
+        float: left;
+        background-color: beige;
+    }
 
+    .third-div {
+        width: 400px;
+        
+        float: left;
+        background-color: ghostwhite;
+    }
+
+</style>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <div>
     <h4>Course</h4>
     <hr />
@@ -12,7 +36,7 @@
 
         @Html.ActionLink("Back to List", "Index") |
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Registrera modul", "Create", "Module", new { CourseId = Model.Id, @Role = "Elev" }, null) |
+        @Html.ActionLink("Registrera modul", "Create", "Module", new { CourseId = Model.Id }, null) |
         @Html.ActionLink("Registrera elev", "Create", "User", new { CourseId = Model.Id, @Role = "Elev" }, null) |
         @Html.ActionLink("Registrera Dokument", "Create", "Document", new { CourseId = Model.Id }, null)
 
@@ -23,8 +47,6 @@
             <th>Beskrivning</th>
             <th>Start</th>
             <th>Slut</th>
-           
-
         </tr>
         <tr>
          <td>
@@ -45,76 +67,111 @@
 </div>
 
 
-<ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#" >Modul<span class="badge">@Model.Modules.Count</span></a>
-        <div id="Modules">
+
+
+<div class="container">
+    <center><h6></h6></center>
+    <div id="content">
+        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+            <li class="active"><a href="#Modules" data-toggle="tab">Modul <span class="badge">@Model.Modules.Count</span></a></li>
+            <li><a href="#Students" data-toggle="tab">Elev <span class="badge">@Model.Students.Count</span></a></li>
+            <li><a href="#Documents" data-toggle="tab">Dokument <span class="badge">@Model.Documents.Count</span></a></li>
            
-            <div class="col-lg-4">
-                <ul>
-                    @foreach (var modul in Model.Modules)
-                    {
-                        <li>@Html.ActionLink(modul.Name, "", "")</li>
+        </ul>
+        <div id="my-tab-content" class="tab-content">
+            <div class="tab-pane active" id="Modules">
+                <h1>Modules</h1>
+                <div >
+                    <ul>
+                        @foreach (var modul in Model.Modules)
+                        {
+                            <li>
+                                @Html.ActionLink(modul.Name, "ModuleWithActivities", "Modules", new { id = @modul.Id }, new { @class = "second" })
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div id="ModuleDetails" class="">
+
+                </div>
+            </div>
+            <div class="tab-pane" id="Students">
+                <h1>Students</h1>
+                <div class="">
+                    @{
+                        if (Model.Students.Count > 0)
+                        {
+                            <table class="table">
+                                <tr class="alert-info">
+                                    <th>Name</th>
+                                    <th>Email</th>
+
+                                </tr>
+                                @foreach (var student in Model.Students)
+                                {
+                                    <tr>
+                                        <td>@student.FirstName + " " + @student.LastName</td>
+                                        <td>@student.Email</td>
+                                    </tr>
+                                }
+                            </table>
+                        }
+
                     }
-                </ul>
+                </div>
             </div>
-            <div id="ModuleDetails" class="col-lg-8">
+            <div class="tab-pane" id="Documents">
+                <h1>Documents</h1>
+                @{
+                    if (Model.Documents.Count > 0)
+                    {
+                        <table class="table">
+                            <tr class="alert-info">
+                                <th>Namn</th>
+                                <th>Beskrivning</th>
 
+                            </tr>
+                            @foreach (var doc in Model.Documents)
+                            {
+                                <tr>
+                                    <td>@doc.Name</td>
+                                    <td>@doc.Description</td>
+                                </tr>
+                            }
+                        </table>
+                    }
+
+                }
             </div>
            
-
         </div>
-    </li>
-    <li role="presentation" class="">
-        <a href="#">Elev <span class="badge">@Model.Students.Count</span></a>
-        <div id="Students">
+    </div>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $('#tabs').tab();
+        });
+        $('button').addClass('btn-primary').text('Switch to Orange Tab');
+        $('button').click(function () {
+            $('#tabs a[href=#orange]').tab('show');
+        });
+    </script>
+</div> <!-- container -->
+<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
-            @{
-                if (Model.Students.Count > 0)
-                {
-                    <table class="table">
-                        <tr class="alert-info">
-                            <th>Name</th>
-                            <th>Email</th>
+    <script type="text/javascript">
+        $(function () {
 
-                        </tr>
-                        @foreach (var student in Model.Students)
-                {
-                            <tr>
-                                <td>@student.FirstName + " " + @student.LastName</td>
-                                <td>@student.Email</td>
-                            </tr>
-                        }
-                    </table>
-                }
+            $(".second").click(function (e) {
 
-            }
-        </div>
-    </li>
-    <li role="presentation" class="tabbable"><a href="#">Dokument <span class="badge">@Model.Documents.Count</span></a>
-        <div id="Dokumént">
+                e.preventDefault();
+                $("#ModuleDetails").load($(this).attr("href"))
+            });
+            $(".third").click(function (e) {
 
-            @{
-                if (Model.Documents.Count > 0)
-                {
-                    <table class="table">
-                        <tr class="alert-info">
-                            <th>Name</th>
-                            <th>Email</th>
+                e.preventDefault();
+                $("#ActivityDetails").load($(this).attr("href"))
+            });
 
-                        </tr>
-                        @foreach (var student in Model.Students)
-                {
-                            <tr>
-                                <td>@student.FirstName + " " + @student.LastName</td>
-                                <td>@student.Email</td>
-                            </tr>
-                        }
-                    </table>
-                }
 
-            }
-        </div>
-    
-    </li>
-</ul>
-
+        });
+    </script>
