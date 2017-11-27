@@ -6,11 +6,18 @@ using System.Web.Mvc;
 
 namespace Laja.Controllers
 {
+    [Authorize(Roles ="Lärare")]
     public class UserController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
+        }
 
 
         // GET: User
@@ -51,7 +58,8 @@ namespace Laja.Controllers
 
                 if (result.Succeeded == false)
                 {
-                    return View(newUser);
+                    AddErrors(result);
+                    return View(User);
                 }
 
                 var findNewUser = userManager.FindByEmail(newUser.Email);
@@ -61,7 +69,8 @@ namespace Laja.Controllers
                     var resultRole = userManager.AddToRole(findNewUser.Id, User.Role);
                     if (resultRole.Succeeded == false)
                     {
-                        return View(newUser);
+                        AddErrors(resultRole);
+                        return View(User);
                     }
 
                     //User and Role definition OK
