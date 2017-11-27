@@ -19,9 +19,10 @@ namespace Laja.Models
         }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public int? CourseId { get; set; }
 
         //nav
-        public Course Course { get; set; }
+        public virtual Course Course { get; set; }
 
     }
 

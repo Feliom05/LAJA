@@ -7,13 +7,13 @@ namespace Laja.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class cleanUp : IMigrationMetadata
+    public sealed partial class UserCourseIDUpdated : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(cleanUp));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(UserCourseIDUpdated));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711270757326_cleanUp"; }
+            get { return "201711271035374_UserCourseIDUpdated"; }
         }
         
         string IMigrationMetadata.Source
