@@ -7,13 +7,13 @@ namespace Laja.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class ActivityNavigationDeadline : IMigrationMetadata
+    public sealed partial class cleanUp : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ActivityNavigationDeadline));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(cleanUp));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711241408216_ActivityNavigationDeadline"; }
+            get { return "201711270757326_cleanUp"; }
         }
         
         string IMigrationMetadata.Source
