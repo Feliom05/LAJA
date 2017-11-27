@@ -203,6 +203,7 @@
     <Compile Include="Migrations\201711241301462_AfterMerge.cs" />
     <Compile Include="Migrations\201711241301462_AfterMerge.Designer.cs">
       <DependentUpon>201711241301462_AfterMerge.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201711241257056_User.cs" />
     <Compile Include="Migrations\201711241257056_User.Designer.cs">
       <DependentUpon>201711241257056_User.cs</DependentUpon>
