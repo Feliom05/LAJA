@@ -17,7 +17,12 @@ namespace Laja.Controllers
         // GET: Activities
         public ActionResult Index()
         {
-            var activities = db.Activities.Include(a => a.Module);
+            var activities = db.Activities
+                .Include(a => a.Module)
+                .Include(a => a.ActivityType);
+            
+                       
+            
             return View(activities.ToList());
         }
 

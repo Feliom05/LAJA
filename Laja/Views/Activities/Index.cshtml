@@ -33,7 +33,7 @@
             @Html.DisplayNameFor(model => model.SubmitRequired)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ActivityTypeId)
+            @Html.DisplayNameFor(model => model.ActivityType.Name)
         </th>
         <th></th>
     </tr>
@@ -62,7 +62,7 @@
             @Html.DisplayFor(modelItem => item.SubmitRequired)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ActivityTypeId)
+            @Html.DisplayFor(modelItem => item.ActivityType.Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

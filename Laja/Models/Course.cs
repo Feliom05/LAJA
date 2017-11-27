@@ -9,6 +9,11 @@ namespace Laja.Models
 {
     public class Course
     {
+        //public Course()
+        //{
+        //    Students = new HashSet<ApplicationUser>();
+        //    Modules = new HashSet<Module>();
+        //}
         public int Id { get; set; }
 
         [Required]

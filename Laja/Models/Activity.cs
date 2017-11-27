@@ -30,7 +30,7 @@ namespace Laja.Models
 
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm}", ApplyFormatInEditMode = true)]
-        public DateTime DeadLine { get; set; }
+        public DateTime? DeadLine { get; set; }
 
         public bool SubmitRequired { get; set; }
 

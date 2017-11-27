@@ -65,9 +65,14 @@ namespace Laja.Models
                 .HasMany<Activity>(a => a.Activities)
                 .WithRequired(a => a.ActivityType)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<DocType>()
+                .HasMany<Document>(t => t.Documents)
+                .WithRequired(t => t.DocType)
+                .WillCascadeOnDelete(false);
+
             base.OnModelCreating(modelBuilder);
         }
-        
-        
+       
     }
 }
