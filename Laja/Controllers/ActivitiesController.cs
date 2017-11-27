@@ -37,9 +37,12 @@ namespace Laja.Controllers
         }
 
         // GET: Activities/Create
-        public ActionResult Create()
+        public ActionResult Create(int? moduleId)
         {
             ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name");
+            ViewBag.SelectedModuleId = 0;
+            if (moduleId != null)
+                ViewBag.SelectedModuleId = moduleId;
             return View();
         }
 

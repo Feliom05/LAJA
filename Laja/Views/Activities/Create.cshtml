@@ -26,7 +26,18 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ModuleId, "ModuleId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ModuleId", null, htmlAttributes: new { @class = "form-control" })
+                @{
+                    if (ViewBag.SelectedModuleId > 0)
+                    {
+                        @Html.Hidden("ModuleId", (object)ViewBag.SelectedModuleId.ToString())
+                       <label>@ViewBag.SelectedModuleId</label>
+                    }
+                    else
+                    {
+                        @Html.DropDownList("ModuleId", null, htmlAttributes: new { @class = "form-control disabled" })
+                    }
+                }
+               
                 @Html.ValidationMessageFor(model => model.ModuleId, "", new { @class = "text-danger" })
             </div>
         </div>

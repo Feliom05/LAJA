@@ -4,47 +4,117 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
 <div>
     <h4>Course</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    <p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+        @Html.ActionLink("Back to List", "Index") |
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Registrera modul", "Create", "Module", new { CourseId = Model.Id, @Role = "Elev" }, null) |
+        @Html.ActionLink("Registrera elev", "Create", "User", new { CourseId = Model.Id, @Role = "Elev" }, null) |
+        @Html.ActionLink("Registrera Dokument", "Create", "Document", new { CourseId = Model.Id }, null)
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+    </p>
+    <table class="table">
+        <tr class="alert-info">
+            <th>Namn</th>
+            <th>Beskrivning</th>
+            <th>Start</th>
+            <th>Slut</th>
+           
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
-
-    </dl>
+        </tr>
+        <tr>
+         <td>
+             @Html.DisplayFor(model => model.Name)
+         </td>
+            <td>
+                @Html.DisplayFor(model => model.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.EndDate)
+            </td>
+        </tr>
+        </table>
+    
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#" >Modul<span class="badge">@Model.Modules.Count</span></a>
+        <div id="Modules">
+           
+            <div class="col-lg-4">
+                <ul>
+                    @foreach (var modul in Model.Modules)
+                    {
+                        <li>@Html.ActionLink(modul.Name, "", "")</li>
+                    }
+                </ul>
+            </div>
+            <div id="ModuleDetails" class="col-lg-8">
+
+            </div>
+           
+
+        </div>
+    </li>
+    <li role="presentation" class="">
+        <a href="#">Elev <span class="badge">@Model.Students.Count</span></a>
+        <div id="Students">
+
+            @{
+                if (Model.Students.Count > 0)
+                {
+                    <table class="table">
+                        <tr class="alert-info">
+                            <th>Name</th>
+                            <th>Email</th>
+
+                        </tr>
+                        @foreach (var student in Model.Students)
+                {
+                            <tr>
+                                <td>@student.FirstName + " " + @student.LastName</td>
+                                <td>@student.Email</td>
+                            </tr>
+                        }
+                    </table>
+                }
+
+            }
+        </div>
+    </li>
+    <li role="presentation" class="tabbable"><a href="#">Dokument <span class="badge">@Model.Documents.Count</span></a>
+        <div id="Dokumént">
+
+            @{
+                if (Model.Documents.Count > 0)
+                {
+                    <table class="table">
+                        <tr class="alert-info">
+                            <th>Name</th>
+                            <th>Email</th>
+
+                        </tr>
+                        @foreach (var student in Model.Students)
+                {
+                            <tr>
+                                <td>@student.FirstName + " " + @student.LastName</td>
+                                <td>@student.Email</td>
+                            </tr>
+                        }
+                    </table>
+                }
+
+            }
+        </div>
+    
+    </li>
+</ul>
+
