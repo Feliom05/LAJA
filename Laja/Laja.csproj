@@ -200,9 +200,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711270757326_cleanUp.cs" />
-    <Compile Include="Migrations\201711270757326_cleanUp.Designer.cs">
-      <DependentUpon>201711270757326_cleanUp.cs</DependentUpon>
+    <Compile Include="Migrations\201711241301462_AfterMerge.cs" />
+    <Compile Include="Migrations\201711241301462_AfterMerge.Designer.cs">
+      <DependentUpon>201711241301462_AfterMerge.cs</DependentUpon>
+    <Compile Include="Migrations\201711241257056_User.cs" />
+    <Compile Include="Migrations\201711241257056_User.Designer.cs">
+      <DependentUpon>201711241257056_User.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711241052253_Documents.cs" />
+    <Compile Include="Migrations\201711241052253_Documents.Designer.cs">
+      <DependentUpon>201711241052253_Documents.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -220,6 +227,7 @@
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Documents\frågor utvärdering kurs hos Lexicon .xlsx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -242,9 +250,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -288,30 +294,11 @@
     <Content Include="Views\Modules\Details.cshtml" />
     <Content Include="Views\Modules\Edit.cshtml" />
     <Content Include="Views\Modules\Index.cshtml" />
-    <Content Include="Views\ActivityTypes\Create.cshtml" />
-    <Content Include="Views\ActivityTypes\Delete.cshtml" />
-    <Content Include="Views\ActivityTypes\Details.cshtml" />
-    <Content Include="Views\ActivityTypes\Edit.cshtml" />
-    <Content Include="Views\ActivityTypes\Index.cshtml" />
-    <Content Include="Views\Activities\Create.cshtml" />
-    <Content Include="Views\Activities\Delete.cshtml" />
-    <Content Include="Views\Activities\Details.cshtml" />
-    <Content Include="Views\Activities\Edit.cshtml" />
-    <Content Include="Views\Activities\Index.cshtml" />
-    <Content Include="Views\Activities\Create.cshtml" />
-    <Content Include="Views\Activities\Delete.cshtml" />
-    <Content Include="Views\Activities\Details.cshtml" />
-    <Content Include="Views\Activities\Edit.cshtml" />
-    <Content Include="Views\Activities\Index.cshtml" />
-    <Content Include="Views\ActivityTypes\Create.cshtml" />
-    <Content Include="Views\ActivityTypes\Delete.cshtml" />
-    <Content Include="Views\ActivityTypes\Details.cshtml" />
-    <Content Include="Views\ActivityTypes\Edit.cshtml" />
-    <Content Include="Views\ActivityTypes\Index.cshtml" />
-    <Content Include="Views\User\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <EmbeddedResource Include="Migrations\201711270844567_relations.resx">
+      <DependentUpon>201711270844567_relations.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -323,14 +310,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711270757326_cleanUp.resx">
-      <DependentUpon>201711270757326_cleanUp.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711241050466_NewDb.resx">
+      <DependentUpon>201711241050466_NewDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711241052253_Documents.resx">
+      <DependentUpon>201711241052253_Documents.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

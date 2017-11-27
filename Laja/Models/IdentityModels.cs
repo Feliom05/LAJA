@@ -45,7 +45,9 @@ namespace Laja.Models
 
         public DbSet<ActivityType> ActivityTypes { get; set; }
 
-        public DbSet<Document> Documents { get; set; }
+        public System.Data.Entity.DbSet<Document> Documents { get; set; }
+
+        public System.Data.Entity.DbSet<DocType> DocTypes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -59,15 +61,18 @@ namespace Laja.Models
                 .WithRequired(a => a.Module)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<ActivityType>()
+                .HasMany<Activity>(a => a.Activities)
+                .WithRequired(a => a.ActivityType)
+                .WillCascadeOnDelete(false);
 
-            //modelBuilder.Entity<ActivityType>()
-            //    .HasMany<Activity>(a => a.Activites)
-            //    .WithRequired(a => a.ActivityType)
-            //    .WillCascadeOnDelete(false);
+            modelBuilder.Entity<DocType>()
+                .HasMany<Document>(t => t.Documents)
+                .WithRequired(t => t.DocType)
+                .WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);
         }
-
-
+       
     }
 }
