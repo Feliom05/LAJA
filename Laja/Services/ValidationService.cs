@@ -1,5 +1,6 @@
 ﻿using Laja.Models;
 using System.Linq;
+using System;
 
 namespace Laja.Services
 {
@@ -66,7 +67,7 @@ namespace Laja.Services
 
         public string CreateUniqFileName(string fileName)
         {
-
+            return "";
         }
 
     }
