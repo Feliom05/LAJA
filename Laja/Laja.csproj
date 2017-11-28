@@ -216,7 +216,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Module.cs" />
-    <Compile Include="Controllers\myActionController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ValidationService.cs" />
     <Compile Include="Startup.cs" />
@@ -301,8 +300,6 @@
     <Content Include="Views\DocTypes\Details.cshtml" />
     <Content Include="Views\DocTypes\Edit.cshtml" />
     <Content Include="Views\DocTypes\Index.cshtml" />
-    <Content Include="Views\myAction\Upload.cshtml" />
-    <Content Include="Views\myAction\Downloads.cshtml" />
     <Content Include="Views\Documents\Downloads.cshtml" />
     <Content Include="Views\Activities\Create.cshtml" />
     <Content Include="Views\Activities\Delete.cshtml" />
