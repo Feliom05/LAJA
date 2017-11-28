@@ -33,7 +33,7 @@
                         if (User.IsInRole("Lärare"))
                         {
                             <li>@Html.ActionLink("Kurs", "Index", "Courses")</li>
-                            <li>@Html.ActionLink("Registrera lärare", "Create", "User")</li>
+                            <li>@Html.ActionLink("Registrera lärare", "Create", "User", new { @Role = "Lärare" }, null )</li>
                         }
                     }
                 </ul>

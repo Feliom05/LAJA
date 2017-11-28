@@ -202,9 +202,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711271007251_aba.cs" />
-    <Compile Include="Migrations\201711271007251_aba.Designer.cs">
-      <DependentUpon>201711271007251_aba.cs</DependentUpon>
+    <Compile Include="Migrations\201711271035374_UserCourseIDUpdated.cs" />
+    <Compile Include="Migrations\201711271035374_UserCourseIDUpdated.Designer.cs">
+      <DependentUpon>201711271035374_UserCourseIDUpdated.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -223,6 +223,7 @@
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Documents\frågor utvärdering kurs hos Lexicon .xlsx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -303,6 +304,17 @@
     <Content Include="Views\myAction\Upload.cshtml" />
     <Content Include="Views\myAction\Downloads.cshtml" />
     <Content Include="Views\Documents\Downloads.cshtml" />
+    <Content Include="Views\Activities\Create.cshtml" />
+    <Content Include="Views\Activities\Delete.cshtml" />
+    <Content Include="Views\Activities\Details.cshtml" />
+    <Content Include="Views\Activities\Edit.cshtml" />
+    <Content Include="Views\Activities\Index.cshtml" />
+    <Content Include="Views\ActivityTypes\Create.cshtml" />
+    <Content Include="Views\ActivityTypes\Delete.cshtml" />
+    <Content Include="Views\ActivityTypes\Details.cshtml" />
+    <Content Include="Views\ActivityTypes\Edit.cshtml" />
+    <Content Include="Views\ActivityTypes\Index.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -324,6 +336,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Documents\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201711271035374_UserCourseIDUpdated.resx">
+      <DependentUpon>201711271035374_UserCourseIDUpdated.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
