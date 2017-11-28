@@ -43,8 +43,8 @@ namespace Laja.Models
 
         //Navigation
 
-        public virtual Module Module { get; set; }
-        public virtual ActivityType ActivityType { get; set; }
+        public Module Module { get; set; }
+        public ActivityType ActivityType { get; set; }
 
 
     }

@@ -46,9 +46,9 @@ namespace Laja.Models
 
         public DbSet<ActivityType> ActivityTypes { get; set; }
 
-        public System.Data.Entity.DbSet<Document> Documents { get; set; }
+        public DbSet<Document> Documents { get; set; }
 
-        public System.Data.Entity.DbSet<DocType> DocTypes { get; set; }
+        public DbSet<DocType> DocTypes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

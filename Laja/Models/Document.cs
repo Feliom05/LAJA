@@ -12,6 +12,8 @@ namespace Laja.Models
         public int Id { get; set; }
 
         public string Description { get; set; }
+
+        [Display(Name ="Document Name")]
         public string Name { get; set; }
 
         [Required]
