@@ -15,7 +15,7 @@ namespace Laja.Services
         public bool UniqName(Course course)
         {
             bool isUniqe = false;
-            isUniqe = db.Courses.Any(c => c.Name.ToLower() == course.Name.ToLower());
+            isUniqe = db.Courses.Any(c => c.Name.ToLower() == course.Name.ToLower() && c.Id != course.Id);
             return isUniqe;
         }
 
@@ -43,7 +43,8 @@ namespace Laja.Services
 
         public bool CheckModulePeriodAgainstCourse(Module module)
         {
-            if (EndDateIsAfterStartDate(module.Course.StartDate, module.StartDate) && EndDateIsAfterStartDate(module.EndDate, module.Course.EndDate))
+            var targetCourse = db.Courses.Find(module.CourseId);
+            if (EndDateIsAfterStartDate(targetCourse.StartDate, module.StartDate) && EndDateIsAfterStartDate(module.EndDate, targetCourse.EndDate))
                 return true;
             else
                return false;
@@ -65,10 +66,32 @@ namespace Laja.Services
                 return true;
         }
 
+        private bool EndDateIsEqualAfterStartDate(DateTime startDate, DateTime endDate)
+        {
+            if (endDate.Subtract(startDate).TotalDays < 0)
+                return false;
+            else
+                return true;
+        }
+
         public string CreateUniqFileName(string fileName)
         {
             return "";
         }
 
+        public bool CheckCoursePeriodAgainstModules(Course course)
+        {
+            if (course.StartDate == null || course.EndDate == null)
+                return false;
+
+            var savedModules = db.Courses.Find(course.Id).Modules.ToList();
+            
+            foreach (var module in savedModules)
+            {
+                if (!EndDateIsEqualAfterStartDate(course.StartDate, module.StartDate) || (!EndDateIsEqualAfterStartDate(module.EndDate, course.EndDate)))                
+                    return false;                
+            }
+            return true;
+        }
     }
 }

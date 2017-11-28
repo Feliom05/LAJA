@@ -1,13 +1,13 @@
 ﻿@model Laja.Models.Course
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Kurs Detaljer";
 }
 
-<h2>Details</h2>
+<h2>Detaljer för kurs @Model.Name</h2>
 
 <div>
-    <h4>Course</h4>
+   
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -43,8 +43,31 @@
         </dd>
 
     </dl>
+
+    <dd>
+        <h3>Moduler</h3>
+        <table class="table">
+            <tr class="alert-info">
+                <th>Namn</th>
+                <th>Start</th>
+                <th>Slut</th>
+            </tr>
+            @foreach (var module in Model.Modules)
+            {
+                <tr>
+                    <td>@Html.ActionLink(module.Name, "Details", "Modules", new { id = module.Id }, null)</td>                                            
+                    <td>@Html.DisplayFor(model => module.StartDate)</td>
+                    <td>@Html.DisplayFor(model => module.EndDate)</td>                   
+                </tr>
+            }
+        </table>
+    </dd>
+
 </div>
 <p>
+    @Html.ActionLink("Skapa Modul", "Create", "Modules", new { @CourseId = Model.Id}, null) |
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+

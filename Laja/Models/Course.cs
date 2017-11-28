@@ -16,21 +16,25 @@ namespace Laja.Models
         //}
         public int Id { get; set; }
 
+        [Display(Name = "Kursnamn")]
         [Required]
         [StringLength(255)]
         [Index(IsUnique = true)]
         public string Name { get; set; }
 
+        [Display(Name = "Kursbeskrivning")]
         public string Description { get; set; }
 
+        [Display(Name = "Startdatum")]
         [Required]
         [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
 
+        [Display(Name = "Slutdatum")]
         [Required]
         [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
 
         //nav

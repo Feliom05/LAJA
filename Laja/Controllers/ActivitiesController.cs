@@ -1,28 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Laja.Models;
+using Laja.Services;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Laja.Models;
 
 namespace Laja.Controllers
 {
     public class ActivitiesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext db;
+        private ValidationService validationService;
+
+
+        public ActivitiesController()
+        {
+            db = new ApplicationDbContext();
+            validationService = new ValidationService(db);
+        }
 
         // GET: Activities
         public ActionResult Index()
         {
-            var activities = db.Activities
-                .Include(a => a.Module)
-                .Include(a => a.ActivityType);
-            
-                       
-            
+            var activities = db.Activities.Include(a => a.ActivityType).Include(a => a.Module);
             return View(activities.ToList());
         }
 
@@ -42,9 +42,19 @@ namespace Laja.Controllers
         }
 
         // GET: Activities/Create
-        public ActionResult Create()
+        public ActionResult Create(int? moduleId)
         {
-            ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name");
+            ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "Id", "Name");
+            //ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name");
+
+
+
+            if (moduleId != null)
+            {
+                ViewBag.ModuleId = moduleId;
+                var moduleName = db.Modules.Find(moduleId).Name;
+                ViewBag.ModuleName = moduleName;
+            }
             return View();
         }
 
@@ -62,6 +72,7 @@ namespace Laja.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "Id", "Name", activity.ActivityTypeId);
             ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name", activity.ModuleId);
             return View(activity);
         }
@@ -78,6 +89,7 @@ namespace Laja.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "Id", "Name", activity.ActivityTypeId);
             ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name", activity.ModuleId);
             return View(activity);
         }
@@ -95,6 +107,7 @@ namespace Laja.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "Id", "Name", activity.ActivityTypeId);
             ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name", activity.ModuleId);
             return View(activity);
         }
