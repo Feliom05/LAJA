@@ -10,7 +10,7 @@ namespace Laja.Models
 
         //Navigation
 
-        public virtual ICollection<Activity> Activities { get; set; }
+        public  ICollection<Activity> Activities { get; set; }
 
     }
 }
