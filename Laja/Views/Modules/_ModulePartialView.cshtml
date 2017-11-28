@@ -20,7 +20,7 @@
 </style>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 
-<table class="table">
+<table class="table table-responsive">
     <tr class="alert-info">
         <th>Namn</th>
         <th>Beskrivning</th>
@@ -49,61 +49,66 @@
         </td>
     </tr>
 </table>
-<ul class="nav nav-tabs " role="tablist">
-    <li role="presentation" class="active"><a href="#">Aktivitet <span class="badge">@Model.Activities.Count</span></a>
-        <div id="Aktivitet">
+<div class="container responsive">
+    <div id="content">
+        <ul class="nav nav-tabs table-responsive" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#">Aktivitet <span class="badge">@Model.Activities.Count</span></a>
+                <div id="Aktivitet">
 
-            <div class="col-lg-4 first-div">
-                <ul>
-                    @foreach (var activity in Model.Activities)
-                    {
-                        <li>
-                            @Html.ActionLink(activity.Name, "PartialActivities", "Activities", new { id = @activity.Id }, new { @class = "third" })
-                           
-                        </li>
-                    }
-                </ul>
-            </div>
-            <div id="ActivityDetails" class=" second-div">
-               
-            </div>
+                    <div>
+                        <ul>
+                            @foreach (var activity in Model.Activities)
+                            {
+                            <li>
+                                @Html.ActionLink(activity.Name, "PartialActivities", "Activities", new { id = @activity.Id }, new { @class = "third" })
+
+                            </li>
+                            }
+                        </ul>
+                    </div>
+                    <div id="ActivityDetails">
+
+                    </div>
 
 
-        </div>
-    </li>
-    <li role="presentation" class="active">
-        <a href="#">Dokument <span class="badge">@Model.Documents.Count</span></a>
-        <div class="col-lg-4 first-div">
-            <div id="Dokument">
+                </div>
+            </li>
+            <li role="presentation" class="active">
+                <a href="#">Dokument <span class="badge">@Model.Documents.Count</span></a>
+                <div>
+                    <div id="Dokument">
 
-                @{
-                if (Model.Documents.Count > 0)
-                {
-            <table class="table">
-                <tr class="alert-info">
-                    <th>Namn</th>
-                    <th>Beskrivning</th>
+                        @{
+                        if (Model.Documents.Count > 0)
+                        {
+                        <table class="table table-responsive">
+                            <tr class="alert-info">
+                                <th>Namn</th>
+                                <th>Beskrivning</th>
 
-                </tr>
-                @foreach (var doc in Model.Documents)
-                {
-                        <tr>
-                            <td>@doc.Name</td>
-                            <td>@doc.Description</td>
-                        </tr>
+                            </tr>
+                            @foreach (var doc in Model.Documents)
+                            {
+                            <tr>
+                                <td>@doc.Name</td>
+                                <td>@doc.Description</td>
+                            </tr>
+                            }
+                        </table>
                         }
-            </table>
-                }
 
-                }
-            </div>
-        </div>
-</li>
-</ul>
-<script type="text/javascript">
+                        }
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+    <script type="text/javascript">
         $(function () {
 
-           
+
             $(".third").click(function (e) {
 
                 e.preventDefault();
@@ -112,4 +117,13 @@
 
 
         });
-</script>
+        jQuery(document).ready(function ($) {
+            $('#tabs').tab();
+        });
+        $('button').addClass('btn-primary').text('Switch to Orange Tab');
+        $('button').click(function () {
+            $('#tabs a[href=#orange]').tab('show');
+        });
+
+
+    </script>

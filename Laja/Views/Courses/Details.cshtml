@@ -28,7 +28,6 @@
     }
 
 </style>
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <div>
     <h4>Course</h4>
     <hr />
@@ -36,13 +35,11 @@
 
         @Html.ActionLink("Back to List", "Index") |
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Registrera modul", "Create", "Module", new { CourseId = Model.Id }, null) |
-        @Html.ActionLink("Registrera elev", "Create", "User", new { CourseId = Model.Id, @Role = "Elev" }, null) |
-        @Html.ActionLink("Registrera Dokument", "Create", "Document", new { CourseId = Model.Id }, null)
+        
 
     </p>
-    <table class="table">
-        <tr class="alert-info">
+    <table class="table responsive">
+        <tr class="alert-link">
             <th>Namn</th>
             <th>Beskrivning</th>
             <th>Start</th>
@@ -69,19 +66,20 @@
 
 
 
-<div class="container">
+<div class="container responsive">
     <center><h6></h6></center>
     <div id="content">
-        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+        <ul id="tabs" class="nav nav-tabs responsive" data-tabs="tabs">
             <li class="active"><a href="#Modules" data-toggle="tab">Modul <span class="badge">@Model.Modules.Count</span></a></li>
             <li><a href="#Students" data-toggle="tab">Elev <span class="badge">@Model.Students.Count</span></a></li>
             <li><a href="#Documents" data-toggle="tab">Dokument <span class="badge">@Model.Documents.Count</span></a></li>
            
         </ul>
-        <div id="my-tab-content" class="tab-content">
+        <div id="my-tab-content" class="tab-content responsive">
             <div class="tab-pane active" id="Modules">
-                <h1>Modules</h1>
+                <h4>Modules</h4>
                 <div >
+                    @Html.ActionLink("Registrera nya modul", "Create", "Modules", new { CourseId = Model.Id }, null)
                     <ul>
                         @foreach (var modul in Model.Modules)
                         {
@@ -95,13 +93,14 @@
 
                 </div>
             </div>
-            <div class="tab-pane" id="Students">
-                <h1>Students</h1>
+            <div class="tab-pane responsive" id="Students">
+                <h4>Students</h4>
                 <div class="">
+                    @Html.ActionLink("Registrera elev", "Create", "User", new { CourseId = Model.Id, @Role = "Elev" }, null)
                     @{
                         if (Model.Students.Count > 0)
                         {
-                            <table class="table">
+                            <table class="table responsive">
                                 <tr class="alert-info">
                                     <th>Name</th>
                                     <th>Email</th>
@@ -120,8 +119,9 @@
                     }
                 </div>
             </div>
-            <div class="tab-pane" id="Documents">
-                <h1>Documents</h1>
+            <div class="tab-pane responsive" id="Documents">
+                <h4>Documents</h4>
+                @Html.ActionLink("Registrera Dokument", "Create", "Document", new { CourseId = Model.Id }, null)
                 @{
                     if (Model.Documents.Count > 0)
                     {
@@ -147,6 +147,7 @@
         </div>
     </div>
     <script type="text/javascript">
+        
         jQuery(document).ready(function ($) {
             $('#tabs').tab();
         });
@@ -154,11 +155,7 @@
         $('button').click(function () {
             $('#tabs a[href=#orange]').tab('show');
         });
-    </script>
-</div> <!-- container -->
-<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
-    <script type="text/javascript">
         $(function () {
 
             $(".second").click(function (e) {
@@ -174,4 +171,16 @@
 
 
         });
+        (function ($) {
+            fakewaffle.responsiveTabs(['xs', 'sm']);
+        })(jQuery);
+
+    </script>
+</div> <!-- container -->
+<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+
+    <script type="text/javascript">
+        
     </script>
