@@ -110,7 +110,8 @@ namespace Laja.Services
         {
             if (module.StartDate == null || module.EndDate == null)
                 return false;
-            foreach (var activity in module.Activities)
+            var savedActivities = db.Modules.Find(module.Id).Activities.ToList();
+            foreach (var activity in savedActivities)
             {
                 if (!EndDateIsEqualAfterStartDate(activity.StartDate, module.StartDate) || !EndDateIsEqualAfterStartDate(activity.EndDate, module.EndDate))
                     return false;
