@@ -53,7 +53,7 @@ namespace Laja.Controllers
             {
                 var validationService = new ValidationService(db);
                 var NameExists = validationService.UniqName(course);
-                if (!NameExists)
+                if (!NameExists && validationService.CheckPeriod(course))
                 {
                     db.Courses.Add(course);
                     db.SaveChanges();
