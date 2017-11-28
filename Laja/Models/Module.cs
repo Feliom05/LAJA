@@ -35,7 +35,7 @@ namespace Laja.Models
 
         //Navigation
 
-        public virtual Course Course { get; set; }
+        public Course Course { get; set; }
         public virtual ICollection<Activity> Activities { get; set; }
         public virtual ICollection<Document> Documents { get; set; }
 

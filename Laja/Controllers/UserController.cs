@@ -1,18 +1,34 @@
 ﻿using Laja.Models;
-using Laja.Services;
 using Laja.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web.Mvc;
 
 namespace Laja.Controllers
 {
+    [Authorize(Roles ="Lärare")]
     public class UserController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: User
-        public ActionResult Create()
+        private void AddErrors(IdentityResult result)
         {
-            var user = new UserViewModel();
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
+        }
+
+
+        // GET: User
+        public ActionResult Create(int? courseId, string role)
+        {
+            var user = new UserViewModel()
+            {
+                CourseId = courseId,
+                Role = role
+            };
+
             return View(user);
         }
 
@@ -21,14 +37,59 @@ namespace Laja.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FirstName, LastName, Email, CourseId")] UserViewModel User)
+        public ActionResult Create([Bind(Include = "FirstName, LastName, Email, PassWord, CourseId, Role")] UserViewModel User)
         {
+
+            var userStore = new UserStore<ApplicationUser>(db);
+            var userManager = new UserManager<ApplicationUser>(userStore);
+
             if (ModelState.IsValid)
             {
-                var validateEmail = new ValidationService(db);
-            }
+                var newUser = new ApplicationUser
+                {
+                    FirstName = User.FirstName,
+                    LastName = User.LastName,
+                    UserName = User.Email,
+                    Email = User.Email,
+                    CourseId = User.CourseId
+                };
 
-            return View();
+                var result = userManager.Create(newUser, User.PassWord);
+
+                if (result.Succeeded == false)
+                {
+                    AddErrors(result);
+                    return View(User);
+                }
+
+                var findNewUser = userManager.FindByEmail(newUser.Email);
+
+                if (findNewUser != null)
+                {
+                    var resultRole = userManager.AddToRole(findNewUser.Id, User.Role);
+                    if (resultRole.Succeeded == false)
+                    {
+                        AddErrors(resultRole);
+                        return View(User);
+                    }
+
+                    //User and Role definition OK
+
+                    //If role Elev redirect to 
+                    //else (Lärare redirect to 
+
+                    if (User.Role == "Elev")
+                    {
+                        return RedirectToAction("Details", "Courses" , new { id = User.CourseId });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Courses");
+                    }
+                }
+            }         
+
+            return View(User);
         }
     }
 }
