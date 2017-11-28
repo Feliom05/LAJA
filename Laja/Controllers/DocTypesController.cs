@@ -10,117 +10,107 @@ using Laja.Models;
 
 namespace Laja.Controllers
 {
-    public class ActivitiesController : Controller
+    public class DocTypesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Activities
+        // GET: DocTypes
         public ActionResult Index()
         {
-            var activities = db.Activities
-                .Include(a => a.Module)
-                .Include(a => a.ActivityType);
-            
-                       
-            
-            return View(activities.ToList());
+            return View(db.DocTypes.ToList());
         }
 
-        // GET: Activities/Details/5
+        // GET: DocTypes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Activity activity = db.Activities.Find(id);
-            if (activity == null)
+            DocType docType = db.DocTypes.Find(id);
+            if (docType == null)
             {
                 return HttpNotFound();
             }
-            return View(activity);
+            return View(docType);
         }
 
-        // GET: Activities/Create
+        // GET: DocTypes/Create
         public ActionResult Create()
         {
-            ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name");
             return View();
         }
 
-        // POST: Activities/Create
+        // POST: DocTypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,ModuleId,Description,StartDate,EndDate,DeadLine,SubmitRequired,ActivityTypeId")] Activity activity)
+        public ActionResult Create([Bind(Include = "Id,Extension,Name")] DocType docType)
         {
             if (ModelState.IsValid)
             {
-                db.Activities.Add(activity);
+                db.DocTypes.Add(docType);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name", activity.ModuleId);
-            return View(activity);
+            return View(docType);
         }
 
-        // GET: Activities/Edit/5
+        // GET: DocTypes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Activity activity = db.Activities.Find(id);
-            if (activity == null)
+            DocType docType = db.DocTypes.Find(id);
+            if (docType == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name", activity.ModuleId);
-            return View(activity);
+            return View(docType);
         }
 
-        // POST: Activities/Edit/5
+        // POST: DocTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,ModuleId,Description,StartDate,EndDate,DeadLine,SubmitRequired,ActivityTypeId")] Activity activity)
+        public ActionResult Edit([Bind(Include = "Id,Extension,Name")] DocType docType)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(activity).State = EntityState.Modified;
+                db.Entry(docType).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name", activity.ModuleId);
-            return View(activity);
+            return View(docType);
         }
 
-        // GET: Activities/Delete/5
+        // GET: DocTypes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Activity activity = db.Activities.Find(id);
-            if (activity == null)
+            DocType docType = db.DocTypes.Find(id);
+            if (docType == null)
             {
                 return HttpNotFound();
             }
-            return View(activity);
+            return View(docType);
         }
 
-        // POST: Activities/Delete/5
+        // POST: DocTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Activity activity = db.Activities.Find(id);
-            db.Activities.Remove(activity);
+            DocType docType = db.DocTypes.Find(id);
+            db.DocTypes.Remove(docType);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
