@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Laja.Models
 {
@@ -38,8 +36,10 @@ namespace Laja.Models
         public DateTime EndDate { get; set; }
 
         //nav
+        public virtual DocType DocumentType { get; set; }
         public virtual ICollection<ApplicationUser> Students { get; set; }
         public virtual ICollection<Module> Modules { get; set; }
+        public virtual ICollection<Document> Documents { get; set; }
 
     }
 }

@@ -9,7 +9,14 @@ namespace Laja.Controllers
 {
     public class ModulesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext db;
+        private ValidationService validationService;
+
+        public ModulesController()
+        {
+            db = new ApplicationDbContext();
+            validationService = new ValidationService(db);
+        }
 
         // GET: Modules
         public ActionResult Index()
@@ -58,7 +65,7 @@ namespace Laja.Controllers
         {
             if (ModelState.IsValid)
             {
-                var validationService = new ValidationService(db);
+               
                 var moduleExists = validationService.UniqName(module);
                 if (moduleExists)
                 {

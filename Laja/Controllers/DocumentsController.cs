@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Laja.Models;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Laja.Models;
-using System.IO;
-using Microsoft.AspNet.Identity;
 
 namespace Laja.Controllers
 {
@@ -62,15 +60,24 @@ namespace Laja.Controllers
                 if (Request.Files[upload].FileName != "")
                 {
                     string path = AppDomain.CurrentDomain.BaseDirectory + "/App_Data/Documents/";
-                    string filename = Path.GetFileName(Request.Files[upload].FileName);                   
+                    string filename = Path.GetFileName(Request.Files[upload].FileName);
                     document.FileName = filename + "_" + DateTime.Now.ToString();
                     document.CreationTime = DateTime.Now;
                     var userName = User.Identity.GetUserName();
                     var folder = Directory.CreateDirectory(Path.Combine(path, userName)).FullName;
-                    Request.Files[upload].SaveAs(Path.Combine(folder, filename));                    
-                    var filePath= Path.Combine(folder, filename);
+                    Request.Files[upload].SaveAs(Path.Combine(folder, filename));
+                    var filePath = Path.Combine(folder, filename);
                     String RelativePath = filePath.Replace(Request.ServerVariables["APPL_PHYSICAL_PATH"], String.Empty);
                     document.Name = RelativePath;
+
+                    if (document.ActivityId != null)
+                    {
+                        document.CourseId = null;
+                        document.ModuleId = null;
+                        document.Course = null;
+                        document.Module = null;
+                    }
+
                     db.Documents.Add(document);
                     db.SaveChanges();
                 }
@@ -87,7 +94,7 @@ namespace Laja.Controllers
             ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name", document.ModuleId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", document.UserId);
 
-            
+
             return View(document);
         }
 

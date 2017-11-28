@@ -52,8 +52,8 @@ namespace Laja.Controllers
             if (moduleId != null)
             {
                 ViewBag.ModuleId = moduleId;
-                var moduleName = db.Modules.Find(moduleId).Name;
-                ViewBag.ModuleName = moduleName;
+                var module = db.Modules.Find(moduleId);
+                ViewBag.ModuleName = module.Name + " (" + module.StartDate.ToShortDateString() + " - " + module.EndDate.ToShortDateString()+ " )";
             }
             return View();
         }
@@ -67,6 +67,18 @@ namespace Laja.Controllers
         {
             if (ModelState.IsValid)
             {
+                var activityExists = validationService.UniqName(activity);
+                if (activityExists)
+                {
+                    ViewBag.Error = "Aktitivtetnamnet används redan. Var god ange ett annat namn, tack.";
+                    return View(activity);
+                }
+                if (!validationService.CheckActivityPeriodAgainstModule(activity)) ;
+                {
+                    ViewBag.Error = "Aktivitetens startdatum och slutdatum måste vara inom moduless start och slutdatum.";
+                    return View(activity);
+                }
+           
                 db.Activities.Add(activity);
                 db.SaveChanges();
                 return RedirectToAction("Index");
