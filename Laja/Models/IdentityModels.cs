@@ -19,9 +19,10 @@ namespace Laja.Models
         }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public int? CourseId { get; set; }
 
         //nav
-        public Course Course { get; set; }
+        public virtual Course Course { get; set; }
 
     }
 
@@ -45,9 +46,9 @@ namespace Laja.Models
 
         public DbSet<ActivityType> ActivityTypes { get; set; }
 
-        public System.Data.Entity.DbSet<Document> Documents { get; set; }
+        public DbSet<Document> Documents { get; set; }
 
-        public System.Data.Entity.DbSet<DocType> DocTypes { get; set; }
+        public DbSet<DocType> DocTypes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

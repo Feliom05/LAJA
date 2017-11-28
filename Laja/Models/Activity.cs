@@ -41,7 +41,7 @@ namespace Laja.Models
         //Navigation
 
         public virtual Module Module { get; set; }
-        public virtual ActivityType ActivityType { get; set; }
+        public  ActivityType ActivityType { get; set; }
         public virtual ICollection<Document> Documents { get; set; }
 
 

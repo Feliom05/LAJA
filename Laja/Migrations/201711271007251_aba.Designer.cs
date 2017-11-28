@@ -7,13 +7,13 @@ namespace Laja.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class relations : IMigrationMetadata
+    public sealed partial class aba : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(relations));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(aba));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711270844567_relations"; }
+            get { return "201711271007251_aba"; }
         }
         
         string IMigrationMetadata.Source

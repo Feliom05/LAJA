@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -17,7 +17,7 @@ namespace Laja.Controllers
         // GET: Activities
         public ActionResult Index()
         {
-            var activities = db.Activities.Include(a => a.Module);
+            var activities = db.Activities.Include(a => a.ActivityType).Include(a => a.Module);
             return View(activities.ToList());
         }
 
@@ -37,12 +37,10 @@ namespace Laja.Controllers
         }
 
         // GET: Activities/Create
-        public ActionResult Create(int? moduleId)
+        public ActionResult Create()
         {
+            ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "Id", "Name");
             ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name");
-            ViewBag.SelectedModuleId = 0;
-            if (moduleId != null)
-                ViewBag.SelectedModuleId = moduleId;
             return View();
         }
 
@@ -60,6 +58,7 @@ namespace Laja.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "Id", "Name", activity.ActivityTypeId);
             ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name", activity.ModuleId);
             return View(activity);
         }
@@ -76,6 +75,7 @@ namespace Laja.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "Id", "Name", activity.ActivityTypeId);
             ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name", activity.ModuleId);
             return View(activity);
         }
@@ -93,6 +93,7 @@ namespace Laja.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "Id", "Name", activity.ActivityTypeId);
             ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name", activity.ModuleId);
             return View(activity);
         }
@@ -121,12 +122,6 @@ namespace Laja.Controllers
             db.Activities.Remove(activity);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        public ActionResult PartialActivities(int id = 0)
-        {
-            var activity = db.Activities.Find(id);
-            return PartialView("_ActivitypartialView", activity);
         }
 
         protected override void Dispose(bool disposing)
