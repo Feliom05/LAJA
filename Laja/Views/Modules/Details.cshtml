@@ -49,6 +49,23 @@
         <dd>
             @Html.DisplayFor(model => model.EndDate)
         </dd>
+        <dd>
+            <h2>Dokument</h2>
+            <table class="table">
+                <tr class="alert-info">
+                    <th>Namn</th>
+                    <th>Epost</th>
+
+                </tr>
+                @foreach (var doc in Model.Documents)
+                {
+                    <tr>
+                        <td><a href="@doc.Name" download>@doc.FileName.Substring(0, @doc.FileName.IndexOf('_'))</a></td>
+                        <td>@doc.User.UserName</td>
+                    </tr>
+                }
+            </table>
+        </dd>
 
     </dl>
 </div>
