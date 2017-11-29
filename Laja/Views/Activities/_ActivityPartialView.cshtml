@@ -1,6 +1,6 @@
 ﻿@model Laja.Models.Activity
 
-<table class="table">
+<table class="table table-responsive">
     <tr class="alert-info">
         <th>Namn</th>
         <th>Beskrivning</th>
@@ -24,7 +24,7 @@
         </td>
     </tr>
 </table>
-<ul class="nav nav-tabs" active>
+<ul class="nav nav-tabs table-responsive" active>
     
     <li role="presentation" class="active">
         <a href="#">Dokument <span class="badge">@Model.Documents.Count</span></a>
@@ -33,7 +33,34 @@
             @{
                 if (Model.Documents.Count > 0)
                 {
-                    <table class="table">
+                    <table class="table table-responsive">
+                        <tr class="alert-info">
+                            <th>Namn</th>
+                            <th>Beskrivning</th>
+
+                        </tr>
+                        @foreach (var doc in Model.Documents)
+                {
+                            <tr>
+                                <td>@doc.Name</td>
+                                <td>@doc.Description</td>
+                            </tr>
+                        }
+                    </table>
+                }
+
+            }
+        </div>
+
+    </li>
+    <li role="presentation" class="active">
+        <a href="#">Deadlines <span class="badge"></span></a>
+        <div id="DeadLines">
+
+            @{
+                if (Model.Documents.Count > 0)
+                {
+                    <table class="table table-responsive">
                         <tr class="alert-info">
                             <th>Namn</th>
                             <th>Beskrivning</th>
