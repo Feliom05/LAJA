@@ -1,10 +1,10 @@
 ﻿@model Laja.Models.Course
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Redigera";
 }
 
-<h2>Edit</h2>
+<h2>Redigera Kurs</h2>
 
 
 @using (Html.BeginForm())
@@ -12,8 +12,9 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Course</h4>
+ 
         <hr />
+        <h5 class="alert-danger">@ViewBag.Error</h5>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
@@ -58,7 +59,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Tillbaka till Kurser", "Index")
 </div>
 
 @section Scripts {

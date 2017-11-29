@@ -1,19 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Laja.Models;
+using Laja.Services;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Laja.Models;
-using Laja.Services;
 
 namespace Laja.Controllers
 {
+    [Authorize]
     public class ModulesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext db;
+        private ValidationService validationService;
+
+        public ModulesController()
+        {
+            db = new ApplicationDbContext();
+            validationService = new ValidationService(db);
+        }
 
         // GET: Modules
         public ActionResult Index()
@@ -38,35 +42,56 @@ namespace Laja.Controllers
         }
 
         // GET: Modules/Create
-        public ActionResult Create()
+        [Authorize(Roles = "Lärare")]
+        public ActionResult Create(int? courseId)
         {
-            ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name");
+            //ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name");
+            if (courseId != 0)
+            {
+                ViewBag.CourseSelectedId = courseId;
+                var name = db.Courses.Find(courseId).Name;
+                ViewBag.CourseName = name;
+
+            }
+
+
             return View();
         }
 
         // POST: Modules/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Lärare")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,CourseId,Description,StartDate,EndDate")] Module module)
         {
             if (ModelState.IsValid)
             {
-                var validationService = new ValidationService(db);
+
                 var moduleExists = validationService.UniqName(module);
-                if (!moduleExists)
+                if (moduleExists)
                 {
-                    db.Modules.Add(module);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name", module.CourseId);
-                    ViewBag.Error = "Modulenamnet används redan inom samma kurs. Var god ange ett annat namn, tack.";
+                    ViewBag.Error = "Modulnamnet används redan. Var god ange ett annat namn, tack.";
                     return View(module);
                 }
+                if (!validationService.CheckModulePeriodAgainstCourse(module))
+                {
+                    ViewBag.Error = "Modulens startdatum och slutdatum måste vara inom kursens start och slutdatum.";
+                    return View(module);
+                }
+
+
+                db.Modules.Add(module);
+                db.SaveChanges();
+                return RedirectToAction("Details", "Courses", new { @id = module.CourseId });
+                //}
+                //else
+                //{
+                //    ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name", module.CourseId);
+                //    ViewBag.Error = "Modulenamnet används redan inom samma kurs. Var god ange ett annat namn, tack.";
+                //    return View(module);
+                //}
 
 
             }
@@ -76,6 +101,7 @@ namespace Laja.Controllers
         }
 
         // GET: Modules/Edit/5
+        [Authorize(Roles = "Lärare")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -94,6 +120,7 @@ namespace Laja.Controllers
         // POST: Modules/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Lärare")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,CourseId,Description,StartDate,EndDate")] Module module)
@@ -109,6 +136,7 @@ namespace Laja.Controllers
         }
 
         // GET: Modules/Delete/5
+        [Authorize(Roles = "Lärare")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -124,6 +152,7 @@ namespace Laja.Controllers
         }
 
         // POST: Modules/Delete/5
+        [Authorize(Roles = "Lärare")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

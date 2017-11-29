@@ -11,6 +11,14 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.ActivityType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActivityType.Name)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Module.Name)
         </dt>
 
@@ -73,7 +81,7 @@
         <dd>
             @Html.DisplayFor(model => model.ActivityTypeId)
         </dd>
-        <dd>
+        @*<dd>
             <h2>Dokument</h2>
             <table class="table">
                 <tr class="alert-info">
@@ -89,8 +97,26 @@
                 </tr>
                 }
             </table>
-        </dd>
+        </dd>*@
     </dl>
+
+    <dd>
+        <h2>Dokument</h2>
+        <table class="table">
+            <tr class="alert-info">
+                <th>Namn</th>
+                <th>Epost</th>
+
+            </tr>
+            @foreach (var doc in Model.Documents)
+            {
+                <tr>
+                    <td><a href="@doc.Name" download>@doc.FileName.Substring(0, @doc.FileName.IndexOf('_'))</a></td>
+                    <td>@doc.User.UserName</td>
+                </tr>
+            }
+        </table>
+    </dd>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

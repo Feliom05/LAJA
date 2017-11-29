@@ -202,9 +202,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711271007251_aba.cs" />
-    <Compile Include="Migrations\201711271007251_aba.Designer.cs">
-      <DependentUpon>201711271007251_aba.cs</DependentUpon>
+    <Compile Include="Migrations\201711271035374_UserCourseIDUpdated.cs" />
+    <Compile Include="Migrations\201711271035374_UserCourseIDUpdated.Designer.cs">
+      <DependentUpon>201711271035374_UserCourseIDUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711281518492_DocVirtual.cs" />
+    <Compile Include="Migrations\201711281518492_DocVirtual.Designer.cs">
+      <DependentUpon>201711281518492_DocVirtual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711281538016_VirtualListDoc.cs" />
+    <Compile Include="Migrations\201711281538016_VirtualListDoc.Designer.cs">
+      <DependentUpon>201711281538016_VirtualListDoc.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -228,6 +236,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Education.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -237,7 +246,6 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.11.1.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -289,6 +297,27 @@
     <Content Include="Views\Modules\Details.cshtml" />
     <Content Include="Views\Modules\Edit.cshtml" />
     <Content Include="Views\Modules\Index.cshtml" />
+    <Content Include="Views\ActivityTypes\Create.cshtml" />
+    <Content Include="Views\ActivityTypes\Delete.cshtml" />
+    <Content Include="Views\ActivityTypes\Details.cshtml" />
+    <Content Include="Views\ActivityTypes\Edit.cshtml" />
+    <Content Include="Views\ActivityTypes\Index.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\Activities\Delete.cshtml" />
+    <Content Include="Views\Activities\Details.cshtml" />
+    <Content Include="Views\Activities\Edit.cshtml" />
+    <Content Include="Views\Activities\Index.cshtml" />
+    <Content Include="Views\DocTypes\Create.cshtml" />
+    <Content Include="Views\DocTypes\Delete.cshtml" />
+    <Content Include="Views\DocTypes\Details.cshtml" />
+    <Content Include="Views\DocTypes\Edit.cshtml" />
+    <Content Include="Views\DocTypes\Index.cshtml" />
+    <Content Include="Views\Documents\Create.cshtml" />
+    <Content Include="Views\Documents\Delete.cshtml" />
+    <Content Include="Views\Documents\Details.cshtml" />
+    <Content Include="Views\Documents\Downloads.cshtml" />
+    <Content Include="Views\Documents\Edit.cshtml" />
+    <Content Include="Views\Documents\Index.cshtml" />
     <Content Include="Views\Documents\Create.cshtml" />
     <Content Include="Views\Documents\Delete.cshtml" />
     <Content Include="Views\Documents\Details.cshtml" />
@@ -325,8 +354,14 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711271007251_aba.resx">
-      <DependentUpon>201711271007251_aba.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711271035374_UserCourseIDUpdated.resx">
+      <DependentUpon>201711271035374_UserCourseIDUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711281518492_DocVirtual.resx">
+      <DependentUpon>201711281518492_DocVirtual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711281538016_VirtualListDoc.resx">
+      <DependentUpon>201711281538016_VirtualListDoc.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

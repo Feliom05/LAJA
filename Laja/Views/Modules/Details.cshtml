@@ -1,13 +1,13 @@
 ﻿@model Laja.Models.Module
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detaljer";
 }
 
-<h2>Details</h2>
+<h2>Detaljer</h2>
 
 <div>
-    <h4>Module</h4>
+    <h4>Moduler</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -49,27 +49,50 @@
         <dd>
             @Html.DisplayFor(model => model.EndDate)
         </dd>
-        <dd>
-            <h2>Dokument</h2>
-            <table class="table">
-                <tr class="alert-info">
-                    <th>Namn</th>
-                    <th>Epost</th>
-
-                </tr>
-                @foreach (var doc in Model.Documents)
-                {
-                    <tr>
-                        <td><a href="@doc.Name" download>@doc.FileName.Substring(0, @doc.FileName.IndexOf('_'))</a></td>
-                        <td>@doc.User.UserName</td>
-                    </tr>
-                }
-            </table>
-        </dd>
+        
 
     </dl>
+
+    <dd>
+        <h3>Aktiviteter</h3>
+        <table class="table">
+            <tr class="alert-info">
+                <th>Namn</th>
+                <th>Start</th>
+                <th>Slut</th>
+            </tr>
+            @foreach (var module in Model.Activities)
+            {
+                <tr>
+                    <td>@Html.ActionLink(module.Name, "Details", "Activities", new { id = module.Id }, null)</td>
+                    <td>@Html.DisplayFor(model => module.StartDate)</td>
+                    <td>@Html.DisplayFor(model => module.EndDate)</td>
+                </tr>
+            }
+        </table>
+    </dd>
+
+    <dd>
+        <h2>Dokument</h2>
+        <table class="table">
+            <tr class="alert-info">
+                <th>Namn</th>
+                <th>Epost</th>
+
+            </tr>
+            @foreach (var doc in Model.Documents)
+            {
+                <tr>
+                    <td><a href="@doc.Name" download>@doc.FileName.Substring(0, @doc.FileName.IndexOf('_'))</a></td>
+                    <td>@doc.User.UserName</td>
+                </tr>
+            }
+        </table>
+    </dd>
+
 </div>
 <p>
+    @Html.ActionLink("Registera ny aktivitet", "Create", "Activities", new { @moduleId = Model.Id}, null)
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

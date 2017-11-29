@@ -7,6 +7,7 @@ namespace Laja.ViewModels
         [Display(Name = "Förnamn:")]
         [Required(ErrorMessage = "Förnamnet krävs")]
         public string FirstName { get; set; }
+
         [Display(Name = "Efternamn:")]
         [Required(ErrorMessage = "Efternamet krävs")]
         public string LastName { get; set; }
@@ -21,5 +22,8 @@ namespace Laja.ViewModels
 
         [Display(Name = "Kursnamn:")]
         public int? CourseId { get; set; }
+
+        [Required]
+        public string Role { get; set; }
     }
 }

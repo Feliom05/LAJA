@@ -1,19 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Laja.Models;
+using Laja.Services;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Laja.Models;
-using Laja.Services;
 
 namespace Laja.Controllers
+
 {
+    [Authorize]
     public class CoursesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext db;
+        private ValidationService validationService;
+
+        public CoursesController()
+        {
+            db = new ApplicationDbContext();
+            validationService = new ValidationService(db);
+        }
 
         // GET: Courses
         public ActionResult Index()
@@ -37,6 +42,7 @@ namespace Laja.Controllers
         }
 
         // GET: Courses/Create
+        [Authorize(Roles ="Lärare")]
         public ActionResult Create()
         {
             return View();
@@ -45,33 +51,36 @@ namespace Laja.Controllers
         // POST: Courses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Lärare")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Description,StartDate,EndDate")] Course course)
         {
             if (ModelState.IsValid)
             {
-                var validationService = new ValidationService(db);
+               
                 var NameExists = validationService.UniqName(course);
-                if (!NameExists)
+                if (NameExists)
                 {
-                    db.Courses.Add(course);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    
                     ViewBag.Error = "Kursnamnet används redan. Var god ange ett annat namn, tack.";
                     return View(course);
                 }
-              
+                if (!validationService.CheckPeriod(course))
+                {
+                    ViewBag.Error = "Slut datum måste vara efter startdatum.";
+                    return View(course);
+                }
+
+                db.Courses.Add(course);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
             return View(course);
         }
 
         // GET: Courses/Edit/5
+        [Authorize(Roles = "Lärare")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -89,12 +98,33 @@ namespace Laja.Controllers
         // POST: Courses/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Lärare")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Description,StartDate,EndDate")] Course course)
         {
             if (ModelState.IsValid)
             {
+
+               
+                var NameExists = validationService.UniqName(course);
+                if (NameExists)
+                {
+                    ViewBag.Error = "Kursnamnet används redan. Var god ange ett annat namn, tack.";
+                    return View(course);
+                }
+                if (!validationService.CheckPeriod(course))
+                {
+                    ViewBag.Error = "Slut datum måste vara efter startdatum.";
+                    return View(course);
+                }
+                if (!validationService.CheckCoursePeriodAgainstModules(course))
+                {
+                    ViewBag.Error = "Kursens start eller slutdatum får inte vara före eller efter den första och sista modulen.";
+                    return View(course);
+                }
+
+
                 db.Entry(course).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -103,6 +133,7 @@ namespace Laja.Controllers
         }
 
         // GET: Courses/Delete/5
+        [Authorize(Roles = "Lärare")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -118,6 +149,7 @@ namespace Laja.Controllers
         }
 
         // POST: Courses/Delete/5
+        [Authorize(Roles = "Lärare")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
