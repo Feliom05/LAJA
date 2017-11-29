@@ -64,21 +64,14 @@ namespace Laja.Controllers
                     string filename = Path.GetFileName(Request.Files[upload].FileName);
                     document.FileName = filename + "_" + DateTime.Now.ToString();
                     document.CreationTime = DateTime.Now;
-                    var userName = User.Identity.GetUserName();
-                    var folder = Directory.CreateDirectory(Path.Combine(path, userName)).FullName;
-                    Request.Files[upload].SaveAs(Path.Combine(folder, filename));
-                    var filePath = Path.Combine(folder, filename);
+                    var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
+                    var currentUser = manager.FindById(User.Identity.GetUserId()).UserName;
+                    document.UserId = manager.FindById(User.Identity.GetUserId()).Id;                    
+                    var folder = Directory.CreateDirectory(Path.Combine(path, currentUser)).FullName;
+                    Request.Files[upload].SaveAs(Path.Combine(folder, filename));                    
+                    var filePath= Path.Combine(folder, filename);
                     String RelativePath = filePath.Replace(Request.ServerVariables["APPL_PHYSICAL_PATH"], String.Empty);
                     document.Name = RelativePath;
-
-                    //if (document.ActivityId != null)
-                    //{
-                    //    document.CourseId = null;
-                    //    document.ModuleId = null;
-                    //    document.Course = null;
-                    //    document.Module = null;
-                    //}
-
                     db.Documents.Add(document);
                     db.SaveChanges();
                 }
@@ -95,7 +88,7 @@ namespace Laja.Controllers
             ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name", document.ModuleId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", document.UserId);
 
-
+            
             return View(document);
         }
 
