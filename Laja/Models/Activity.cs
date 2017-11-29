@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+
 namespace Laja.Models
 {
     public class Activity
@@ -47,6 +48,7 @@ namespace Laja.Models
         public Module Module { get; set; }
         public ActivityType ActivityType { get; set; }
         public virtual ICollection<Document> Documents { get; set; }
+
 
     }
 }

@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Laja.Models;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Laja.Models;
-using System.IO;
-using Microsoft.AspNet.Identity;
 
 namespace Laja.Controllers
 {
+    [Authorize]
     public class DocumentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -62,7 +61,7 @@ namespace Laja.Controllers
                 if (Request.Files[upload].FileName != "")
                 {
                     string path = AppDomain.CurrentDomain.BaseDirectory + "/App_Data/Documents/";
-                    string filename = Path.GetFileName(Request.Files[upload].FileName);                   
+                    string filename = Path.GetFileName(Request.Files[upload].FileName);
                     document.FileName = filename + "_" + DateTime.Now.ToString();
                     document.CreationTime = DateTime.Now;
                     var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
