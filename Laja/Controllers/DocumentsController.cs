@@ -65,8 +65,10 @@ namespace Laja.Controllers
                     string filename = Path.GetFileName(Request.Files[upload].FileName);                   
                     document.FileName = filename + "_" + DateTime.Now.ToString();
                     document.CreationTime = DateTime.Now;
-                    var userName = User.Identity.GetUserName();
-                    var folder = Directory.CreateDirectory(Path.Combine(path, userName)).FullName;
+                    var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
+                    var currentUser = manager.FindById(User.Identity.GetUserId()).UserName;
+                    document.UserId = manager.FindById(User.Identity.GetUserId()).Id;                    
+                    var folder = Directory.CreateDirectory(Path.Combine(path, currentUser)).FullName;
                     Request.Files[upload].SaveAs(Path.Combine(folder, filename));                    
                     var filePath= Path.Combine(folder, filename);
                     String RelativePath = filePath.Replace(Request.ServerVariables["APPL_PHYSICAL_PATH"], String.Empty);
