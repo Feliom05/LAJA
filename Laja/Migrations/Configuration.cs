@@ -47,7 +47,9 @@ namespace Laja.Migrations
             var userManager = new UserManager<ApplicationUser>(userStore);
             var AppUsers = new List<ApplicationUser>()
             {
-                new ApplicationUser {UserName = "larare1@laja.se", Email = "larare1@laja.se", FirstName="Afram", LastName = "Kako" },
+                new ApplicationUser {UserName = "larare1@laja.se", Email = "larare1@laja.se", FirstName="Kalle", LastName = "Karlsson" },
+                new ApplicationUser {UserName = "larare2@laja.se", Email = "larare2@laja.se", FirstName="Dimitris", LastName = "Björlingh" },
+                new ApplicationUser {UserName = "elev@laja.se", Email = "elev@laja.se", FirstName="elev1", LastName = "Elev1" },
 
             };
             foreach (var appUser in AppUsers)
@@ -70,10 +72,15 @@ namespace Laja.Migrations
         {
             var userStore = new UserStore<ApplicationUser>(context);
             var userManager = new UserManager<ApplicationUser>(userStore);
-            var adminRole = userManager.FindByName("larare1@laja.se");
+            var adminRole = userManager.FindByName("larare2@laja.se");            
             if (adminRole != null)
             {
                 var result = userManager.AddToRole(adminRole.Id, "Lärare");
+            }
+            var elevRole = userManager.FindByName("elev@laja.se");
+            if (adminRole != null)
+            {
+                var result = userManager.AddToRole(adminRole.Id, "Elev");
             }
         }
     }
