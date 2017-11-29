@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Laja.Controllers
 {
+    [Authorize]
     public class DocumentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -70,13 +71,13 @@ namespace Laja.Controllers
                     String RelativePath = filePath.Replace(Request.ServerVariables["APPL_PHYSICAL_PATH"], String.Empty);
                     document.Name = RelativePath;
 
-                    if (document.ActivityId != null)
-                    {
-                        document.CourseId = null;
-                        document.ModuleId = null;
-                        document.Course = null;
-                        document.Module = null;
-                    }
+                    //if (document.ActivityId != null)
+                    //{
+                    //    document.CourseId = null;
+                    //    document.ModuleId = null;
+                    //    document.Course = null;
+                    //    document.Module = null;
+                    //}
 
                     db.Documents.Add(document);
                     db.SaveChanges();

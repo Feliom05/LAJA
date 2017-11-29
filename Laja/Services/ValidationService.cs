@@ -104,7 +104,8 @@ namespace Laja.Services
         }
         public bool CheckModulePeriodAgainstCourse(Module module)
         {
-            if (EndDateIsEqualAfterStartDate(module.Course.StartDate, module.StartDate) && EndDateIsEqualAfterStartDate(module.EndDate, module.Course.EndDate))
+            var targetModule = db.Courses.Find(module.CourseId);
+            if (EndDateIsEqualAfterStartDate(targetModule.StartDate, module.StartDate) && EndDateIsEqualAfterStartDate(module.EndDate, targetModule.EndDate))
                 return true;
             else
                 return false;
