@@ -10,6 +10,7 @@ using Laja.Models;
 
 namespace Laja.Controllers
 {
+    [Authorize]
     public class DocTypesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

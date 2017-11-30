@@ -1,29 +1,27 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
-<div class="jumbotron" >
+<div class="jumbotron">
     <h2 class="text-center">Vällkommen till Laja Education</h2>
     <p class="lead"></p>
     <p class="text-center">
         <img src="~/Images/Education.jpg" />
     </p>
 </div>
-
 <div class="row">
     <div class="col-md-12">
         <h4>Våra kurser </h4>
         <p>
-            
-                <table class="table table-responsive">
+
+            <table class="table table-responsive">
                 <tr class="alert-info">
                     <th>Namn</th>
                     <th>Beskrivning</th>
                     <th>Start</th>
                     <th>Slut</th>
                 </tr>
-                    @foreach (var cuorse in ViewBag.Courses)
-                    {
+                @foreach (var cuorse in ViewBag.Courses)
+                {
                     <tr>
                         <td>
                             @cuorse.Name
@@ -38,14 +36,13 @@
                             @cuorse.EndDate.ToShortDateString()
                         </td>
                     </tr>
-                    }
-
+                }
 
             </table>
-                
-           
+
+
         </p>
         <p></p>
     </div>
-   
+
 </div>

@@ -1,7 +1,6 @@
-﻿@{ 
+﻿@{
     var appName = "Laja Education";
 }
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +9,6 @@
     <title>@ViewBag.Title - @appName</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body class="">
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -25,14 +23,21 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                  
-                   
+
+
                     @{
                         if (User.IsInRole("Lärare"))
                         {
                             <li>@Html.ActionLink("Kurs", "Index", "Courses")</li>
-                            <li>@Html.ActionLink("Registrera lärare", "Create", "User", new { @Role = "Lärare" }, null )</li>
+                            <li>@Html.ActionLink("Registrera lärare", "Create", "User", new { @Role = "Lärare" }, null)</li>
                             <li>@Html.ActionLink("Documents", "Index", "Documents")</li>
+                        }
+                        else
+                        {
+                            if (User.IsInRole("Elev"))
+                            {
+                                <li>@Html.ActionLink("Min sida", "Index", "Student")</li>
+                            }
                         }
                     }
                 </ul>
@@ -47,9 +52,9 @@
             <p>&copy; @DateTime.Now.Year - @appName - Copyright &copy;</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>
+

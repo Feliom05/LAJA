@@ -193,16 +193,19 @@
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\ActivityTypesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
+    <Compile Include="Controllers\DocTypesController.cs" />
+    <Compile Include="Controllers\DocumentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711271035374_UserCourseIDUpdated.cs" />
-    <Compile Include="Migrations\201711271035374_UserCourseIDUpdated.Designer.cs">
-      <DependentUpon>201711271035374_UserCourseIDUpdated.cs</DependentUpon>
+    <Compile Include="Migrations\201711291544154_AfterProjectDoubleFiles.cs" />
+    <Compile Include="Migrations\201711291544154_AfterProjectDoubleFiles.Designer.cs">
+      <DependentUpon>201711291544154_AfterProjectDoubleFiles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -220,13 +223,13 @@
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Documents\frågor utvärdering kurs hos Lexicon .xlsx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Education.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -293,24 +296,22 @@
     <Content Include="Views\ActivityTypes\Edit.cshtml" />
     <Content Include="Views\ActivityTypes\Index.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
-    <Content Include="Views\ActivityTypes\Create.cshtml" />
-    <Content Include="Views\ActivityTypes\Delete.cshtml" />
-    <Content Include="Views\ActivityTypes\Details.cshtml" />
-    <Content Include="Views\ActivityTypes\Edit.cshtml" />
-    <Content Include="Views\ActivityTypes\Index.cshtml" />
-    <Content Include="Views\User\Create.cshtml" />
-    <Content Include="Views\Activities\Create.cshtml" />
     <Content Include="Views\Activities\Delete.cshtml" />
     <Content Include="Views\Activities\Details.cshtml" />
     <Content Include="Views\Activities\Edit.cshtml" />
     <Content Include="Views\Activities\Index.cshtml" />
-    <Content Include="Views\Modules\_ModulePartialView.cshtml" />
-    <Content Include="Views\Activities\_ActivityPartialView.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711270844567_relations.resx">
-      <DependentUpon>201711270844567_relations.cs</DependentUpon>
-    </EmbeddedResource>
+    <Content Include="Views\DocTypes\Create.cshtml" />
+    <Content Include="Views\DocTypes\Delete.cshtml" />
+    <Content Include="Views\DocTypes\Details.cshtml" />
+    <Content Include="Views\DocTypes\Edit.cshtml" />
+    <Content Include="Views\DocTypes\Index.cshtml" />
+    <Content Include="Views\Documents\Create.cshtml" />
+    <Content Include="Views\Documents\Delete.cshtml" />
+    <Content Include="Views\Documents\Details.cshtml" />
+    <Content Include="Views\Documents\Edit.cshtml" />
+    <Content Include="Views\Documents\Index.cshtml" />
+    <Content Include="Views\Activities\Create.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -326,8 +327,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711271035374_UserCourseIDUpdated.resx">
-      <DependentUpon>201711271035374_UserCourseIDUpdated.cs</DependentUpon>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201711291544154_AfterProjectDoubleFiles.resx">
+      <DependentUpon>201711291544154_AfterProjectDoubleFiles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

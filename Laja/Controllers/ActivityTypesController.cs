@@ -10,6 +10,7 @@ using Laja.Models;
 
 namespace Laja.Controllers
 {
+    [Authorize]
     public class ActivityTypesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -36,6 +37,7 @@ namespace Laja.Controllers
         }
 
         // GET: ActivityTypes/Create
+        [Authorize(Roles = "Lärare")]
         public ActionResult Create()
         {
             return View();
@@ -44,6 +46,7 @@ namespace Laja.Controllers
         // POST: ActivityTypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Lärare")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name")] ActivityType activityType)
@@ -59,6 +62,7 @@ namespace Laja.Controllers
         }
 
         // GET: ActivityTypes/Edit/5
+        [Authorize(Roles = "Lärare")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -76,6 +80,7 @@ namespace Laja.Controllers
         // POST: ActivityTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Lärare")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name")] ActivityType activityType)
@@ -90,6 +95,7 @@ namespace Laja.Controllers
         }
 
         // GET: ActivityTypes/Delete/5
+        [Authorize(Roles = "Lärare")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -105,6 +111,7 @@ namespace Laja.Controllers
         }
 
         // POST: ActivityTypes/Delete/5
+        [Authorize(Roles = "Lärare")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
