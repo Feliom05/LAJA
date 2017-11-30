@@ -1,5 +1,5 @@
 ﻿@{ 
-    var appName = "Skol Teknik";
+    var appName = "Laja Education";
 }
 
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body class="pull-left">
+<body class="">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -25,15 +25,14 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Documents", "Index", "Documents")</li>
+                  
+                   
                     @{
                         if (User.IsInRole("Lärare"))
                         {
                             <li>@Html.ActionLink("Kurs", "Index", "Courses")</li>
                             <li>@Html.ActionLink("Registrera lärare", "Create", "User", new { @Role = "Lärare" }, null )</li>
+                            <li>@Html.ActionLink("Documents", "Index", "Documents")</li>
                         }
                     }
                 </ul>

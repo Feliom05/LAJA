@@ -1,15 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Laja.Models;
 
 namespace Laja.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
+            ViewBag.Courses = db.Courses.Include(c => c.Modules).Include(c => c.Students).ToList();
             return View();
         }
 
