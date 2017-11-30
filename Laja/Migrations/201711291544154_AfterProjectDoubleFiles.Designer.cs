@@ -7,13 +7,13 @@ namespace Laja.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class VirtualListDoc : IMigrationMetadata
+    public sealed partial class AfterProjectDoubleFiles : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(VirtualListDoc));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AfterProjectDoubleFiles));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711281538016_VirtualListDoc"; }
+            get { return "201711291544154_AfterProjectDoubleFiles"; }
         }
         
         string IMigrationMetadata.Source

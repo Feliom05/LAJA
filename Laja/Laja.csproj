@@ -202,17 +202,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711271035374_UserCourseIDUpdated.cs" />
-    <Compile Include="Migrations\201711271035374_UserCourseIDUpdated.Designer.cs">
-      <DependentUpon>201711271035374_UserCourseIDUpdated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711281518492_DocVirtual.cs" />
-    <Compile Include="Migrations\201711281518492_DocVirtual.Designer.cs">
-      <DependentUpon>201711281518492_DocVirtual.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711281538016_VirtualListDoc.cs" />
-    <Compile Include="Migrations\201711281538016_VirtualListDoc.Designer.cs">
-      <DependentUpon>201711281538016_VirtualListDoc.cs</DependentUpon>
+    <Compile Include="Migrations\201711291544154_AfterProjectDoubleFiles.cs" />
+    <Compile Include="Migrations\201711291544154_AfterProjectDoubleFiles.Designer.cs">
+      <DependentUpon>201711291544154_AfterProjectDoubleFiles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -333,18 +325,12 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711271035374_UserCourseIDUpdated.resx">
-      <DependentUpon>201711271035374_UserCourseIDUpdated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711281518492_DocVirtual.resx">
-      <DependentUpon>201711281518492_DocVirtual.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711281538016_VirtualListDoc.resx">
-      <DependentUpon>201711281538016_VirtualListDoc.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <EmbeddedResource Include="Migrations\201711291544154_AfterProjectDoubleFiles.resx">
+      <DependentUpon>201711291544154_AfterProjectDoubleFiles.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
