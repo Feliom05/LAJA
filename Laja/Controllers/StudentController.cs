@@ -29,13 +29,15 @@ namespace Laja.Controllers
             if (User.IsInRole("Elev"))
             {
                 var course = db.Courses.Where(c => c.Id == user.CourseId).FirstOrDefault();
-                return View(course);
+                return  View(course);
             }
             else
             {
-                // to coming teacher page
+                // to comming teacher page
             }
             return View();
         }
+
+        
     }
 }

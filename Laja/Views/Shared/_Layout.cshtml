@@ -32,6 +32,13 @@
                             <li>@Html.ActionLink("Registrera lärare", "Create", "User", new { @Role = "Lärare" }, null)</li>
                             <li>@Html.ActionLink("Documents", "Index", "Documents")</li>
                         }
+                        else
+                        {
+                            if (User.IsInRole("Elev"))
+                            {
+                                <li>@Html.ActionLink("Min sida", "Index", "Student")</li>
+                            }
+                        }
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
