@@ -315,30 +315,9 @@
     <Content Include="Views\Documents\Create.cshtml" />
     <Content Include="Views\Documents\Delete.cshtml" />
     <Content Include="Views\Documents\Details.cshtml" />
-    <Content Include="Views\Documents\Downloads.cshtml" />
     <Content Include="Views\Documents\Edit.cshtml" />
     <Content Include="Views\Documents\Index.cshtml" />
-    <Content Include="Views\Documents\Create.cshtml" />
-    <Content Include="Views\Documents\Delete.cshtml" />
-    <Content Include="Views\Documents\Details.cshtml" />
-    <Content Include="Views\Documents\Edit.cshtml" />
-    <Content Include="Views\Documents\Index.cshtml" />
-    <Content Include="Views\DocTypes\Create.cshtml" />
-    <Content Include="Views\DocTypes\Delete.cshtml" />
-    <Content Include="Views\DocTypes\Details.cshtml" />
-    <Content Include="Views\DocTypes\Edit.cshtml" />
-    <Content Include="Views\DocTypes\Index.cshtml" />
-    <Content Include="Views\Documents\Downloads.cshtml" />
     <Content Include="Views\Activities\Create.cshtml" />
-    <Content Include="Views\Activities\Delete.cshtml" />
-    <Content Include="Views\Activities\Details.cshtml" />
-    <Content Include="Views\Activities\Edit.cshtml" />
-    <Content Include="Views\Activities\Index.cshtml" />
-    <Content Include="Views\ActivityTypes\Create.cshtml" />
-    <Content Include="Views\ActivityTypes\Delete.cshtml" />
-    <Content Include="Views\ActivityTypes\Details.cshtml" />
-    <Content Include="Views\ActivityTypes\Edit.cshtml" />
-    <Content Include="Views\ActivityTypes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
