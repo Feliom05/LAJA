@@ -12,37 +12,25 @@
     <div class="container">
         <div class="col-md-2">
             <b> @Html.DisplayNameFor(model => model.Name)</b>
+            <p>@Html.DisplayFor(model => model.Name)</p>
         </div>
         <div class="col-md-6">
             <b> @Html.DisplayNameFor(model => model.Description)</b>
+            <p>@Html.DisplayFor(model => model.Description)</p>
          </div>
         <div class="col-md-2">
             <b>@Html.DisplayNameFor(model => model.StartDate)</b>
+            <p>@Html.DisplayFor(model => model.StartDate)</p>
         </div>
         <div class="col-md-2">
             <b>@Html.DisplayNameFor(model => model.EndDate)</b>
+            <p>@Html.DisplayFor(model => model.EndDate)</p>
         </div>
-        <div class="col-md-2">
-            @Html.DisplayFor(model => model.Name)
-        </div>
-        <div class="col-md-6">
-            @Html.DisplayFor(model => model.Description)
-        </div>
-        <div class="col-md-2">
-            @Html.DisplayFor(model => model.StartDate)
-        </div>
-        <div class="col-md-2">
-            @Html.DisplayFor(model => model.EndDate)
-        </div>
-
-      
         <div class="row">
-            <p><br /> <br /></p><p><br /> <br /></p>
+            <p><br /> <br /><br /></p>
         </div>
-
-
-            <div class="row">
-                <div class="col-md-6">
+        <div class="row">
+         <div class="col-md-12">
                     <div class="tab" role="tabpanel">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
@@ -52,26 +40,106 @@
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content tabs">
-                            <div class="tab-pane fade in active" id="Section1" role="tabpanel">
-                                <h3>Moduler</h3>
-                                @{
-                                    <ul>
-                                        @foreach (var module in Model.Modules)
-                                        {
-                                            <li>@module.Name</li>
-                                        }
-                                    </ul>
-                                }
-                            </div>
-                            <div class="tab-pane fade" id="Section2" role="tabpanel">
-                                <h3>Elever</h3>
+                          <div class="tab-pane fade in active" id="Section1" role="tabpanel">
+                               <h3>Moduler</h3>
+                              <div class="panel-group" id="accordionCourse" role="tablist" aria-multiselectable="true">
 
+                                  @foreach (var module in Model.Modules)
+                                  {
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="@($"heading{module.Id.ToString()}")">
+                                            <h4 class="panel-title">
+                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#@($"collapse{module.Id.ToString()}")" aria-expanded="false" aria-controls="@($"collapse{module.Id.ToString()}")">
+                                                    @module.Name
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="@($"collapse{module.Id.ToString()}")" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="@($"heading{module.Id.ToString()}")">
+                                            <div class="panel-body">
+                                                <div class="col-md-2">
+                                                    <b>@Html.DisplayNameFor(model => module.Name)</b>
+                                                    <p>@Html.DisplayFor(model => module.Name)</p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <b> @Html.DisplayNameFor(model => module.Description)</b>
+                                                    <p>@Html.DisplayFor(model => module.Description)</p>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <b>@Html.DisplayNameFor(model => module.StartDate)</b>
+                                                    <p>@Html.DisplayFor(model => module.StartDate)</p>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <b>@Html.DisplayNameFor(model => module.EndDate)</b>
+                                                    <p>@Html.DisplayFor(model => module.EndDate)</p>
+                                                </div>
+                                                <!-- Module tab go -->
+                                                <p><br /> <br /><br /></p>
+                                                 <div class="col-md-12">
+                                                   <div class="tab" role="tabpanel">
+                                                       <!-- Nav tabs -->
+                                                       <ul class="nav nav-tabs" role="tablist">
+                                                           <li class="active" role="presentation"><a role="tab" aria-controls="home" href="#SectionActivity" data-toggle="tab">Aktivitet</a></li>
+                                                           <li role="presentation"><a role="tab" aria-controls="Documents" href="#SectionActivity" data-toggle="tab">Dokument</a></li>
+                                                       </ul>
+                                                       <!-- Tab panes -->
+                                                       <div class="tab-content tabs">
+                                                         <div class="tab-pane fade in active" id="SectionActivity" role="tabpanel">
+                                                             <h3>Aktivitet</h3>
+                                                             <div class="panel-group" id="accordionModule" role="tablist" aria-multiselectable="true">
+                                                                @foreach (var activity in module.Activities)
+                                                                {
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-heading" role="tab" id="@($"headingActivity{activity.Id.ToString()}")">
+                                                                            <h4 class="panel-title">
+                                                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#@($"collapseActivity{activity.Id.ToString()}")" aria-expanded="false" aria-controls="@($"collapseActivity{activity.Id.ToString()}")">
+                                                                                    @activity.Name
+                                                                                </a>
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div id="@($"collapseActivity{activity.Id.ToString()}")" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="@($"headingActivity{activity.Id.ToString()}")">
+                                                                            <div class="panel-body">
+                                                                                <div class="col-md-2">
+                                                                                    <b>@Html.DisplayNameFor(model => activity.Name)</b>
+                                                                                    <p>@Html.DisplayFor(model => activity.Name)</p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <b> @Html.DisplayNameFor(model => activity.Description)</b>
+                                                                                    <p>@Html.DisplayFor(model => activity.Description)</p>
+                                                                                </div>
+                                                                                <div class="col-md-2">
+                                                                                    <b>@Html.DisplayNameFor(model => activity.StartDate)</b>
+                                                                                    <p>@Html.DisplayFor(model => activity.StartDate)</p>
+                                                                                </div>
+                                                                                <div class="col-md-2">
+                                                                                    <b>@Html.DisplayNameFor(model => activity.EndDate)</b>
+                                                                                    <p>@Html.DisplayFor(model => activity.EndDate)</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                            </div>  
+                                                         </div>
+                                                       </div>
+                                                    </div>
+                                                 </div>
+                                                <!-- Module tab stop -->
+                                                </div>
+                                        </div>
+                                    </div>
+                                  }
+
+                              </div>
+
+                           </div>
+                          <div class="tab-pane fade" id="Section2" role="tabpanel">
+                            <h3>Elever</h3>
                             </div>
-                            <div class="tab-pane fade" id="Section3" role="tabpanel">
+                          <div class="tab-pane fade" id="Section3" role="tabpanel">
                                 <h3>Dokument</h3>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                     </div>
+          </div>
+         </div>
+     </div>
