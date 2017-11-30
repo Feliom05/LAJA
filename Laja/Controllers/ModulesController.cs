@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Laja.Models;
+using Laja.Services;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Laja.Models;
-using Laja.Services;
 
 namespace Laja.Controllers
 {
@@ -40,7 +36,16 @@ namespace Laja.Controllers
         // GET: Modules/Create
         public ActionResult Create(int? courseId)
         {
-            ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name");
+            //ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name");
+            if (courseId != 0)
+            {
+                ViewBag.CourseSelectedId = courseId;
+                var name = db.Courses.Find(courseId).Name;
+                ViewBag.CourseName = name;
+
+            }
+
+
             return View();
         }
 
@@ -55,18 +60,28 @@ namespace Laja.Controllers
             {
                 var validationService = new ValidationService(db);
                 var moduleExists = validationService.UniqName(module);
-                if (!moduleExists)
+                if (moduleExists)
                 {
-                    db.Modules.Add(module);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name", module.CourseId);
-                    ViewBag.Error = "Modulenamnet används redan inom samma kurs. Var god ange ett annat namn, tack.";
+                    ViewBag.Error = "Modulnamnet används redan. Var god ange ett annat namn, tack.";
                     return View(module);
                 }
+                if (!validationService.CheckModulePeriodAgainstCourse(module))
+                {
+                    ViewBag.Error = "Modulens startdatum och slutdatum måste vara inom kursens start och slutdatum.";
+                    return View(module);
+                }
+
+
+                db.Modules.Add(module);
+                db.SaveChanges();
+                return RedirectToAction("Details", "Courses", new { @id = module.CourseId });
+                //}
+                //else
+                //{
+                //    ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name", module.CourseId);
+                //    ViewBag.Error = "Modulenamnet används redan inom samma kurs. Var god ange ett annat namn, tack.";
+                //    return View(module);
+                //}
 
 
             }

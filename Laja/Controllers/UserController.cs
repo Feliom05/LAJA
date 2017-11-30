@@ -75,19 +75,19 @@ namespace Laja.Controllers
 
                     //User and Role definition OK
 
-                    //If role Elev redirect to 
-                    //else (Lärare redirect to 
+                    //If role Elev redirect to Courses/Details
+                    //else (Lärare redirect to Courses/Index
 
                     if (User.Role == "Elev")
                     {
-                        return RedirectToAction("Details", "Courses" , new { id = User.CourseId });
+                        return RedirectToAction("Details", "Courses", new { id = User.CourseId });
                     }
                     else
                     {
                         return RedirectToAction("Index", "Courses");
                     }
                 }
-            }         
+            }
 
             return View(User);
         }

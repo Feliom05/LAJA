@@ -1,19 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Laja.Models;
+using Laja.Services;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Laja.Models;
-using Laja.Services;
 
 namespace Laja.Controllers
 {
     public class CoursesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext db;
+        private ValidationService validationService;
+
+        public CoursesController()
+        {
+            db = new ApplicationDbContext();
+            validationService = new ValidationService(db);
+        }
 
         // GET: Courses
         public ActionResult Index()
@@ -51,21 +54,22 @@ namespace Laja.Controllers
         {
             if (ModelState.IsValid)
             {
-                var validationService = new ValidationService(db);
+               
                 var NameExists = validationService.UniqName(course);
-                if (!NameExists && validationService.CheckPeriod(course))
+                if (NameExists)
                 {
-                    db.Courses.Add(course);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    
                     ViewBag.Error = "Kursnamnet används redan. Var god ange ett annat namn, tack.";
                     return View(course);
                 }
-              
+                if (!validationService.CheckPeriod(course))
+                {
+                    ViewBag.Error = "Slut datum måste vara efter startdatum.";
+                    return View(course);
+                }
+
+                db.Courses.Add(course);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
             return View(course);
@@ -95,6 +99,26 @@ namespace Laja.Controllers
         {
             if (ModelState.IsValid)
             {
+
+               
+                var NameExists = validationService.UniqName(course);
+                if (NameExists)
+                {
+                    ViewBag.Error = "Kursnamnet används redan. Var god ange ett annat namn, tack.";
+                    return View(course);
+                }
+                if (!validationService.CheckPeriod(course))
+                {
+                    ViewBag.Error = "Slut datum måste vara efter startdatum.";
+                    return View(course);
+                }
+                if (!validationService.CheckCoursePeriodAgainstModules(course))
+                {
+                    ViewBag.Error = "Kursens start eller slutdatum får inte vara före eller efter den första och sista modulen.";
+                    return View(course);
+                }
+
+
                 db.Entry(course).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
