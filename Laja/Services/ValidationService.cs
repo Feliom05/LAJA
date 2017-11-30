@@ -1,6 +1,7 @@
 ﻿using Laja.Models;
 using System;
 using System.Linq;
+
 namespace Laja.Services
 {
     public class ValidationService
@@ -158,47 +159,14 @@ namespace Laja.Services
 
         public bool CheckActivityPeriodAgainstModule(Activity activity)
         {
-            var targetModule = db.Courses.Find(module.CourseId);
-            if (EndDateIsEqualAfterStartDate(targetModule.StartDate, module.StartDate) && EndDateIsEqualAfterStartDate(module.EndDate, targetModule.EndDate))
+            var targetModule = db.Modules.Find(activity.ModuleId);
+            if (EndDateIsEqualAfterStartDate(targetModule.StartDate, activity.StartDate) && EndDateIsEqualAfterStartDate(activity.EndDate, targetModule.EndDate))
                 return true;
             else
                 return false;
         }
         #endregion
-        #region Activity
-        public bool CanDeleteActivity(Activity activity)
-        {
-            if (ActivityHasDocuments(activity))
-                return false;
-            return true;
-        }
-        public bool ActivityHasDocuments(Activity activity)
-        {
-            var documents = 0;
-            documents = db.Activities.Find(activity.Id).Documents.Count();
-            return (documents > 0) ? true : false;
-        }
-        public bool UniqName(Activity activity)
-        {
-            bool isUniqe = false;
-            isUniqe = db.Activities.Any(c => c.Name.ToLower() == activity.Name.ToLower() && c.ModuleId != activity.ModuleId);
-            return isUniqe;
-        }
-        public bool CheckPeriod(Activity activity)
-        {
-            if (activity.StartDate == null || activity.EndDate == null)
-                return false;
-            return EndDateIsAfterStartDate(activity.StartDate, activity.EndDate);
-        }
-        public bool CheckActivityPeriodAgainstModule(Activity activity)
-        {
-            var module = db.Modules.Find(activity.ModuleId);
-            if (EndDateIsEqualAfterStartDate(module.StartDate, activity.StartDate) && EndDateIsEqualAfterStartDate(activity.EndDate, module.EndDate))
-                return true;
-            else
-                return false;
-        }
-        #endregion
+       
         private bool EndDateIsEqualAfterStartDate(DateTime startDate, DateTime endDate)
         {
             if (endDate.Subtract(startDate).TotalDays < 0)
