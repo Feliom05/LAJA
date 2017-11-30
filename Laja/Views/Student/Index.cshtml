@@ -9,42 +9,69 @@
 <div>
     <h4>Course</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
+    <div class="container">
+        <div class="col-md-2">
+            <b> @Html.DisplayNameFor(model => model.Name)</b>
+        </div>
+        <div class="col-md-6">
+            <b> @Html.DisplayNameFor(model => model.Description)</b>
+         </div>
+        <div class="col-md-2">
+            <b>@Html.DisplayNameFor(model => model.StartDate)</b>
+        </div>
+        <div class="col-md-2">
+            <b>@Html.DisplayNameFor(model => model.EndDate)</b>
+        </div>
+        <div class="col-md-2">
             @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
+        </div>
+        <div class="col-md-6">
             @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-
-        <dd>
+        </div>
+        <div class="col-md-2">
             @Html.DisplayFor(model => model.StartDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-
-        <dd>
+        </div>
+        <div class="col-md-2">
             @Html.DisplayFor(model => model.EndDate)
-        </dd>
+        </div>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+      
+        <div class="row">
+            <p><br /> <br /></p><p><br /> <br /></p>
+        </div>
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="tab" role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="active" role="presentation"><a role="tab" aria-controls="home" href="#Section1" data-toggle="tab">Moduler</a></li>
+                            <li role="presentation"><a role="tab" aria-controls="Students" href="#Section2" data-toggle="tab">Elever</a></li>
+                            <li role="presentation"><a role="tab" aria-controls="Documents" href="#Section3" data-toggle="tab">Dokument</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content tabs">
+                            <div class="tab-pane fade in active" id="Section1" role="tabpanel">
+                                <h3>Moduler</h3>
+                                @{
+                                    <ul>
+                                        @foreach (var module in Model.Modules)
+                                        {
+                                            <li>@module.Name</li>
+                                        }
+                                    </ul>
+                                }
+                            </div>
+                            <div class="tab-pane fade" id="Section2" role="tabpanel">
+                                <h3>Elever</h3>
+
+                            </div>
+                            <div class="tab-pane fade" id="Section3" role="tabpanel">
+                                <h3>Dokument</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
