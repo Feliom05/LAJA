@@ -165,9 +165,31 @@
                            </div>
                           <div class="tab-pane fade" id="Section2" role="tabpanel">
                             <h3>Elever</h3>
-                            </div>
+                                @{
+                                 <div class="row">
+                                 @foreach (var student in Model.Students)
+                                 {
+                                    <div class="col-sm-6 col-md-4">
+                                        <div class="thumbnail">
+                                        <img src="..." alt="...">
+                                            <div class="caption">
+                                                <h4>@student.FirstName @student.LastName</h4>
+                                                <p>@student.Email</p>
+                                                 @*<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                 }
+
+                                </div>
+                                    }
+                              </div>
                           <div class="tab-pane fade" id="Section3" role="tabpanel">
                                 <h3>Dokument</h3>
+
+
+
+                                </div>
                             </div>
                         </div>
                      </div>
