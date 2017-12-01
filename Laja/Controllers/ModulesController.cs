@@ -133,7 +133,8 @@ namespace Laja.Controllers
             {
                 db.Entry(module).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+               // return RedirectToAction("Index");
+                return RedirectToAction("Details", "Courses", new { id = module.CourseId });
             }
             ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name", module.CourseId);
             return View(module);
@@ -165,6 +166,12 @@ namespace Laja.Controllers
             db.Modules.Remove(module);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult ModuleWithActivities(int id = 0)
+        {
+            var module = db.Modules.Find(id);
+            return PartialView("_ModulepartialView", module);
         }
 
         protected override void Dispose(bool disposing)

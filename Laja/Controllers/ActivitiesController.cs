@@ -1,4 +1,4 @@
-﻿using Laja.Models;
+using Laja.Models;
 using Laja.Services;
 using System.Data.Entity;
 using System.Linq;
