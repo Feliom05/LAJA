@@ -1,7 +1,10 @@
 ﻿using Laja.Models;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
+using System.Web;
 using System.Web.Mvc;
+
 namespace Laja.Controllers
 {
     public class HomeController : Controller
