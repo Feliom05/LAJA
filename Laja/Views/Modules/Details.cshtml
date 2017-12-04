@@ -51,6 +51,43 @@
         </dd>
         
 
+        <dd>
+            <h2>Aktiviteter</h2>
+            <table class="table">
+                <tr class="alert-info">
+                    <th>Namn</th>
+                    <th>Start</th>
+                    <th>Slut</th>
+                </tr>
+                @foreach (var activity in Model.Activities)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(activity.Name, "Details", "Aktivities", new { id = activity.Id }, null)</td>
+                        <td>@activity.StartDate</td>
+                        <td>@activity.EndDate</td>
+
+                    </tr>
+                }
+            </table>
+        </dd>
+        <dd>
+            <h2>Dokument</h2>
+            <table class="table">
+                <tr class="alert-info">
+                    <th>Namn</th>
+                    <th>Epost</th>
+                    
+                </tr>
+                @foreach (var doc in Model.Documents)
+                {
+                    <tr>
+                        <td><a href="" >@doc.Name.Substring(0, 10)</a></td>
+                        <td>@doc.User.UserName</td>
+                    </tr>
+                }
+            </table>
+        </dd>
+
     </dl>
 
     <dd>

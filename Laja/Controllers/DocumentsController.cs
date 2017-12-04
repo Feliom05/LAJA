@@ -39,13 +39,11 @@ namespace Laja.Controllers
         }
 
         // GET: Documents/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id, string c)
         {
-            ViewBag.ActivityId = new SelectList(db.Activities, "Id", "Name");
-            ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name");
-            ViewBag.DocTypeId = new SelectList(db.DocTypes, "Id", "Extension");
-            ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name");
-            ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName");
+
+            TempData.Remove("c");
+            TempData.Add("c", c);
             return View();
         }
 
@@ -54,26 +52,52 @@ namespace Laja.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Description,Name,FileName,CreationTime,UserId,CourseId,ModuleId,ActivityId,DocTypeId")] Document document, HttpPostedFileBase upload1)
+        public ActionResult Create(Document document, HttpPostedFileBase upload1, int? id, string c)
         {
+            ViewBag.Message = "";
             foreach (string upload in Request.Files)
             {
                 if (Request.Files[upload].FileName != "")
                 {
                     string path = AppDomain.CurrentDomain.BaseDirectory + "/App_Data/Documents/";
                     string filename = Path.GetFileName(Request.Files[upload].FileName);
-                    document.FileName = filename + "_" + DateTime.Now.ToString();
-                    document.CreationTime = DateTime.Now;
-                    var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
-                    var currentUser = manager.FindById(User.Identity.GetUserId()).UserName;
-                    document.UserId = manager.FindById(User.Identity.GetUserId()).Id;                    
-                    var folder = Directory.CreateDirectory(Path.Combine(path, currentUser)).FullName;
-                    Request.Files[upload].SaveAs(Path.Combine(folder, filename));                    
-                    var filePath= Path.Combine(folder, filename);
-                    String RelativePath = filePath.Replace(Request.ServerVariables["APPL_PHYSICAL_PATH"], String.Empty);
-                    document.Name = RelativePath;
-                    db.Documents.Add(document);
-                    db.SaveChanges();
+                    string ext = filename.Split('.')[1];
+                    if (db.DocTypes.Where(e => e.Extension.Equals(ext)).FirstOrDefault() != null)
+                    {
+                        c = TempData["c"].ToString();
+                        switch (c)
+                        {
+                            case "course":
+                                document.CourseId = id;
+                                break;
+                            case "module":
+                                document.ModuleId = id;
+                                break;
+                            case "activity":
+                                document.ActivityId = id;
+                                break;
+                            default:
+                                break;
+                        }
+                        var currentUser = User.Identity.GetUserName();
+                        document.UserId = User.Identity.GetUserId().ToString();
+                        document.CreationTime = DateTime.Now;
+                        filename = filename + "_" + DateTime.Now.ToString();
+                        filename = filename.Replace(":", "_");
+                        document.FileName = filename;
+                        document.DocTypeId = db.DocTypes.Where(f => f.Extension == ext).FirstOrDefault().Id;                       
+                        var folder = Directory.CreateDirectory(Path.Combine(path, currentUser)).FullName;
+                        Request.Files[upload].SaveAs(Path.Combine(folder, filename));
+                        var filePath = Path.Combine(folder, filename);
+                        String RelativePath = filePath.Replace(Request.ServerVariables["APPL_PHYSICAL_PATH"], String.Empty);
+                        document.Name = RelativePath;
+                        db.Documents.Add(document);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("Extension not allowed!");
+                    }
                 }
             }
             if (ModelState.IsValid)
@@ -88,7 +112,7 @@ namespace Laja.Controllers
             ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name", document.ModuleId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", document.UserId);
 
-            
+
             return View(document);
         }
 
