@@ -22,3 +22,22 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.red-back {
+    background-color: rgb(222,0,0);
+}
+
+.green-back {
+    background-color: rgb(47,212,132);
+}
+
+.text-color {
+    background-color: rgb(51,51,51);
+}
+
+.round-icon-img {
+    width: 6.4rem;
+    height: 6.4rem;
+    border-radius: 50%;
+    margin: 1.6rem 0px 1rem;
+}
