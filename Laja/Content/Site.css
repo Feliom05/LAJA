@@ -22,3 +22,48 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.red-back {
+    background-color: rgb(222,0,0);
+}
+
+.green-back {
+    background-color: rgb(47,212,132);
+}
+
+.lightgrey-back {
+    background-color: rgb(250,250,250);
+}
+
+.text-color-black {
+    color: rgb(51,51,51);
+}
+.text-color-red {
+    color: rgb(222,0,0);
+}
+.text-color-green {
+    color: rgb(47,212,132);
+}
+.text-color-white {
+    color: white;
+}
+.text-color-yellow {
+    color: yellow;
+}
+.text-color-grey {
+    color: lightgray;
+}
+.text-color-blue {
+    color: blue;
+}
+
+.round-icon-img {
+    width: 6.4rem;
+    height: 6.4rem;
+    border-radius: 50%;
+    margin: 1.6rem 0px 1rem;
+}
+
+.navbar-inverse .navbar-brand {
+    color: white;
+}
