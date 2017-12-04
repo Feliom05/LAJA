@@ -39,7 +39,7 @@ namespace Laja.Controllers
         }
 
         // GET: Documents/Create
-        public ActionResult Create()
+        public ActionResult Create(int? courseId, int? moduleId, int? activityId)
         {
             ViewBag.ActivityId = new SelectList(db.Activities, "Id", "Name");
             ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name");
