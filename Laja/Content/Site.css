@@ -63,3 +63,7 @@ textarea {
     border-radius: 50%;
     margin: 1.6rem 0px 1rem;
 }
+
+.navbar-inverse .navbar-brand {
+    color: white;
+}
