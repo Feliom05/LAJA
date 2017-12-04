@@ -31,8 +31,30 @@ textarea {
     background-color: rgb(47,212,132);
 }
 
-.text-color {
-    background-color: rgb(51,51,51);
+.lightgrey-back {
+    background-color: rgb(250,250,250);
+}
+
+.text-color-black {
+    color: rgb(51,51,51);
+}
+.text-color-red {
+    color: rgb(222,0,0);
+}
+.text-color-green {
+    color: rgb(47,212,132);
+}
+.text-color-white {
+    color: white;
+}
+.text-color-yellow {
+    color: yellow;
+}
+.text-color-grey {
+    color: lightgray;
+}
+.text-color-blue {
+    color: blue;
 }
 
 .round-icon-img {
