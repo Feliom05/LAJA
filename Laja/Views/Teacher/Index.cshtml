@@ -86,8 +86,11 @@
                                                 <!-- Module tab go -->
                                                 <p><br /> <br /><br /></p>
                                                 <div class="col-md-12">
-                                                    <p>@Html.ActionLink("Registrera aktivitet >>", "Create", "Activities", new { moduleId = module.Id }, null)  |
-                                                    @Html.ActionLink("Registrera Dokument >>", "Create", "Documents", new { moduleId = module.Id }, null)</p>  
+                                                <p>
+                                                    @Html.ActionLink("Registrera aktivitet >>", "Create", "Activities", new { moduleId = module.Id }, null)  |
+                                                    @Html.ActionLink("Registrera Dokument >>", "Create", "Documents", new { moduleId = module.Id }, null)|
+                                                    @Html.ActionLink("Redigera modul >>", "Edit", "Modules", new { id = module.Id }, null)
+                                                </p> 
                                                 </div>
                                                 @{
                                                     if (module.Activities.Count > 0)

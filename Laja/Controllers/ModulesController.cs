@@ -88,7 +88,7 @@ namespace Laja.Controllers
 
                 db.Modules.Add(module);
                 db.SaveChanges();
-                return RedirectToAction("Details", "Courses", new { @id = module.CourseId });
+                return RedirectToAction("Index", "Teacher", new { @CourseId = module.CourseId });
                 //}
                 //else
                 //{
@@ -134,7 +134,7 @@ namespace Laja.Controllers
                 db.Entry(module).State = EntityState.Modified;
                 db.SaveChanges();
                 // return RedirectToAction("Index");
-                return RedirectToAction("Details", "Courses", new { id = module.CourseId });
+                return RedirectToAction("Index", "Teacher", new { CourseId = module.CourseId });
             }
             ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name", module.CourseId);
             return View(module);
