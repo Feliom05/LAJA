@@ -4,13 +4,13 @@
     ViewBag.Title = "Registrera Modul";
 }
 
-<h2>Registera Modul för @ViewBag.CourseName</h2>
+<h2>Registera Modul för @ViewBag.CourseName : Start @ViewBag.CourseStart - Slut @ViewBag.CourseEnd</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
     
         <hr />
@@ -60,7 +60,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", @min = ViewBag.CourseStart, @max = ViewBag.CourseEnd, @name="YYYY-MM-DD" } })
                 @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -68,23 +68,22 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", @min = ViewBag.CourseStart, @max = ViewBag.CourseEnd } })
                 @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="button" value="Tillbaka till ..." class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Teacher", new { courseId = Model.CourseId })'" /> |
+                <input type="submit" value="Skapa" class="btn btn-default" />
             </div>
         </div>
     </div>
-}
+ }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
 }

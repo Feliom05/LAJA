@@ -46,11 +46,15 @@ namespace Laja.Controllers
         public ActionResult Create(int? courseId)
         {
             //ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name");
-            if (courseId != 0)
+            if (courseId != null)
             {
                 ViewBag.CourseSelectedId = courseId;
-                var name = db.Courses.Find(courseId).Name;
+                var course = db.Courses.Find(courseId);
+                var name = course.Name;
                 ViewBag.CourseName = name;
+
+                ViewBag.CourseStart = course.StartDate.ToShortDateString();
+                ViewBag.CourseEnd = course.EndDate.ToShortDateString();
 
             }
 
@@ -129,7 +133,7 @@ namespace Laja.Controllers
             {
                 db.Entry(module).State = EntityState.Modified;
                 db.SaveChanges();
-               // return RedirectToAction("Index");
+                // return RedirectToAction("Index");
                 return RedirectToAction("Details", "Courses", new { id = module.CourseId });
             }
             ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name", module.CourseId);

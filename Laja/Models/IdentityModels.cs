@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
-using System.EnterpriseServices;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -20,6 +19,10 @@ namespace Laja.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int? CourseId { get; set; }
+
+
+        // Profile Picture
+        //public byte[] ProfilePicturePath { get; set; }
 
         //nav
         public virtual Course Course { get; set; }
@@ -74,6 +77,6 @@ namespace Laja.Models
 
             base.OnModelCreating(modelBuilder);
         }
-       
+
     }
 }
