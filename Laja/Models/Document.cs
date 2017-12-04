@@ -11,9 +11,11 @@ namespace Laja.Models
     {
         public int Id { get; set; }
 
+        [Display(Name = "Beskrivning:")]
+        [Required]
         public string Description { get; set; }
 
-        [Display(Name ="Document Name")]
+        [Display(Name = "Dokumentets namn:")]
         public string Name { get; set; }
 
         [Required]
