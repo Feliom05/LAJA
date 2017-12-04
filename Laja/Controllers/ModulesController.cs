@@ -131,6 +131,20 @@ namespace Laja.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                var moduleExists = validationService.UniqName(module);
+                if (moduleExists)
+                {
+                    ViewBag.Error = "Modulnamnet används redan. Var god ange ett annat namn, tack.";
+                    return View(module);
+                }
+                if (!validationService.CheckModulePeriodAgainstCourse(module))
+                {
+                    ViewBag.Error = "Modulens startdatum och slutdatum måste vara inom kursens start och slutdatum.";
+                    return View(module);
+                }
+
+
                 db.Entry(module).State = EntityState.Modified;
                 db.SaveChanges();
                 // return RedirectToAction("Index");
