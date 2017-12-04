@@ -7,7 +7,7 @@
 <h2>Lärare</h2>
 
 <div>
-    <h4>Course</h4>
+    <h4>Kurs</h4>
     <hr />
     <div class="container">
         <div class="col-md-2">
@@ -181,7 +181,22 @@
                         <div class="tab-pane fade" id="Section2" role="tabpanel">
                             <h3<br /></h3>
                             <div class="col-md-12">
-                                <p>@Html.ActionLink("Registrera Elev >>", "Create", "User", new { courseId = Model.Id , role ="Elev" }, null)</p>
+                                <div class="row">
+                                    @foreach (var student in Model.Students)
+                                    {
+                                        <div class="col-sm-6 col-md-4">
+                                            <div class="thumbnail">
+                                                <img src="..." alt="..." />
+                                                <div class="caption">
+                                                    <h4>@student.FirstName @student.LastName</h4>
+                                                    <p>@student.Email</p>
+                                                    @*<p><a href="#" class="btn btn-primary" role="button">Button</a></p>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <p>@Html.ActionLink("Registrera Elev för kurs: " + Model.Name + " >>", "Create", "User", new { courseId = Model.Id , role ="Elev" }, null)</p>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="Section3" role="tabpanel">

@@ -1,10 +1,10 @@
 ﻿@model Laja.Models.Course
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Skapa Kurs";
 }
 
-<h2>Create</h2>
+<h2>Skapa ny kurs</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Course</h4>
+ 
         <hr />
         <h5 class="alert-danger">@ViewBag.Error</h5>
         
@@ -51,15 +51,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="button" value="Tillbaka till kurslista" class="btn btn-primary" onclick="location.href='@Url.Action("Index")'" /> |
+                <input type="submit" value="Skapa" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Tillbaka till listan", "Index")
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

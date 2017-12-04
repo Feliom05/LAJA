@@ -21,11 +21,11 @@ namespace Laja.Controllers
            // validationService = new ValidationService(db);
         }
         // GET: Teacher
-        public ActionResult Index(int? courseId)
+        public ActionResult Index(int? courseId)    
         {
             if (courseId != null)
             {
-                var course = db.Courses.Include(c => c.Documents).Include(c => c.Students).Include(c => c.Modules).FirstOrDefault();
+                var course = db.Courses.Where(c => c.Id == courseId).Include(c => c.Documents).Include(c => c.Students).Include(c => c.Modules).FirstOrDefault();
                 return View(course);
             }
             else
