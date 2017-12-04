@@ -112,7 +112,7 @@ namespace Laja.Controllers
             ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name", document.ModuleId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", document.UserId);
 
-
+            
             return View(document);
         }
 

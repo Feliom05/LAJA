@@ -12,8 +12,19 @@ namespace Laja.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-            ViewBag.Courses = db.Courses.Include(c => c.Modules).Include(c => c.Students).ToList();
-            return View();
+            if (User.IsInRole("Lärare"))
+            {
+                return RedirectToAction("Index", "Courses");
+            }
+            else if (User.IsInRole("Elev"))
+            {
+                return RedirectToAction("Index", "Student");
+            }
+            else
+            {
+                ViewBag.Courses = db.Courses.Include(c => c.Modules).Include(c => c.Students).ToList();
+                return View();
+            }
         }
         public ActionResult About()
         {

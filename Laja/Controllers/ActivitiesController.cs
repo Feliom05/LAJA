@@ -75,11 +75,13 @@ namespace Laja.Controllers
                 if (activityExists)
                 {
                     ViewBag.Error = "Aktitivtetnamnet används redan. Var god ange ett annat namn, tack.";
+                    ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "Id", "Name", activity.ActivityTypeId);
                     return View(activity);
                 }
                 if (!validationService.CheckActivityPeriodAgainstModule(activity))
                 {
                     ViewBag.Error = "Aktivitetens startdatum och slutdatum måste vara inom moduless start och slutdatum.";
+                    ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "Id", "Name", activity.ActivityTypeId);
                     return View(activity);
                 }
 

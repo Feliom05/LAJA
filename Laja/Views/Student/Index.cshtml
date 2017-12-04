@@ -50,7 +50,9 @@
                                         <div class="panel-heading" role="tab" id="@($"heading{module.Id.ToString()}")">
                                             <h4 class="panel-title">
                                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#@($"collapse{module.Id.ToString()}")" aria-expanded="false" aria-controls="@($"collapse{module.Id.ToString()}")">
-                                                    @module.Name
+                                                    @module.Name <span class="badge">@module.Activities.Count()</span>
+                                                    <img style="width:20px; height:20px;" src="~/Images/Activity.png" /> | <span class="badge">@module.Documents.Count()</span>
+                                                    <img style="width:20px; height:20px;" src="~/Images/Doc.ico" />
                                                 </a>
                                             </h4>
                                         </div>
@@ -189,12 +191,34 @@
                         </div>
                         <div class="tab-pane fade" id="Section2" role="tabpanel">
                             <h3>Elever</h3>
+                                @{
+                                 <div class="row">
+                                 @foreach (var student in Model.Students)
+                                 {
+                                    <div class="col-sm-6 col-md-4">
+                                        <div class="thumbnail">
+                                        <img src="..." alt="...">
+                                            <div class="caption">
+                                                <h4>@student.FirstName @student.LastName</h4>
+                                                <p>@student.Email</p>
+                                                 @*<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                 }
+
+                                </div>
+                                    }
+                              </div>
+                          <div class="tab-pane fade" id="Section3" role="tabpanel">
+                                <h3>Dokument</h3>
+
+
+
+                                </div>
+                            </div>
                         </div>
-                        <div class="tab-pane fade" id="Section3" role="tabpanel">
-                            <h3>Dokument</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                     </div>
+          </div>
+         </div>
+     </div>

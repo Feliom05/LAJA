@@ -49,8 +49,12 @@ namespace Laja.Controllers
             if (courseId != 0)
             {
                 ViewBag.CourseSelectedId = courseId;
-                var name = db.Courses.Find(courseId).Name;
+                var course = db.Courses.Find(courseId);
+                var name = course.Name;
                 ViewBag.CourseName = name;
+                
+                ViewBag.CourseStart = course.StartDate.ToShortDateString();
+                ViewBag.CourseEnd = course.EndDate.ToShortDateString();
 
             }
 
