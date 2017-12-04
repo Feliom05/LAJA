@@ -1,17 +1,16 @@
 ﻿@model Laja.Models.Document
 
 @{
-    ViewBag.Title = "Upload";
+    ViewBag.Title = "Ladda upp dokument";
 }
 
-<h2>Create</h2>
+<h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm("Create", "Documents", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Document</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">

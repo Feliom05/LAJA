@@ -32,7 +32,6 @@ namespace Laja.Controllers
             {
                 return RedirectToAction("Index", "Courses");
             }
-            return View();
         }
     }
 }

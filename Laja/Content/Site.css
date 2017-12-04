@@ -27,6 +27,11 @@ textarea {
     background-color: rgb(222,0,0);
 }
 
+.red-banner {
+    background-color: rgb(222,0,0);
+    height: 10px;
+}
+
 .green-back {
     background-color: rgb(47,212,132);
 }
@@ -58,10 +63,14 @@ textarea {
 }
 
 .round-icon-img {
-    width: 6.4rem;
-    height: 6.4rem;
+    width: 10rem;
+    height: 10rem;
     border-radius: 50%;
-    margin: 1.6rem 0px 1rem;
+    margin: 10px auto;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 10rem;
+    font-size: 50px;
 }
 
 .navbar-inverse .navbar-brand {
