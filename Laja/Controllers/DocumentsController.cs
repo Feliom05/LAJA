@@ -82,6 +82,7 @@ namespace Laja.Controllers
                         var currentUser = User.Identity.GetUserName();
                         document.UserId = User.Identity.GetUserId().ToString();
                         document.CreationTime = DateTime.Now;
+                        filename = filename.Replace("_", "-");
                         filename = filename + "_" + DateTime.Now.ToString();
                         filename = filename.Replace(":", "_");
                         document.FileName = filename;
@@ -96,7 +97,7 @@ namespace Laja.Controllers
                     }
                     else
                     {
-                        throw new Exception("Extension not allowed!");
+                        ViewBag.Message = "File type not allowed, please try another file!";
                     }
                 }
             }

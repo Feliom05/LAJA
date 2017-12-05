@@ -26,6 +26,9 @@ namespace Laja.Controllers
         {
             var userId = User.Identity.GetUserId();
             var user = db.Users.Where(u => u.Id == userId).FirstOrDefault();
+            var currentUser = User.Identity.GetUserName();
+            TempData.Remove("currentUser");
+            TempData.Add("currentUser", currentUser);
             if (User.IsInRole("Elev"))
             {
                 var course = db.Courses.Where(c => c.Id == user.CourseId).FirstOrDefault();

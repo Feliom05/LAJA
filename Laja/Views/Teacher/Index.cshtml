@@ -87,7 +87,7 @@
                                                 <p><br /> <br /><br /></p>
                                                 <div class="col-md-12">
                                                     <p>@Html.ActionLink("Registrera aktivitet >>", "Create", "Activities", new { moduleId = module.Id }, null)  |
-                                                    @Html.ActionLink("Registrera Dokument >>", "Create", "Documents", new { moduleId = module.Id }, null)</p>  
+                                                    @Html.ActionLink("Registrera Dokument >>", "Create", "Documents", new { id = module.Id, c="module" }, null)</p>  
                                                 </div>
                                                 @{
                                                     if (module.Activities.Count > 0)
@@ -133,17 +133,29 @@
                                                                             <p>@Html.DisplayFor(model => activity.EndDate)</p>
                                                                         </div>
                                                                         <div class="col-md-12">
-                                                                            <p>@Html.ActionLink("Ladda dokument >>", "Create", "Documents", new { activityId = Model.Id }, null)</p>
+                                                                            <p>@Html.ActionLink("Ladda dokument >>", "Create", "Documents", new { id = Model.Id, c="activity" }, null)</p>
                                                                         </div>
                                                                         <div class="col-md-12">
                                                                             @{
                                                                                 if (activity.DeadLine != null)
                                                                                 {
                                                                                 <!-- Aframs code here -->
-
-                                                                                }
-                                                                            }
-                                                                        </div>
+                                                                                    var days = activity.DeadLine.Value.Subtract(DateTime.Now).Days;
+                                                                                    var hours = activity.DeadLine.Value.Subtract(DateTime.Now).Hours;
+                                                                                    var min = activity.DeadLine.Value.Subtract(DateTime.Now).Minutes;
+                                                                                    <b>Tid kvar - Inlämningsuppgift</b>
+                                                                                    if (days == 0)
+                                                                                    {
+                                                                                        <p class="alert-danger">Dag: @days  Tim: @hours  Min: @min </p>
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <p class="alert-info">Dag: @days  Tim: @hours  Min: @min </p>
+                                                                                    }
+                                                                                    <p>@Html.ActionLink("Ladda upp fil", "Create", "Documents", new { id = activity.Id, c = "activity" }, null)</p>
+                                                                                    }
+                                                                                    }
+</div>
                                                                         <div class="col-md-12">
                                                                             @{
                                                                                 if (@activity.Documents.Count > 0)
@@ -153,6 +165,15 @@
                                                                                         @foreach (var doc in activity.Documents)
                                                                                         {
                                                                                                <!-- Afram's code here-->
+                                                                                            
+                                                                                            if (User.Identity.Name == doc.User.UserName)
+                                                                                            {
+                                                                                                var fileName = @doc.FileName.Substring(0, @doc.FileName.IndexOf('_')).ToString();
+                                                                                                <div class="col-md-2">
+                                                                                                    <a href="@doc.Name" download="@fileName">@doc.FileName.Substring(0, @doc.FileName.IndexOf('_'))</a>
+                                                                                                </div>
+                                                                                            }
+
 
                                                                                         }
                                                                                     </div>
@@ -200,9 +221,23 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="Section3" role="tabpanel">
-                            <h3></h3>
+                            <h3>Document</h3>
                             <div class="col-md-12">
-                                <p>@Html.ActionLink("Ladda dokument >>", "Create", "Documents", new { courseId = Model.Id }, null)</p>
+                                @foreach (var doc in Model.Documents)
+                                {
+                                                                                               <!-- Afram's code here-->
+                                    if (User.Identity.Name == doc.User.UserName)
+                                    {
+                                        var fileName = @doc.FileName.Substring(0, @doc.FileName.IndexOf('_')).ToString();
+                                        <div class="col-md-2">
+                                            <a href="@doc.Name" download="@fileName">@doc.FileName.Substring(0, @doc.FileName.IndexOf('_'))</a>
+                                        </div>
+                                    }
+
+                                }
+                            </div>
+
+                                <p>@Html.ActionLink("Ladda dokument >>", "Create", "Documents", new { id = Model.Id, c = "course" }, null)</p>
                             </div>
                         </div>
                     </div>
