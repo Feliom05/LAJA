@@ -1,11 +1,15 @@
 ﻿@model Laja.Models.Document
+
 @{
     ViewBag.Title = "Ladda Upp";
 }
-<h2>Ladda upp dokument</h2>
+
+<h2>@ViewBag.Title</h2>
+
 @using (Html.BeginForm("Create", "Documents", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -16,8 +20,49 @@
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.UserId, "UserId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("UserId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.CourseId, "CourseId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("CourseId", null, "Please select", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.ModuleId, "ModuleId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ModuleId", null, "Please select", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ModuleId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.ActivityId, "ActivityId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ActivityId", null, "Please select", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ActivityId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.DocTypeId, "DocTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("DocTypeId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DocTypeId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
+
                 <input type="file" name="FileUpload1" id="fileUpload" /><br />
                 <input type="submit" value="Ladda upp" class="btn btn-default" />
                 <b class="alert-danger">@ViewBag.Message</b>
@@ -30,3 +75,32 @@
 <div>
     @Html.ActionLink("BttF", "Index", "Teacher", new { @courseId = ViewBag.CourseId }, null )
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-1.11.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#btnUploadFile').on('click', function () {
+                var data = new FormData();
+                var files = $("#fileUpload").get(0).files;
+
+                if (files.length > 0) {
+                    data.append("UploadedImage", files[0]);
+                }
+
+                var ajaxRequest = $.ajax({
+                    type: "POST",
+                    url: "Create",
+                    contentType: false,
+                    processData: false,
+                    data: data
+                });
+
+                ajaxRequest.done(function (xhr, textStatus) {
+
+                });
+            });
+        });
+    </script>
+}

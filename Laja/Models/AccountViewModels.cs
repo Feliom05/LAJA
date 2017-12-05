@@ -76,7 +76,7 @@ namespace Laja.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Bekräfta lösenord´:")]
+        [Display(Name = "Bekräfta lösenord:")]
         [Compare("Password", ErrorMessage = "Lösenordet och bekräfta lösenord är inte lika.")]
         public string ConfirmPassword { get; set; }
     }
@@ -95,7 +95,7 @@ namespace Laja.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Bekräfta lösenord")]
+        [Display(Name = "Bekräfta lösenord:")]
         [Compare("Password", ErrorMessage = "Lösenordet och bekräfta lösenord är inte lika.")]
         public string ConfirmPassword { get; set; }
 
