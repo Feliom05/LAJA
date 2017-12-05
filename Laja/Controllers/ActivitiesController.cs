@@ -84,6 +84,8 @@ namespace Laja.Controllers
                     ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "Id", "Name", activity.ActivityTypeId);
                     return View(activity);
                 }
+                if (activity.DeadLine != null)
+                    activity.SubmitRequired = true;
 
                 db.Activities.Add(activity);
                 db.SaveChanges();

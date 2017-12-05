@@ -1,13 +1,13 @@
 ﻿@model Laja.Models.Course
 
 @{
-    ViewBag.Title = "Kurs Detaljer";
+    ViewBag.Title = "Kurs detaljer";
 }
 
-<h2>Detaljer för kurs @Model.Name</h2>
+<h2>Detaljer för kurs '@Model.Name'</h2>
 
 <div>
-   
+
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -43,47 +43,41 @@
         </dd>
 
     </dl>
-
-    <dd>
-        <h3>Moduler</h3>
-        <table class="table-condensed">
-            <tr class="alert-info">
-                <th>Namn</th>
-                <th>Start</th>
-                <th>Slut</th>
+    <h3>Moduler</h3>
+    <table class="table-condensed">
+        <tr class="alert-info col-md-12">
+            <th>Namn</th>
+            <th>Start</th>
+            <th>Slut</th>
+        </tr>
+        @foreach (var module in Model.Modules)
+        {
+            <tr>
+                <td>@Html.ActionLink(module.Name, "Details", "Modules", new { id = module.Id }, null)</td>
+                <td>@Html.DisplayFor(model => module.StartDate)</td>
+                <td>@Html.DisplayFor(model => module.EndDate)</td>
             </tr>
-            @foreach (var module in Model.Modules)
-            {
-                <tr>
-                    <td>@Html.ActionLink(module.Name, "Details", "Modules", new { id = module.Id }, null)</td>                                            
-                    <td>@Html.DisplayFor(model => module.StartDate)</td>
-                    <td>@Html.DisplayFor(model => module.EndDate)</td>                   
-                </tr>
-            }
-        </table>
-    </dd>
-    <dd>
-        <h2>Dokument</h2>
-        <table class="table-condensed">
-            <tr class="alert-info">
-                <th>Namn</th>
-                <th>Epost</th>
+        }
+    </table>
+    <hr />
+    <h3>Dokument</h3>
+    <table class="table-condensed">
+        <tr class="alert-info col-md-12">
+            <th>Namn</th>
+            <th>Epost</th>
 
+        </tr>
+        @foreach (var doc in Model.Documents)
+        {
+            <tr>
+                <td><a href="@doc.Name" download>@doc.FileName.Substring(0, @doc.FileName.IndexOf('_'))</a></td>
+                <td>@doc.User.UserName</td>
             </tr>
-            @foreach (var doc in Model.Documents)
-            {
-                <tr>
-                    <td><a href="@doc.Name" download>@doc.FileName.Substring(0, @doc.FileName.IndexOf('_'))</a></td>
-                    <td>@doc.User.UserName</td>
-                </tr>
-            }
-        </table>
-    </dd>
-
-
-
-</div>
+        }
+    </table>
+    <hr />
+</div><br />
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Redigera kurs", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Tillbaka till alla kurser", "Index")
 </p>
