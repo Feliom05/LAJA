@@ -44,6 +44,37 @@ namespace Laja.Controllers
 
             TempData.Remove("c");
             TempData.Add("c", c);
+
+            //Candidate for refactoring - To find the Course ID to be used by "Back To" in the Create View
+
+            int courseIdToBeUsedForBack = 0;
+            switch (c)
+            {
+                case "course":
+                    {
+                        var course = db.Courses.Find(id);
+                        courseIdToBeUsedForBack = course.Id;
+                        break;
+                    }
+                case "module":
+                    {
+                        courseIdToBeUsedForBack = db.Modules.Find(id).CourseId;
+                        break;
+                    }
+                case "activity":
+                    {
+                        var module = db.Activities.Find(id);
+                        var course = db.Modules.Find(module.Id);
+                        courseIdToBeUsedForBack = course.CourseId;
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+            ViewBag.CourseId = courseIdToBeUsedForBack;
+
             return View();
         }
 
@@ -86,7 +117,7 @@ namespace Laja.Controllers
                         filename = filename + "_" + DateTime.Now.ToString();
                         filename = filename.Replace(":", "_");
                         document.FileName = filename;
-                        document.DocTypeId = db.DocTypes.Where(f => f.Extension == ext).FirstOrDefault().Id;                       
+                        document.DocTypeId = db.DocTypes.Where(f => f.Extension == ext).FirstOrDefault().Id;
                         var folder = Directory.CreateDirectory(Path.Combine(path, currentUser)).FullName;
                         Request.Files[upload].SaveAs(Path.Combine(folder, filename));
                         var filePath = Path.Combine(folder, filename);
@@ -113,8 +144,29 @@ namespace Laja.Controllers
             ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name", document.ModuleId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", document.UserId);
 
-            
-            return View(document);
+
+            // Candidate to be refactored
+            int? backToId;
+            if (document.CourseId != null)
+            {
+                backToId = document.CourseId;
+            }
+            else if (document.ModuleId != null)
+            {
+                var course = db.Modules.Find(document.ModuleId);
+                backToId = course.CourseId;
+            }
+            else
+            {
+                var module = db.Activities.Find(document.ActivityId);
+                var course = db.Modules.Find(module.ModuleId);
+                backToId = course.CourseId;
+            }
+
+            return RedirectToAction("Index", "Teacher", new { @courseId = backToId });
+
+
+            //return View(document);
         }
 
         // GET: Documents/Edit/5

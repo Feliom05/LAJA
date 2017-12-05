@@ -1,8 +1,8 @@
 ﻿@model Laja.Models.Document
 @{
-    ViewBag.Title = "Upload";
+    ViewBag.Title = "Ladda Upp";
 }
-<h2>Upload</h2>
+<h2>Ladda upp dokument</h2>
 @using (Html.BeginForm("Create", "Documents", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -19,7 +19,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="file" name="FileUpload1" id="fileUpload" /><br />
-                <input type="submit" value="Upload" class="btn btn-default" />
+                <input type="submit" value="Ladda upp" class="btn btn-default" />
                 <b class="alert-danger">@ViewBag.Message</b>
             </div>
         </div>
@@ -28,5 +28,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("BttF", "Index", "Teacher", new { @courseId = ViewBag.CourseId }, null )
 </div>
