@@ -117,7 +117,10 @@ namespace Laja.Controllers
             {
                 return HttpNotFound();
             }
+            var course = db.Courses.Find(module.CourseId);
             ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name", module.CourseId);
+            ViewBag.CourseStart = course.StartDate.ToShortDateString();
+            ViewBag.CourseEnd = course.EndDate.ToShortDateString();
             return View(module);
         }
 

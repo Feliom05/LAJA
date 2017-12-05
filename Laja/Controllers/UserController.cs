@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Laja.Controllers
 {
-    [Authorize(Roles ="Lärare")]
+    [Authorize(Roles = "Lärare")]
     public class UserController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -80,7 +80,7 @@ namespace Laja.Controllers
 
                     if (User.Role == "Elev")
                     {
-                        return RedirectToAction("Details", "Courses", new { id = User.CourseId });
+                        return RedirectToAction("Index", "Teacher", new { CourseId = User.CourseId });
                     }
                     else
                     {

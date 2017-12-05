@@ -43,21 +43,27 @@ textarea {
 .text-color-black {
     color: rgb(51,51,51);
 }
+
 .text-color-red {
     color: rgb(222,0,0);
 }
+
 .text-color-green {
     color: rgb(47,212,132);
 }
-.text-color-white {
+
+.text-color-white > li > a {
     color: white;
 }
+
 .text-color-yellow {
     color: yellow;
 }
+
 .text-color-grey {
     color: lightgray;
 }
+
 .text-color-blue {
     color: blue;
 }
@@ -75,4 +81,12 @@ textarea {
 
 .navbar-inverse .navbar-brand {
     color: white;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: black !important;
+}
+
+.top-space{
+    margin-top: 90px;
 }
