@@ -88,7 +88,7 @@ namespace Laja.Controllers
 
                 db.Modules.Add(module);
                 db.SaveChanges();
-                return RedirectToAction("Details", "Courses", new { @id = module.CourseId });
+                return RedirectToAction("Index", "Teacher", new { @CourseId = module.CourseId });
                 //}
                 //else
                 //{
@@ -131,10 +131,24 @@ namespace Laja.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                //var moduleExists = validationService.UniqName(module);
+                //if (moduleExists)
+                //{
+                //    ViewBag.Error = "Modulnamnet används redan. Var god ange ett annat namn, tack.";
+                //    return View(module);
+                //}
+                if (!validationService.CheckModulePeriodAgainstCourse(module))
+                {
+                    ViewBag.Error = "Modulens startdatum och slutdatum måste vara inom kursens start och slutdatum.";
+                    return View(module);
+                }
+
+
                 db.Entry(module).State = EntityState.Modified;
                 db.SaveChanges();
                 // return RedirectToAction("Index");
-                return RedirectToAction("Details", "Courses", new { id = module.CourseId });
+                return RedirectToAction("Index", "Teacher", new { CourseId = module.CourseId });
             }
             ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name", module.CourseId);
             return View(module);

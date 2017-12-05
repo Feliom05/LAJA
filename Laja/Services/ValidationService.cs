@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 
+
 namespace Laja.Services
 {
     public class ValidationService
@@ -101,9 +102,20 @@ namespace Laja.Services
 
         public bool UniqName(Module module)
         {
-            bool isUniqe = false;
-            isUniqe = db.Modules.Any(c => c.Name.ToLower() == module.Name.ToLower() && c.CourseId != module.CourseId);
-            return isUniqe;
+            bool isNotUniqe = false;
+
+            var moduleNames = db.Modules.Where(m => m.CourseId == module.CourseId).ToList();
+            foreach (var mod in moduleNames)
+            {
+                if (mod.Name == module.Name)
+                {
+                    isNotUniqe = true;
+                    break;
+                }
+            }
+
+            //isUniqe = (db.Modules.Any(c => c.Name.ToLower() == module.Name.ToLower() && (c.CourseId != module.CourseId));
+            return isNotUniqe;
         }
 
         public bool CheckModulePeriodAgainstActivities(Module module)
@@ -142,7 +154,7 @@ namespace Laja.Services
             documents = db.Activities.Find(activity.Id).Documents.Count();
             return (documents > 0) ? true : false;
         }
-
+       
         public bool UniqName(Activity activity)
         {
             bool isUniqe = false;
@@ -167,7 +179,7 @@ namespace Laja.Services
                 return false;
         }
         #endregion
-       
+
         private bool EndDateIsEqualAfterStartDate(DateTime startDate, DateTime endDate)
         {
             if (endDate.Subtract(startDate).TotalDays < 0)

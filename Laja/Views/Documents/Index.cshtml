@@ -49,12 +49,7 @@
                 @Html.DisplayFor(modelItem => item.Course.Name)
             </td>
             <td>
-                @{
-                    var extName = item.FileName.Substring(0, item.FileName.IndexOf('_'));
-                    var ex = extName.Split('.');
-                    @Html.DisplayFor(modelItem => ex[1])
-                }
-
+                @Html.DisplayFor(model => item.DocType.Extension)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Module.Name)

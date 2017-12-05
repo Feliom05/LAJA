@@ -153,24 +153,16 @@
                                                                                 {
                                                                                 <!-- Aframs code here -->
 
-                                                                                    var days = 0;// activity.DeadLine.Value.Subtract(DateTime.Now).Days;
-                                                                                    var hours = activity.DeadLine.Value.Subtract(DateTime.Now).Hours;
-                                                                                    var min = activity.DeadLine.Value.Subtract(DateTime.Now).Minutes;
+                                                                                    @Html.Action("ActivityHasDocuments", "Documents", new { activity = activity });
                                                                                     <b>Tid kvar - Inlämningsuppgift</b>
-                                                                                    if (days == 0)
+                                                                                    if (TempData["days"] != null)
                                                                                     {
-                                                                                       
-                                                                                        if (User.Identity.Name==TempData["currentUser"].ToString())
-                                                                                        {
-
-                                                                                            TempData.Remove("d");
-                                                                                            TempData.Add("d", "Du har en eller flera inlämningsuppgifter kvar att göra!!");
-                                                                                        }
-                                                                                        <p class="alert-danger">Dag: @days  Tim: @hours  Min: @min </p>
+                                                                                        <p class="alert-info">Dag: @TempData["days"]  Tim: @TempData["hours"]  Min: @TempData["min"] </p>
                                                                                     }
                                                                                     else
                                                                                     {
-                                                                                        <p class="alert-info">Dag: @days  Tim: @hours  Min: @min </p>
+
+                                                                                        <p class="alert-danger">Tim: @TempData["hoursR"]  Min: @TempData["minR"] </p>
                                                                                     }
 
                                                                                     <b>Fil Inlämning</b>
