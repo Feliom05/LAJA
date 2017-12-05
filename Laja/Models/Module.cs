@@ -13,6 +13,7 @@ namespace Laja.Models
         [Required]
         [StringLength(255)]
         [Index("IX_UniqeModelName", 1, IsUnique = true)]
+        [DisplayFormat(NullDisplayText = "-")]
         public string Name { get; set; }
 
         [Index("IX_UniqeModelName", 2, IsUnique = true)]

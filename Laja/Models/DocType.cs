@@ -16,6 +16,7 @@ namespace Laja.Models
         [Index(IsUnique = true)]
         public string Extension { get; set; }
 
+        [DisplayFormat(NullDisplayText = "-")]
         public string Name { get; set; }
 
         public virtual ICollection<Document> Documents { get; set; }

@@ -14,6 +14,7 @@ namespace Laja.Models
         [Required]
         [StringLength(255)]
         [Index("IX_UniqeActivityName", 1, IsUnique = true)]
+        [DisplayFormat(NullDisplayText = "-")]
         public string Name { get; set; }
 
         [Index("IX_UniqeActivityName", 2, IsUnique = true)]
@@ -36,7 +37,7 @@ namespace Laja.Models
 
         [Display(Name ="Deadline")]
         [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm}", ApplyFormatInEditMode = true, NullDisplayText = "-")]
         public DateTime? DeadLine { get; set; }
 
         public bool SubmitRequired { get; set; }

@@ -12,6 +12,7 @@ namespace Laja.Models
         public int Id { get; set; }
 
         [Display(Name = "Beskrivning:")]
+        [DisplayFormat(NullDisplayText = "-")]
         public string Description { get; set; }
 
         [Display(Name = "Dokumentets namn:")]
@@ -24,9 +25,9 @@ namespace Laja.Models
         public DateTime CreationTime { get; set; }
         public string UserId { get; set; }
         //public string FeedBack { get; set; }
-       
-        public int? CourseId { get; set; }
-        public int? ModuleId { get; set; }
+        
+        public int? CourseId { get; set; }        
+        public int? ModuleId { get; set; }        
         public int? ActivityId { get; set; }
         public int DocTypeId { get; set; }
 
