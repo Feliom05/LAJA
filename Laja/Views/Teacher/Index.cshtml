@@ -30,42 +30,42 @@
             <div class="col-md-12">
                 <p>@Html.ActionLink("Redigera Kurs >>", "Edit", "Courses", new { id = Model.Id }, null)</p>
             </div>
-        <div class="row">
-            <p><br /></p>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="tab" role="tabpanel">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="active" role="presentation"><a role="tab" aria-controls="home" href="#Section1" data-toggle="tab">Moduler <img style="width:20px; height:20px;" src="~/Images/Module.png" /></a></li>
-                        <li role="presentation"><a role="tab" aria-controls="Students" href="#Section2" data-toggle="tab">Elever <img style="width:20px; height:20px;" src="~/Images/Student.png" /></a></li>
-                        <li role="presentation"><a role="tab" aria-controls="Documents" href="#Section3" data-toggle="tab">Dokument <img style="width:20px; height:20px;" src="~/Images/Doc.ico" /></a></li>
-                    </ul>
-                    <!-- Tab panes -->
-                    <div class="tab-content tabs">
-                        <div class="tab-pane fade in active" id="Section1" role="tabpanel">
-                            <h3></h3>
-                            <div class="col-md-12">
-                                <p>@Html.ActionLink("Registrera Modul >>", "Create", "Modules", new { courseId = Model.Id }, null)</p>
-                            </div>
-                            
-                            <div class="panel-group" id="accordionCourse" role="tablist" aria-multiselectable="true">
+            <div class="row">
+                <p><br /></p>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tab" role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="active" role="presentation"><a role="tab" aria-controls="home" href="#Section1" data-toggle="tab">Moduler <img style="width:20px; height:20px;" src="~/Images/Module.png" /></a></li>
+                            <li role="presentation"><a role="tab" aria-controls="Students" href="#Section2" data-toggle="tab">Elever <img style="width:20px; height:20px;" src="~/Images/Student.png" /></a></li>
+                            <li role="presentation"><a role="tab" aria-controls="Documents" href="#Section3" data-toggle="tab">Dokument <img style="width:20px; height:20px;" src="~/Images/Doc.ico" /></a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content tabs">
+                            <div class="tab-pane fade in active" id="Section1" role="tabpanel">
+                                <h3></h3>
+                                <div class="col-md-12">
+                                    <p>@Html.ActionLink("Registrera Modul >>", "Create", "Modules", new { courseId = Model.Id }, null)</p>
+                                </div>
 
-                                @foreach (var module in Model.Modules)
-                                {
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading" role="tab" id="@($"heading{module.Id.ToString()}")">
-                                            <h4 class="panel-title">
-                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#@($"collapse{module.Id.ToString()}")" aria-expanded="false" aria-controls="@($"collapse{module.Id.ToString()}")">
-                                                    @module.Name <span class="badge">@module.Activities.Count()</span>
-                                                    <img style="width:20px; height:20px;" src="~/Images/Activity.png" /> | <span class="badge">@module.Documents.Count()</span>
-                                                    <img style="width:20px; height:20px;" src="~/Images/Doc.ico" />
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="@($"collapse{module.Id.ToString()}")" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="@($"heading{module.Id.ToString()}")">
-                                            <div class="panel-body">
+                                <div class="panel-group" id="accordionCourse" role="tablist" aria-multiselectable="true">
+
+                                    @foreach (var module in Model.Modules)
+                                    {
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" role="tab" id="@($"heading{module.Id.ToString()}")">
+                                                <h4 class="panel-title">
+                                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#@($"collapse{module.Id.ToString()}")" aria-expanded="false" aria-controls="@($"collapse{module.Id.ToString()}")">
+                                                        @module.Name <span class="badge">@module.Activities.Count()</span>
+                                                        <img style="width:20px; height:20px;" src="~/Images/Activity.png" /> | <span class="badge">@module.Documents.Count()</span>
+                                                        <img style="width:20px; height:20px;" src="~/Images/Doc.ico" />
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="@($"collapse{module.Id.ToString()}")" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="@($"heading{module.Id.ToString()}")">
+                                                <div class="panel-body">
 
                                                 <div class="col-md-2">
                                                     <b>@Html.DisplayNameFor(model => module.Name)</b>
@@ -183,20 +183,20 @@
                                                                         </div>
 
 
-                                                                                }
+                                                                     }
                                                                 </div>
 
                                                             </div>
                                                                                 }
-                                                }
+                                                    }
 
-                                                <!-- Module tab stop -->
+                                                    <!-- Module tab stop -->
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
                                                                                 }
 
-                            </div>
+                                </div>
 
                         </div>
                         <div class="tab-pane fade" id="Section2" role="tabpanel">

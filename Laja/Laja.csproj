@@ -204,6 +204,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712041038104_InitMigration.cs" />
+    <Compile Include="Migrations\201712041038104_InitMigration.Designer.cs">
+      <DependentUpon>201712041038104_InitMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712042119481_InitMigrations.cs" />
+    <Compile Include="Migrations\201712042119481_InitMigrations.Designer.cs">
+      <DependentUpon>201712042119481_InitMigrations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -417,6 +425,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201712041038104_InitMigration.resx">
+      <DependentUpon>201712041038104_InitMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712042119481_InitMigrations.resx">
+      <DependentUpon>201712042119481_InitMigrations.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
