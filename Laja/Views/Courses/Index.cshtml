@@ -4,63 +4,66 @@
     ViewBag.Title = "Lista över alla kurser";
 }
 
-<h2>@ViewBag.Title</h2>
+<div>
+    <h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Skapa ny kurs", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </th>
-        <th >
-            @Html.Label("Moduler")
-        </th>
-        <th >
-            @Html.Label("Elever")
-        </th>
-        <th>
-            @Html.Label("Dokument")
-        </th>
-        
-    </tr>
+    <p>
+        @Html.ActionLink("Skapa ny kurs", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.Label("Moduler")
+            </th>
+            <th>
+                @Html.Label("Elever")
+            </th>
+            <th>
+                @Html.Label("Dokument")
+            </th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-           @* @Html.DisplayFor(modelItem => item.Name)*@
-            @Html.ActionLink(item.Name, "Index", "Teacher", new { courseid = item.Id }, null)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndDate)
-        </td>
-        <td >
-            <span >@item.Modules.Count()</span>
-        </td>
-        <td >
-            <span>@item.Students.Count()</span>
-        </td>
-        <td >
-            <span>@item.Documents.Count()</span>
-        </td>
-        
-    </tr>
-}
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @* @Html.DisplayFor(modelItem => item.Name)*@
+                    @Html.ActionLink(item.Name, "Index", "Teacher", new { courseid = item.Id }, null)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    <span>@item.Modules.Count()</span>
+                </td>
+                <td>
+                    <span>@item.Students.Count()</span>
+                </td>
+                <td>
+                    <span>@item.Documents.Count()</span>
+                </td>
+
+            </tr>
+        }
+
+    </table>
+</div>

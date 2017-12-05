@@ -71,7 +71,13 @@
 }
 
 <div>
-    @Html.ActionLink("Tillbaka till kurslista", "Index", "Courses")
+    @if (Model.Role == "Elev")
+    {
+    @Html.ActionLink("Tillbaka till kurslista", "Index", "Teacher", new { CourseId = Model.CourseId })
+    }
+    else
+    {  @Html.ActionLink("Tillbaka till lista", "Index", "Teacher")
+    }
 </div>
 
 @section Scripts {

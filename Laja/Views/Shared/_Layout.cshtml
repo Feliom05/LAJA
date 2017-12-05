@@ -19,33 +19,36 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink(appName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand text-color-white" })
+                @Html.ActionLink(appName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
 
 
-                    @{
-                        if (User.IsInRole("Lärare"))
-                        {
-                            <li>@Html.ActionLink("Kurs", "Index", "Courses")</li>
-                            <li>@Html.ActionLink("Registrera lärare", "Create", "User", new { @Role = "Lärare" }, null)</li>
-                            <li>@Html.ActionLink("Dokument", "Index", "Documents")</li>
-                        }
-                        else
-                        {
-                            if (User.IsInRole("Elev"))
+                        @{
+                            if (User.IsInRole("Lärare"))
                             {
-                                <li>@Html.ActionLink("Min sida", "Index", "Student")</li>
+
+                                <li>@Html.ActionLink("Kurser", "Index", "Courses")</li>
+                                <li>@Html.ActionLink("Registrera lärare", "Create", "User", new { @Role = "Lärare" }, null)</li>
+                                <li>@Html.ActionLink("Dokument", "Index", "Documents")</li>
+                            }
+                            else
+                            {
+                                if (User.IsInRole("Elev"))
+                                {
+                                    <li>@Html.ActionLink("Min sida", "Index", "Student")</li>
+                                }
                             }
                         }
-                    }
-                </ul>
-                @Html.Partial("_LoginPartial")
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </nav>
             </div>
         </div>
     </div>
-    <div class="container body-content ">
+    <div class="container body-content top-space">
         @RenderBody()
         <hr />
         <footer>
