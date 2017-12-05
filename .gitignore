@@ -268,3 +268,6 @@ __pycache__/
 /Laja/Migrations/201712050819523_fixingerror.resx
 /Laja/Migrations/201712050819523_fixingerror.Designer.cs
 /Laja/Migrations/201712050819523_fixingerror.cs
+/Laja/Migrations/201712051206599_InitDatabase.resx
+/Laja/Migrations/201712051206599_InitDatabase.Designer.cs
+/Laja/Migrations/201712051206599_InitDatabase.cs
