@@ -87,7 +87,9 @@
                                                 <p><br /> <br /><br /></p>
                                                 <div class="col-md-12">
                                                     <p>@Html.ActionLink("Registrera aktivitet >>", "Create", "Activities", new { moduleId = module.Id }, null)  |
-                                                    @Html.ActionLink("Registrera Dokument >>", "Create", "Documents", new { id = module.Id, c="module" }, null)</p>  
+                                                    @Html.ActionLink("Registrera Dokument >>", "Create", "Documents", new { id = module.Id, c="module" }, null) | 
+                                                    @Html.ActionLink("Redigera modul >>", "Edit", "Modules", new { id = module.Id}, null)
+                                                    </p>
                                                 </div>
                                                 @{
                                                     if (module.Activities.Count > 0)
@@ -133,7 +135,9 @@
                                                                             <p>@Html.DisplayFor(model => activity.EndDate)</p>
                                                                         </div>
                                                                         <div class="col-md-12">
-                                                                            <p>@Html.ActionLink("Ladda dokument >>", "Create", "Documents", new { id = activity.Id, c="activity" }, null)</p>
+                                                                            <p>@Html.ActionLink("Ladda dokument >>", "Create", "Documents", new { id = activity.Id, c="activity" }, null)
+                                                                              @Html.ActionLink("Redigera aktivitet >>", "Edit", "Activities", new { id = activity.Id}, null)
+                                                                            </p>
                                                                         </div>
                                                                         <div class="col-md-12">
                                                                             @{
