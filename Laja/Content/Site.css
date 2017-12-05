@@ -52,7 +52,7 @@ textarea {
     color: rgb(47,212,132);
 }
 
-.text-color-white {
+.text-color-white > li > a {
     color: white;
 }
 
@@ -81,4 +81,12 @@ textarea {
 
 .navbar-inverse .navbar-brand {
     color: white;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: black !important;
+}
+
+.top-space{
+    margin-top: 90px;
 }
