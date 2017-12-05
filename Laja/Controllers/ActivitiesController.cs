@@ -57,6 +57,8 @@ namespace Laja.Controllers
                 ViewBag.ModuleId = moduleId;
                 var module = db.Modules.Find(moduleId);
                 ViewBag.ModuleName = module.Name + " (" + module.StartDate.ToShortDateString() + " - " + module.EndDate.ToShortDateString() + " )";
+                ViewBag.ModuleStart = module.StartDate.ToShortDateString();
+                ViewBag.ModuleEnd = module.EndDate.ToShortDateString();
             }
             return View();
         }
@@ -89,7 +91,8 @@ namespace Laja.Controllers
 
                 db.Activities.Add(activity);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                return RedirectToAction("Index", "Teacher", new { @CourseId = db.Modules.Find(activity.ModuleId).CourseId });
             }
 
             ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "Id", "Name", activity.ActivityTypeId);
