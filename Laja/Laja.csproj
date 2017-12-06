@@ -402,6 +402,7 @@
     <Content Include="Views\DocTypes\Edit.cshtml" />
     <Content Include="Views\DocTypes\Index.cshtml" />
     <Content Include="Views\Shared\_ActivityStatus.cshtml" />
+    <Content Include="Views\Shared\_DocumentsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
