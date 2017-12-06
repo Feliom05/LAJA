@@ -13,7 +13,7 @@ namespace Laja.Models
         //    Modules = new HashSet<Module>();
         //}
         public int Id { get; set; }
-
+        [DisplayFormat(NullDisplayText = "-")]
         [Display(Name = "Kursnamn")]
         [Required]
         [StringLength(255)]

@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 
+
 namespace Laja.Services
 {
     public class ValidationService
@@ -153,7 +154,7 @@ namespace Laja.Services
             documents = db.Activities.Find(activity.Id).Documents.Count();
             return (documents > 0) ? true : false;
         }
-
+       
         public bool UniqName(Activity activity)
         {
             bool isUniqe = false;

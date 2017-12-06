@@ -1,0 +1,39 @@
+﻿@model Laja.Models.Course
+
+@using Microsoft.AspNet.Identity
+<div class="col-md-2">
+    <b> @Html.DisplayNameFor(model => model.Name)</b>
+    <p>@Html.DisplayFor(model => model.Name)</p>
+</div>
+@if (Request.IsAuthenticated)
+            {
+                foreach (var module in Model.Modules)
+                {
+                    if (module.Activities.Count > 0)
+                    {
+                        foreach (var activity in module.Activities)
+                        {
+                            if (activity.DeadLine != null)
+                            {
+                    @Html.Action("ActivityHasDocuments", "Documents", new { activity = activity });
+                    <b>Tid kvar - Inlämningsuppgift</b>
+                    if (TempData["days"] != null)
+                    {
+                        <p class="alert-info">Dag: @TempData["days"]  Tim: @TempData["hours"]  Min: @TempData["min"] </p>
+                    }
+                    else
+                    {
+
+                        <p class="alert-danger">Tim: @TempData["hoursR"]  Min: @TempData["minR"] </p>
+                    }
+
+
+                    <p>@Html.ActionLink("Ladda upp fil", "Create", "Documents", new { id = activity.Id, c = "activity" }, null)</p>
+                }
+            }
+        }
+    }
+}
+
+
+}

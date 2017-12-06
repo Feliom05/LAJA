@@ -88,44 +88,51 @@
                                                     <div class="col-md-12">
                                                         <p>
                                                             @Html.ActionLink("Registrera aktivitet >>", "Create", "Activities", new { moduleId = module.Id }, null)  |
-                                                            @Html.ActionLink("Registrera Dokument >>", "Create", "Documents", new { id = module.Id, c = "module" }, null) |
-                                                            @Html.ActionLink("Redigera modul >>", "Edit", "Modules", new { id = module.Id }, null)
-                                                        </p>
-                                                    </div>
-                                                    @{
-                                                        if (module.Activities.Count > 0)
-                                                        {
-                                                            <h4><b>Aktiviteter</b></h4>
-                                                            <div class="col-md-12">
-                                                                <div class="col-md-2">
-                                                                    <b>Name</b>
+                                                        @Html.ActionLink("Registrera Dokument >>", "Create", "Documents", new { id = module.Id, c = "module" }, null)
+                                                    </p>
+                                                </div>
+                                                @{
+                                                    if (module.Activities.Count > 0)
+                                                    {
+                                                        <h4><b>Aktiviteter</b></h4>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-2">
+                                                                <b>Name</b>
 
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <b>Beskrivning</b>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <b>Beskrivning</b>
 
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <b>Startdatum</b>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <b>DeadLine</b>
 
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <b>Slutdatum</b>
-                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <b>Startdatum</b>
+
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <b>Slutdatum</b>
+                                                            </div>
 
 
-                                                                <div class="panel-body">
+                                                            <div class="panel-body">
 
-                                                                    @foreach (var activity in module.Activities)
-                                                                    {
+                                                                @foreach (var activity in module.Activities)
+                                                                {
 
-                                                                        <div class="col-md-2">
-                                                                            @*<b>@Html.DisplayNameFor(model => activity.Name)</b>*@
-                                                                            <p>@Html.DisplayFor(model => activity.Name)</p>
-                                                                        </div>
-                                                                        <div class="col-md-6">
+                                                                    <div class="col-md-2">
+                                                                        @*<b>@Html.DisplayNameFor(model => activity.Name)</b>*@
+                                                                        <p>@Html.DisplayFor(model => activity.Name)</p>
+                                                                    </div>
+                                                                        <div class="col-md-4">
                                                                             @* <b> @Html.DisplayNameFor(model => activity.Description)</b>*@
                                                                             <p>@Html.DisplayFor(model => activity.Description)</p>
+                                                                        </div>
+                                                                        <div class="col-md-2">
+                                                                            @*<b>@Html.DisplayNameFor(model => activity.StartDate)</b>*@
+                                                                            <p>@Html.DisplayFor(model => activity.DeadLine)</p>
                                                                         </div>
                                                                         <div class="col-md-2">
                                                                             @*<b>@Html.DisplayNameFor(model => activity.StartDate)</b>*@
@@ -145,8 +152,21 @@
                                                                             @{
                                                                                 if (activity.DeadLine != null)
                                                                                 {
+                                                                                     @Html.Action("ActivityHasDocuments", "Documents", new { activity = activity });
+                                                                                    <b>Tid kvar - Inlämningsuppgift</b>
+                                                                                    if (TempData["days"] != null)
+                                                                                    {
+                                                                                        <p class="alert-info">Dag: @TempData["days"]  Tim: @TempData["hours"]  Min: @TempData["min"] </p>
+                                                                                    }
+                                                                                    else
+                                                                                    {
+
+                                                                                    <p class="alert-danger">Tim: @TempData["hoursR"]  Min: @TempData["minR"] </p>
+                                                                                    }
+
                                                                                 <!-- Aframs code here -->
-                                                                                    var days = activity.DeadLine.Value.Subtract(DateTime.Now).Days;
+
+                                                                                    @*var days = activity.DeadLine.Value.Subtract(DateTime.Now).Days;
                                                                                     var hours = activity.DeadLine.Value.Subtract(DateTime.Now).Hours;
                                                                                     var min = activity.DeadLine.Value.Subtract(DateTime.Now).Minutes;
                                                                                     <b>Tid kvar - Inlämningsuppgift</b>
@@ -157,7 +177,7 @@
                                                                                     else
                                                                                     {
                                                                                         <p class="alert-info">Dag: @days  Tim: @hours  Min: @min </p>
-                                                                                    }
+                                                                                    }*@
                                                                                     <p>@Html.ActionLink("Ladda upp fil", "Create", "Documents", new { id = activity.Id, c = "activity" }, null)</p>
                                                                                 }
                                                                             }
@@ -192,8 +212,8 @@
                                                                     }
                                                                 </div>
 
-                                                            </div>
-                                                       }
+                                                        </div>
+                                                                                }
                                                     }
 
                                                     <!-- Module tab stop -->
