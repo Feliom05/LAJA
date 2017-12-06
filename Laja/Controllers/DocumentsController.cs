@@ -65,7 +65,7 @@ namespace Laja.Controllers
                 case "activity":
                     {
                         var module = db.Activities.Find(id);
-                        var course = db.Modules.Find(module.Id);
+                        var course = db.Modules.Find(module.ModuleId);
                         courseIdToBeUsedForBack = course.CourseId;
                         break;
                     }
