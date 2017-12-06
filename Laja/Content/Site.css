@@ -52,7 +52,7 @@ textarea {
     color: rgb(47,212,132);
 }
 
-.text-color-white > li > a {
+.text-color-white {
     color: white;
 }
 
