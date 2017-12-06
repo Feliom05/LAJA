@@ -74,7 +74,7 @@
                                                     <b>@Html.DisplayNameFor(model => module.EndDate)</b>
                                                     <p>@Html.DisplayFor(model => module.EndDate)</p>
                                                 </div>
-                                                <p>@Html.ActionLink("Ladda upp fil", "Create", "Documents", new { id = module.Id, c = "module" }, null)</p>
+                                                @*<p>@Html.ActionLink("Ladda upp fil", "Create", "Documents", new { id = module.Id, c = "module" }, null)</p>*@
                                                 <div class="col-md-12">
                                                     @{
                                                         if (module.Documents.Count > 0)
@@ -99,7 +99,7 @@
                                                             <div class="col-md-2">
                                                                 <b>Name</b>
                                                             </div>
-                                                            <div class="col-md-6">
+                                                            <div class="col-md-4">
                                                                 <b>Beskrivning</b>
                                                             </div>
                                                             <div class="col-md-2">
@@ -134,7 +134,7 @@
                                                                         @*<b>@Html.DisplayNameFor(model => activity.EndDate)</b>*@
                                                                         <p>@Html.DisplayFor(model => activity.EndDate)</p>
                                                                     </div>
-                                                                        @Html.ActionLink("Ladda upp fil", "Create", "Documents", new { id = activity.Id, c = "activity" }, null)
+                                                                        @*@Html.ActionLink("Ladda upp fil", "Create", "Documents", new { id = activity.Id, c = "activity" }, null)*@
                                                                         <div class="col-md-12">
                                                                             @{
                                                                                 if (activity.DeadLine != null)
@@ -175,21 +175,28 @@
                         <div class="tab-pane fade" id="Section2" role="tabpanel">
                             <h3>Elever</h3>
                             @{
-                                <div class="row">
-                                    @foreach (var student in Model.Students)
-                                    {
-                                        <div class="col-sm-6 col-md-4">
-                                            <div class="thumbnail">
-                                                <img src="..." alt="...">
-                                                <div class="caption">
-                                                    <h4>@student.FirstName @student.LastName</h4>
-                                                    <p>@student.Email</p>
-                                                    @*<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>*@
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
+                            <div class="row">
+                                @foreach (var student in Model.Students)
+    {
+                            <div class="col-sm-3 col-md-3">
+                                <div class="red-banner"></div>
+                                <div class="table-bordered text-center">
+                                    <div class="round-icon-img green-back">
+                                        @{
+                string[] initialsName = new string[] { student.FirstName, student.LastName };
+                String initials = String.Join(" ", initialsName.Select(i => i[0].ToString()).ToArray());
+                                        }
+                                        @initials
+                                    </div>
+                                    <div class="caption">
+                                        <h4>@student.FirstName @student.LastName</h4>
+                                        <p>@student.Email</p>
+                                        @*<p><a href="#" class="btn btn-primary" role="button">Button</a></p>*@
+                                    </div>
                                 </div>
+                            </div>
+}   
+                            </div>
                             }
                         </div>
                         <div class="tab-pane fade" id="Section3" role="tabpanel">

@@ -1,7 +1,6 @@
 ﻿using Laja.Models;
 using Microsoft.AspNet.Identity;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
@@ -15,14 +14,14 @@ namespace Laja.Controllers
     public class DocumentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        
+
         // GET: Documents
         public ActionResult Index()
         {
             var documents = db.Documents.Include(d => d.Activity).Include(d => d.Course).Include(d => d.DocType).Include(d => d.Module).Include(d => d.User);
             return View(documents.ToList());
         }
-        
+
 
         // GET: Documents/Details/5
         public ActionResult Details(int? id)
@@ -42,7 +41,7 @@ namespace Laja.Controllers
         // GET: Documents/Create
         public ActionResult Create(int? id, string c)
         {
-            
+
             TempData.Remove("c");
             TempData.Add("c", c);
 
@@ -164,7 +163,14 @@ namespace Laja.Controllers
                 backToId = course.CourseId;
             }
 
-            return RedirectToAction("Index", "Teacher", new { @courseId = backToId });
+            if (User.IsInRole("Lärare"))
+            {
+                return RedirectToAction("Index", "Teacher", new { @courseId = backToId });
+            }
+            else
+            {
+                return RedirectToAction("Index", "Student", new { @corseId = backToId });
+            }
 
 
             //return View(document);
@@ -244,12 +250,12 @@ namespace Laja.Controllers
             TempData.Remove("hours");
             TempData.Remove("min");
 
-            if (activity.DeadLine !=null)
+            if (activity.DeadLine != null)
             {
                 var days = activity.DeadLine.Value.Subtract(DateTime.Now).Days;
                 var hours = activity.DeadLine.Value.Subtract(DateTime.Now).Hours;
                 var min = activity.DeadLine.Value.Subtract(DateTime.Now).Minutes;
-               if(days==0)
+                if (days <= 0)
                 {
                     TempData.Add("hoursR", hours);
                     TempData.Add("minR", min);

@@ -40,6 +40,7 @@ namespace Laja.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(activity);
         }
 
@@ -59,6 +60,10 @@ namespace Laja.Controllers
                 ViewBag.ModuleName = module.Name + " (" + module.StartDate.ToShortDateString() + " - " + module.EndDate.ToShortDateString() + " )";
                 ViewBag.ModuleStart = module.StartDate.ToShortDateString();
                 ViewBag.ModuleEnd = module.EndDate.ToShortDateString();
+                //var moduleTempId = db.Activities.Find()
+                var courseId = db.Modules.Find(moduleId).CourseId;
+                ViewBag.CourseId = courseId;
+
             }
             return View();
         }

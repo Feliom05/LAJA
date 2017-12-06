@@ -72,9 +72,16 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("BttF", "Index", "Teacher", new { @courseId = ViewBag.CourseId }, null )
-</div>
+    <div>
+        @if (User.IsInRole("Lärare"))
+        {
+            @Html.ActionLink("BttF", "Index", "Teacher", new { @courseId = ViewBag.CourseId }, null)
+        }
+        else
+        {
+            @Html.ActionLink("BttF", "Index", "Student", new { @courseId = ViewBag.CourseId }, null)
+        }
+    </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
