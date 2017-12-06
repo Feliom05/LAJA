@@ -73,7 +73,7 @@
 <div>
     @if (Model.Role == "Elev")
     {
-    @Html.ActionLink("Tillbaka till kurslista", "Index", "Teacher", new { CourseId = Model.CourseId })
+    @Html.ActionLink("Tillbaka till kurslista", "Index", "Teacher", new { CourseId = Model.CourseId }, null)
     }
     else
     {  @Html.ActionLink("Tillbaka till lista", "Index", "Teacher")
