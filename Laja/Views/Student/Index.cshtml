@@ -7,7 +7,7 @@
 <h2>Student</h2>
 <p class="alert-danger"> @TempData["d"]</p>
 <div>
-    <h4>Course</h4>
+
     <hr />
     <div class="container">
         <div class="col-md-2">
@@ -58,7 +58,6 @@
                                         </div>
                                         <div id="@($"collapse{module.Id.ToString()}")" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="@($"heading{module.Id.ToString()}")">
                                             <div class="panel-body">
-
                                                 <div class="col-md-2">
                                                     <b>@Html.DisplayNameFor(model => module.Name)</b>
                                                     <p>@Html.DisplayFor(model => module.Name)</p>
@@ -75,31 +74,21 @@
                                                     <b>@Html.DisplayNameFor(model => module.EndDate)</b>
                                                     <p>@Html.DisplayFor(model => module.EndDate)</p>
                                                 </div>
-                                                <p>@Html.ActionLink("Ladda upp fil", "Create", "Documents", new { id = module.Id, c="module" }, null)</p>
+                                                @*<p>@Html.ActionLink("Ladda upp fil", "Create", "Documents", new { id = module.Id, c = "module" }, null)</p>*@
                                                 <div class="col-md-12">
                                                     @{
                                                         if (module.Documents.Count > 0)
                                                         {
-                                                            <h4  class="panel-title">Dokument</h4>
-                                                                                                <div class="col-md-12">
-                                                                                                    @foreach (var doc in module.Documents)
-                                                                                                    {
-                                                                                               <!-- Afram's code here-->
-                                                                                                        if (User.Identity.Name == doc.User.UserName)
-                                                                                                        {
-                                                                                                            var fileName = @doc.FileName.Substring(0, @doc.FileName.IndexOf('_')).ToString();
-                                                                                                            <div class="col-md-2">
-                                                                                                                <a href="@doc.Name" download="@fileName">@doc.FileName.Substring(0, @doc.FileName.IndexOf('_'))</a>
-                                                                                                            </div>
-                                                                                                        }
-
-                                                                                                    }
-                                                                                                </div>
-
+                                                            <h4 class="panel-title">Dokument</h4>
+                                                            <div class="col-md-12">
+                                                                @foreach (var doc in module.Documents)
+                                                                {
+                                                                    @Html.Partial("_DocumentsList", doc);
+                                                                }
+                                                            </div>
                                                         }
                                                     }
                                                 </div>
-
                                                 <!-- Module tab go -->
                                                 <p><br /> <br /><br /></p>
                                                 @{
@@ -109,154 +98,120 @@
                                                         <div class="col-md-12">
                                                             <div class="col-md-2">
                                                                 <b>Name</b>
-
                                                             </div>
-                                                            <div class="col-md-6">
+                                                            <div class="col-md-4">
                                                                 <b>Beskrivning</b>
-
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <b>DeadLine</b>
                                                             </div>
                                                             <div class="col-md-2">
                                                                 <b>Startdatum</b>
-
                                                             </div>
                                                             <div class="col-md-2">
                                                                 <b>Slutdatum</b>
                                                             </div>
                                                             <div class="panel-body">
-
-
-
                                                                 @foreach (var activity in module.Activities)
                                                                 {
-
                                                                     <div class="col-md-2">
                                                                         @*<b>@Html.DisplayNameFor(model => activity.Name)</b>*@
                                                                         <p>@Html.DisplayFor(model => activity.Name)</p>
                                                                     </div>
-                                                                        <div class="col-md-6">
-                                                                            @* <b> @Html.DisplayNameFor(model => activity.Description)</b>*@
-                                                                            <p>@Html.DisplayFor(model => activity.Description)</p>
-                                                                        </div>
-                                                                        <div class="col-md-2">
-                                                                            @*<b>@Html.DisplayNameFor(model => activity.StartDate)</b>*@
-                                                                            <p>@Html.DisplayFor(model => activity.StartDate)</p>
-                                                                        </div>
-                                                                        <div class="col-md-2">
-                                                                            @*<b>@Html.DisplayNameFor(model => activity.EndDate)</b>*@
-                                                                            <p>@Html.DisplayFor(model => activity.EndDate)</p>
-                                                                        </div>
-                                                                        <p>@Html.ActionLink("Ladda upp fil", "Create", "Documents", new { id = activity.Id, c = "activity" }, null)</p>
+                                                                    <div class="col-md-4">
+                                                                        @* <b> @Html.DisplayNameFor(model => activity.Description)</b>*@
+                                                                        <p>@Html.DisplayFor(model => activity.Description)</p>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        @*<b>@Html.DisplayNameFor(model => activity.StartDate)</b>*@
+                                                                        <p>@Html.DisplayFor(model => activity.DeadLine)</p>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        @*<b>@Html.DisplayNameFor(model => activity.StartDate)</b>*@
+                                                                        <p>@Html.DisplayFor(model => activity.StartDate)</p>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        @*<b>@Html.DisplayNameFor(model => activity.EndDate)</b>*@
+                                                                        <p>@Html.DisplayFor(model => activity.EndDate)</p>
+                                                                    </div>
+                                                                        @*@Html.ActionLink("Ladda upp fil", "Create", "Documents", new { id = activity.Id, c = "activity" }, null)*@
                                                                         <div class="col-md-12">
                                                                             @{
-
                                                                                 if (activity.DeadLine != null)
                                                                                 {
-                                                                                <!-- Aframs code here -->
-
-                                                                                    @Html.Action("ActivityHasDocuments", "Documents", new { activity = activity });
-                                                                                    <b>Tid kvar - Inlämningsuppgift</b>
-                                                                                    if (TempData["days"] != null)
-                                                                                    {
-                                                                                        <p class="alert-info">Dag: @TempData["days"]  Tim: @TempData["hours"]  Min: @TempData["min"] </p>
-                                                                                    }
-                                                                                    else
-                                                                                    {
-
-                                                                                        <p class="alert-danger">Tim: @TempData["hoursR"]  Min: @TempData["minR"] </p>
-                                                                                    }
-
+                                                                                    @Html.Partial("_ActivityStatus", activity);
                                                                                     <b>Fil Inlämning</b>
-                                                                                            <p>@Html.ActionLink("Ladda upp fil", "Create", "Documents", new {id=activity.Id, c="activity", },null)</p>
-
-                                                                                    
+                                                                                    @Html.ActionLink("Ladda upp fil", "Create", "Documents", new { id = activity.Id, c = "activity", }, null)
                                                                                 }
                                                                             }
                                                                         </div>
+                                                                        <div class="col-md-12">
+                                                                            @{
+                                                                                if (@activity.Documents.Count > 0)
+                                                                                {
+                                                                                    <h4 class="panel-title">Dokument</h4>
                                                                                     <div class="col-md-12">
-                                                                                        @{
-                                                                                            if (@activity.Documents.Count > 0)
-                                                                                            {
-                                                                                                <h4 class="panel-title">Dokument</h4>
-                                                                                                <div class="col-md-12">
-                                                                                                    @foreach (var doc in activity.Documents)
-                                                                                                    {
-                                                                                               <!-- Afram's code here-->
-                                                                                                        if (User.Identity.Name == doc.User.UserName)
-                                                                                                        {
-                                                                                                            var fileName = @doc.FileName.Substring(0, @doc.FileName.IndexOf('_')).ToString();
-                                                                                                            <div class="col-md-2">
-                                                                                                                <a href="@doc.Name" download="@fileName">@doc.FileName.Substring(0, @doc.FileName.IndexOf('_'))</a>                                                                                                               
-                                                                                                            </div>
-                                                                                                        }
-
-                                                                                                    }
-                                                                                                </div>
-
-                                                                                            }
+                                                                                        @foreach (var doc in activity.Documents)
+                                                                                        {
+                                                                                            @Html.Partial("_DocumentsList", doc);
                                                                                         }
                                                                                     </div>
 
-
-                                                                                            }
+                                                                                }
+                                                                            }
+                                                                        </div>
+                                                                                }
                                                             </div>
-
                                                         </div>
-                                                                                            }
+                                                                                }
                                                 }
-
                                                 <!-- Module tab stop -->
                                             </div>
                                         </div>
                                     </div>
-                                                                                            }
-
+                                                                                }
                             </div>
-
                         </div>
                         <div class="tab-pane fade" id="Section2" role="tabpanel">
                             <h3>Elever</h3>
-                                @{
-                                 <div class="row">
-                                 @foreach (var student in Model.Students)
-                                 {
-                                    <div class="col-sm-6 col-md-4">
-                                        <div class="thumbnail">
-                                        <img src="..." alt="...">
-                                            <div class="caption">
-                                                <h4>@student.FirstName @student.LastName</h4>
-                                                <p>@student.Email</p>
-                                                 @*<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>*@
-                                            </div>
-                                        </div>
+                            @{
+                            <div class="row">
+                                @foreach (var student in Model.Students)
+    {
+                            <div class="col-sm-3 col-md-3">
+                                <div class="red-banner"></div>
+                                <div class="table-bordered text-center">
+                                    <div class="round-icon-img green-back">
+                                        @{
+                string[] initialsName = new string[] { student.FirstName, student.LastName };
+                String initials = String.Join(" ", initialsName.Select(i => i[0].ToString()).ToArray());
+                                        }
+                                        @initials
                                     </div>
-                                 }
-
-                                </div>
-                                    }
-                              </div>
-                          <div class="tab-pane fade" id="Section3" role="tabpanel">
-                                <h3>Dokument</h3>
-                              <div class="col-md-12">
-                                  @foreach (var doc in Model.Documents)
-                                  {
-                                                                                               <!-- Afram's code here-->
-                                      if (User.Identity.Name == doc.User.UserName)
-                                      {
-                                          var fileName = @doc.FileName.Substring(0, @doc.FileName.IndexOf('_')).ToString();
-                                          <div class="col-md-2">
-                                              <a href="@doc.Name" download="@fileName">@doc.FileName.Substring(0, @doc.FileName.IndexOf('_'))</a>
-                                          </div>
-                                      }
-
-                                  }
-                              </div>
-
-                              <p>@Html.ActionLink("Ladda dokument >>", "Create", "Documents", new { id = Model.Id, c = "course" }, null)</p>
-
+                                    <div class="caption">
+                                        <h4>@student.FirstName @student.LastName</h4>
+                                        <p>@student.Email</p>
+                                        @*<p><a href="#" class="btn btn-primary" role="button">Button</a></p>*@
+                                    </div>
                                 </div>
                             </div>
+}   
+                            </div>
+                            }
                         </div>
-                     </div>
-          </div>
-         </div>
-     </div>
+                        <div class="tab-pane fade" id="Section3" role="tabpanel">
+                            <h3>Dokument</h3>
+                            <div class="col-md-12">
+                                @foreach (var doc in Model.Documents)
+                                {
+                                    @Html.Partial("_DocumentsList", doc);
+                                }
+                            </div>
+                            @Html.ActionLink("Ladda dokument >>", "Create", "Documents", new { id = Model.Id, c = "course" }, null)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

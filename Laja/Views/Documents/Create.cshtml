@@ -72,35 +72,18 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("BttF", "Index", "Teacher", new { @courseId = ViewBag.CourseId }, null )
-</div>
+    <div>
+        @if (User.IsInRole("Lärare"))
+        {
+            @Html.ActionLink("BttF", "Index", "Teacher", new { @courseId = ViewBag.CourseId }, null)
+        }
+        else
+        {
+            @Html.ActionLink("BttF", "Index", "Student", new { @courseId = ViewBag.CourseId }, null)
+        }
+    </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/jquery-1.11.1.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#btnUploadFile').on('click', function () {
-                var data = new FormData();
-                var files = $("#fileUpload").get(0).files;
 
-                if (files.length > 0) {
-                    data.append("UploadedImage", files[0]);
-                }
-
-                var ajaxRequest = $.ajax({
-                    type: "POST",
-                    url: "Create",
-                    contentType: false,
-                    processData: false,
-                    data: data
-                });
-
-                ajaxRequest.done(function (xhr, textStatus) {
-
-                });
-            });
-        });
-    </script>
 }

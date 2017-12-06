@@ -406,6 +406,7 @@
     <Content Include="Views\DocTypes\Edit.cshtml" />
     <Content Include="Views\DocTypes\Index.cshtml" />
     <Content Include="Views\Shared\_ActivityStatus.cshtml" />
+    <Content Include="Views\Shared\_DocumentsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -424,8 +425,8 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712051909003_InitDatabaseV2.resx">
-      <DependentUpon>201712051909003_InitDatabaseV2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712051206599_InitDatabase.resx">
+      <DependentUpon>201712051206599_InitDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
