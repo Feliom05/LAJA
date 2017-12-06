@@ -154,7 +154,7 @@
                                                                                 if (activity.DeadLine != null)
                                                                                 {
                                                                                     @Html.Partial("_ActivityStatus", activity);
-                                                                                    @Html.ActionLink("Ladda upp fil", "Create", "Documents", new { id = activity.Id, c = "activity", }, null)
+                                                                                    @*@Html.ActionLink("Ladda upp fil", "Create", "Documents", new { id = activity.Id, c = "activity", }, null)*@
 
                                                                                 }
                                                                             }
@@ -186,7 +186,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="Section2" role="tabpanel">
-                                <h3<br /></h3>
+                                <h3><br /></h3>
                                 <div class="col-md-12">
                                     <div class="row">
                                         @foreach (var student in Model.Students)
@@ -208,7 +208,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                                            }
+                                          }
                                     </div>
                                     <p>@Html.ActionLink("Registrera Elev för kurs: " + Model.Name + " >>", "Create", "User", new { courseId = Model.Id, role = "Elev" }, null)</p>
                                 </div>
