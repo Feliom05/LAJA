@@ -1,0 +1,10 @@
+﻿@{
+
+    if (User.Identity.Name == Model.User.UserName)
+    {
+        var fileName = @Model.FileName.Substring(0, @Model.FileName.IndexOf('_')).ToString();
+        <div class="col-md-2">
+            <a href="@Model.Name" download="@fileName">@Model.FileName.Substring(0, @Model.FileName.IndexOf('_'))</a>
+        </div>
+    }
+}
