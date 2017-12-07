@@ -1,9 +1,9 @@
 ﻿@model Laja.Models.Course
 
 @{
-    ViewBag.Title = "Lärare";
+    ViewBag.Title = "Kursöversikt Lärare";
 }
-<h2>Lärare</h2>
+<h1>@Html.DisplayFor(model => model.Name)</h1>
 <div>
     <hr />
     <div class="container">
@@ -132,12 +132,9 @@
                                                                 <div class="col-md-2">
                                                                     <b>Slutdatum</b>
                                                                 </div>
-                                                                <div class="col-md-1">
-                                                                   
-                                                                </div>
                                                                 <div class="panel-body" style="padding-left:0px;">
-                                                                    
-                                                                    @foreach (var activity in module.Activities)
+
+                                                                    @foreach (var activity in module.Activities.OrderBy(a => a.StartDate))
                                                                     {
                                                                        <div class="panel panel-info col-md-12 " >
                                                                            <div class="row col-md-12">
@@ -205,7 +202,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                                                                }
+                                     }
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="Section2" role="tabpanel">

@@ -32,6 +32,7 @@ namespace Laja.Controllers
             if (User.IsInRole("Elev"))
             {
                 var course = db.Courses.Where(c => c.Id == user.CourseId).FirstOrDefault();
+                course.Modules = course.Modules.OrderBy(m => m.StartDate).ToList();
                 return  View(course);
             }
             else

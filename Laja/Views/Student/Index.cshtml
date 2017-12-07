@@ -1,10 +1,10 @@
 ﻿@model Laja.Models.Course
 
 @{
-    ViewBag.Title = "Student";
+    ViewBag.Title = "Kursöversikt Elev";
 }
+<h1>@Html.DisplayFor(model => model.Name)</h1>
 
-<h2>Student</h2>
 <p class="alert-danger"> @TempData["d"]</p>
 <div>
 
@@ -41,7 +41,7 @@
                     <!-- Tab panes -->
                     <div class="tab-content tabs">
                         <div class="tab-pane fade in active" id="Section1" role="tabpanel">
-                            <h3>Moduler</h3>
+                            <h3></h3>
                             <div class="panel-group" id="accordionCourse" role="tablist" aria-multiselectable="true">
 
                                 @foreach (var module in Model.Modules)
@@ -112,7 +112,7 @@
                                                                 <b>Slutdatum</b>
                                                             </div>
                                                             <div class="panel-body">
-                                                                @foreach (var activity in module.Activities)
+                                                                @foreach (var activity in module.Activities.OrderBy(a => a.StartDate))
                                                                 {
                                                                     <div class="col-md-2">
                                                                         @*<b>@Html.DisplayNameFor(model => activity.Name)</b>*@
@@ -160,10 +160,10 @@
                                                                                 }
                                                                             }
                                                                         </div>
-                                                                                }
+                                                                 }
                                                             </div>
                                                         </div>
-                                                                                }
+                                                    }
                                                 }
                                                 <!-- Module tab stop -->
                                             </div>

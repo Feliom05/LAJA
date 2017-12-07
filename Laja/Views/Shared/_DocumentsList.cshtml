@@ -1,10 +1,11 @@
 ﻿@{
-
+    ViewBag.Text = Model.FileName.Substring(0, @Model.FileName.IndexOf('_')).ToString();
     if (User.Identity.Name == Model.User.UserName)
     {
         var fileName = @Model.FileName.Substring(0, @Model.FileName.IndexOf('_')).ToString();
+
         <div class="col-md-4" style="padding-left:1px;">
-            <a href="@Model.Name" download="@fileName">@Model.FileName.Substring(0, @Model.FileName.IndexOf('_'))</a>
+            @Html.ActionLink((string)ViewBag.Text, "Download", "Documents", new { ImageName = Model.FileName.ToString() }, new { @class = "btn btn-link" })
         </div>
     }
 }
