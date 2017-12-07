@@ -1,0 +1,13 @@
+﻿@model Laja.ViewModels.AssignmentSubmitViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@Model.ActivityName</h2>
+
+@foreach (var student in Model.Students)
+{
+    <p>@student.Email</p>
+}
+
+

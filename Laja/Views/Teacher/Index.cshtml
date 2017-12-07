@@ -147,6 +147,8 @@
                                                                             <p>
                                                                                 @Html.ActionLink("Ladda dokument >>", "Create", "Documents", new { id = activity.Id, c = "activity" }, null)
                                                                                 @Html.ActionLink("Redigera aktivitet >>", "Edit", "Activities", new { id = activity.Id }, null)
+
+                                                                                @Html.ActionLink("Visa inlämningsuppgifter", "Index", "AssignmentSubmit", new { activityId = activity.Id}, null)
                                                                             </p>
                                                                         </div>
                                                                         <div class="col-md-12">
