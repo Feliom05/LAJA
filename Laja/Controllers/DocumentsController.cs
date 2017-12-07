@@ -129,6 +129,7 @@ namespace Laja.Controllers
                     else
                     {
                         ViewBag.Message = "File type not allowed, please try another file!";
+                         return View(document);
                     }
                 }
             }
