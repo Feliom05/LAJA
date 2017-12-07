@@ -47,36 +47,17 @@ namespace Laja.Controllers
 
             //Candidate for refactoring - To find the Course ID to be used by "Back To" in the Create View
 
-            int courseIdToBeUsedForBack = 0;
-            switch (c)
-            {
-                case "course":
-                    {
-                        var course = db.Courses.Find(id);
-                        courseIdToBeUsedForBack = course.Id;
-                        break;
-                    }
-                case "module":
-                    {
-                        courseIdToBeUsedForBack = db.Modules.Find(id).CourseId;
-                        break;
-                    }
-                case "activity":
-                    {
-                        var module = db.Activities.Find(id);
-                        var course = db.Modules.Find(module.ModuleId);
-                        courseIdToBeUsedForBack = course.CourseId;
-                        break;
-                    }
-                default:
-                    {
-                        break;
-                    }
-            }
-            ViewBag.CourseId = courseIdToBeUsedForBack;
+
+
+            //int courseIdToBeUsedForBack = findCourseIdforDoc(id, c);
+
+ 
+            ViewBag.CourseId = findCourseIdforDoc(id, c);
 
             return View();
         }
+
+
 
         // POST: Documents/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -86,9 +67,11 @@ namespace Laja.Controllers
         public ActionResult Create(Document document, HttpPostedFileBase upload1, int? id, string c)
         {
             ViewBag.Message = "";
+           
             foreach (string upload in Request.Files)
             {
-                if (Request.Files[upload].FileName != "")
+                
+                    if (Request.Files[upload].FileName != "")
                 {
                     string path = AppDomain.CurrentDomain.BaseDirectory + "/App_Data/Documents/";
                     string filename = Path.GetFileName(Request.Files[upload].FileName);
@@ -145,35 +128,27 @@ namespace Laja.Controllers
             ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", document.UserId);
 
 
-            // Candidate to be refactored
-            int? backToId;
-            if (document.CourseId != null)
+            if (document.DocType != null)
             {
-                backToId = document.CourseId;
-            }
-            else if (document.ModuleId != null)
-            {
-                var course = db.Modules.Find(document.ModuleId);
-                backToId = course.CourseId;
-            }
-            else
-            {
-                var module = db.Activities.Find(document.ActivityId);
-                var course = db.Modules.Find(module.ModuleId);
-                backToId = course.CourseId;
-            }
+                // Candidate to be refactored
+                int? backToId = findCourseIdforDoc(id, TempData["c"].ToString());
+              
 
-            if (User.IsInRole("Lärare"))
-            {
-                return RedirectToAction("Index", "Teacher", new { @courseId = backToId });
-            }
-            else
-            {
-                return RedirectToAction("Index", "Student", new { @corseId = backToId });
-            }
+                if (User.IsInRole("Lärare"))
+                {
+                    return RedirectToAction("Index", "Teacher", new { @courseId = backToId });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Student", new { @corseId = backToId });
+                }
 
-
-            //return View(document);
+            }
+            ViewBag.CourseId = findCourseIdforDoc(id, TempData["c"].ToString());
+            var tempC = TempData["c"].ToString();
+            TempData.Remove("c");
+            TempData.Add("c", tempC);
+            return View(document);
         }
 
         // GET: Documents/Edit/5
@@ -282,6 +257,38 @@ namespace Laja.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+        private int findCourseIdforDoc(int? id, string c)
+        {
+            int courseIdToBeUsedForBack = 0;
+            switch (c)
+            {
+                case "course":
+                    {
+                        var course = db.Courses.Find(id);
+                        courseIdToBeUsedForBack = course.Id;
+                        break;
+                    }
+                case "module":
+                    {
+                        courseIdToBeUsedForBack = db.Modules.Find(id).CourseId;
+                        break;
+                    }
+                case "activity":
+                    {
+                        var module = db.Activities.Find(id);
+                        var course = db.Modules.Find(module.ModuleId);
+                        courseIdToBeUsedForBack = course.CourseId;
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+            return courseIdToBeUsedForBack;
         }
     }
 
