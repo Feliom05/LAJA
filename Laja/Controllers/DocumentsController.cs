@@ -243,7 +243,13 @@ namespace Laja.Controllers
                 }
             }
         }
-
+        public FileResult Download(string ImageName)
+        {
+            var userName = User.Identity.GetUserName();
+            var FileVirtualPath = "~/App_Data/Documents/"+userName+"/" + ImageName;
+            return File(FileVirtualPath, "application/force-download", ImageName.Substring(0, ImageName.IndexOf('_')).ToString());
+            
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
