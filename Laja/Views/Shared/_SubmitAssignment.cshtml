@@ -4,26 +4,17 @@
 <ul>
     @foreach (var student in Model.Students)
     {
-    <div id="modal-body" class="modal-body">
-
-
-
         <li>
             @student.FirstName @student.LastName
-
-
             <ul>
                 @foreach (var document in Model.Documents)
             {
                 if (document.UserId == student.Id)
                 {
-                    <li>@document.Description</li>
-            }
-        }
-
-
+                <li>@Html.Partial("_ActivityDocList", document)</li>
+                 }
+             }
             </ul>
         </li>
-    </div>
     }
 </ul>
