@@ -23,9 +23,7 @@ namespace Laja.Controllers
             var moduleId = db.Activities.Find(activityId).ModuleId;
             var courseId = db.Modules.Find(moduleId).CourseId;
 
-           
-
-            //var activityDocs = db.Documents.Where(d => d.ActivityId == activityId);
+            var activityDocs = activity.Documents;
 
             var course = db.Courses
                 .Where(c => c.Id == courseId)
@@ -41,11 +39,13 @@ namespace Laja.Controllers
                 ActivityName = activity.Name,
                 CourseId = course.Id,
                 Students = course.Students,
-                Documents = course.Documents
+                Documents = activityDocs
             };
 
 
             return View(assignmentSubmit);
         }
+
+
     }
 }

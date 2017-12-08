@@ -6,14 +6,24 @@
 <h2>@Model.ActivityName</h2>
 
 
+
+
     @foreach (var student in Model.Students)
     {
         <p>@student.FirstName</p>
+        
+
+        foreach (var document in Model.Documents)
+        {
+            if (document.UserId == student.Id)
+            {
+                <p>@document.Description</p>
+            }
+        }
+
     }
 
-@foreach (var document in Model.Documents)
-{
-    <span>@document.Description</span>
-}
+
+
 
 
