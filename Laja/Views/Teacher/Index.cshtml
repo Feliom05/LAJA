@@ -9,7 +9,7 @@
     <div class="container">
         <div class="col-md-2">
             <b> @Html.DisplayNameFor(model => model.Name)</b>
-            <p>@Html.DisplayFor(model => model.Name)</p>
+            <p> @Html.ActionLink(Model.Name, "Edit", "Courses", new { id = Model.Id }, new { @class = "glyphicon glyphicon-edit" })</p>
         </div>
         <div class="col-md-6">
             <b> @Html.DisplayNameFor(model => model.Description)</b>
@@ -24,9 +24,7 @@
             <p>@Html.DisplayFor(model => model.EndDate)</p>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <p>@Html.ActionLink("Redigera Kurs >>", "Edit", "Courses", new { id = Model.Id }, null)</p>
-            </div>
+           
             <div class="row">
                 <p><br /></p>
             </div>
@@ -35,53 +33,72 @@
                     <div class="tab" role="tabpanel">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
-                            <li class="active" role="presentation"><a role="tab" aria-controls="home" href="#Section1" data-toggle="tab">Moduler <img style="width:20px; height:20px;" src="~/Images/Module.png" /></a></li>
-                            <li role="presentation"><a role="tab" aria-controls="Students" href="#Section2" data-toggle="tab">Elever <img style="width:20px; height:20px;" src="~/Images/Student.png" /></a></li>
-                            <li role="presentation"><a role="tab" aria-controls="Documents" href="#Section3" data-toggle="tab">Dokument <img style="width:20px; height:20px;" src="~/Images/Doc.ico" /></a></li>
+                            <li class="active" role="presentation"><a role="tab" aria-controls="home" href="#Section1" data-toggle="tab">Moduler <img style="width:25px; height:25px;" src="~/Images/Modules.jpg" /></a></li>
+                            <li role="presentation"><a role="tab" aria-controls="Students" href="#Section2" data-toggle="tab">Elever <img style="width:25px; height:25px;" src="~/Images/Student.png" /></a></li>
+                            <li role="presentation"><a role="tab" aria-controls="Documents" href="#Section3" data-toggle="tab">Dokument <img style="width:25px; height:25px;" src="~/Images/Doc.ico" /></a></li>
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content tabs">
                             <div class="tab-pane fade in active" id="Section1" role="tabpanel">
                                 <h3></h3>
                                 <div class="col-md-12">
-                                    <p>@Html.ActionLink("Registrera Modul >>", "Create", "Modules", new { courseId = Model.Id }, null)</p>
+                                   <div class="col-md-11"></div>
+                                    <div class="col-md-1">@Html.ActionLink("Modul", "Create", "Modules", new { courseId = Model.Id }, new { @class = "glyphicon glyphicon-plus" })</div>
                                 </div>
                                 <div class="panel-group" id="accordionCourse" role="tablist" aria-multiselectable="true">
                                     @foreach (var module in Model.Modules)
                                     {
+
+                                        var activeModule = "";
+                                        var activeModuleStyle = "";
+                                        var activeModuleClass = "";
+                                        if (module.StartDate < System.DateTime.Today && module.EndDate > System.DateTime.Today)
+                                        {
+                                            activeModule = " in";
+                                            activeModuleClass = "class= glyphicon-asterisk";
+                                            activeModuleStyle = "style= color:green;";
+                                        }
+
+
                                         <div class="panel panel-default">
                                             <div class="panel-heading" role="tab" id="@($"heading{module.Id.ToString()}")">
-                                                <h4 class="panel-title">
-                                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#@($"collapse{module.Id.ToString()}")" aria-expanded="false" aria-controls="@($"collapse{module.Id.ToString()}")">
-                                                        @module.Name <span class="badge">@module.Activities.Count()</span>
-                                                        <img style="width:20px; height:20px;" src="~/Images/Activity.png" /> | <span class="badge">@module.Documents.Count()</span>
-                                                        <img style="width:20px; height:20px;" src="~/Images/Doc.ico" />
-                                                    </a>
-                                                </h4>
+                                                <div class="panel-title" style="height:20px;">
+                                                    <div class="col-md-4" style="padding-left:1px;">
+                                                        <a role="button" style="text-decoration:none;" data-toggle="collapse" data-parent="#accordion" href="#@($"collapse{module.Id.ToString()}")" aria-expanded="false" aria-controls="@($"collapse{module.Id.ToString()}")">
+                                                            <span @activeModuleClass @activeModuleStyle> @module.Name </span>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <span> @module.StartDate.ToShortDateString() </span>&nbsp; »»&nbsp; <span> @module.EndDate.ToShortDateString() </span> 
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                       
+                                                        <img style="width:25px; height:25px;" src="~/Images/Activity.png" /> Aktiviteter &nbsp;<span class="badge">@module.Activities.Count()</span>&nbsp;&nbsp;
+                                                        <img style="width:25px; height:25px;" src="~/Images/Doc.ico" />Dokument &nbsp;<span class="badge">@module.Documents.Count()</span>
+                                                       
+                                                       
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div id="@($"collapse{module.Id.ToString()}")" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="@($"heading{module.Id.ToString()}")">
+                                            <div id="@($"collapse{module.Id.ToString()}")" class="panel-collapse collapse out @activeModule" role="tabpanel" aria-labelledby="@($"heading{module.Id.ToString()}")">
                                                 <div class="panel-body">
-                                                    <div class="col-md-2">
-                                                        <b>@Html.DisplayNameFor(model => module.Name)</b>
-                                                        <p>@Html.DisplayFor(model => module.Name)</p>
+                                                    
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-11" style="padding-left:1px;">
+                                                            <b> Beskrivning: </b>
+                                                            @Html.DisplayFor(model => module.Description)
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            @Html.ActionLink("Dokument", "Create", "Documents", new { id = module.Id, c = "module" }, new { @class = "glyphicon glyphicon-plus" })
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <b> @Html.DisplayNameFor(model => module.Description)</b>
-                                                        <p>@Html.DisplayFor(model => module.Description)</p>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <b>@Html.DisplayNameFor(model => module.StartDate)</b>
-                                                        <p>@Html.DisplayFor(model => module.StartDate)</p>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <b>@Html.DisplayNameFor(model => module.EndDate)</b>
-                                                        <p>@Html.DisplayFor(model => module.EndDate)</p>
-                                                    </div>
+                                                    
                                                     <div class="col-md-12">
                                                         @{
                                                             if (module.Documents.Count > 0)
                                                             {
-                                                                <h4 class="panel-title">Dokument</h4>
+                                                                <br />
+                                                                <h4 class="panel-title"><b>Dokument</b></h4>
                                                                 <div class="col-md-12">
                                                                     @foreach (var doc in module.Documents)
                                                                     {
@@ -92,25 +109,21 @@
                                                         }
                                                     </div>
                                                     <!-- Module tab go -->
-                                                    <p><br /> <br /><br /></p>
-                                                    <div class="col-md-12">
-                                                        <p>
-                                                            @Html.ActionLink("Registrera aktivitet >>", "Create", "Activities", new { moduleId = module.Id }, null)  |
-                                                            @Html.ActionLink("Registrera Dokument >>", "Create", "Documents", new { id = module.Id, c = "module" }, null)
-                                                        </p>
-                                                    </div>
+                                                    <p><br /> <br /></p>
+                                                    
+                                                    
+                                                    
                                                     @{
                                                         if (module.Activities.Count > 0)
                                                         {
-                                                            <h4><b>Aktiviteter</b></h4>
+                                                            <br />
+                                                            @Html.ActionLink("Aktivitet", "Create", "Activities", new { moduleId = module.Id }, new { @class = "glyphicon glyphicon-plus" })
                                                             <div class="col-md-12">
-                                                                <div class="col-md-2">
+                                                                <div class="col-md-4" style="padding-left:1px;">
                                                                     <b>Name</b>
                                                                 </div>
-                                                                <div class="col-md-4">
-                                                                    <b>Beskrivning</b>
-                                                                </div>
-                                                                <div class="col-md-2">
+
+                                                                <div class="col-md-3">
                                                                     <b>DeadLine</b>
                                                                 </div>
                                                                 <div class="col-md-2">
@@ -119,54 +132,109 @@
                                                                 <div class="col-md-2">
                                                                     <b>Slutdatum</b>
                                                                 </div>
-                                                                <div class="panel-body">
+                                                                <div class="panel-body" style="padding-left:0px;">
 
                                                                     @foreach (var activity in module.Activities.OrderBy(a => a.StartDate))
                                                                     {
-                                                                        <div class="col-md-2">
-                                                                            @*<b>@Html.DisplayNameFor(model => activity.Name)</b>*@
-                                                                            <p>@Html.DisplayFor(model => activity.Name)</p>
-                                                                        </div>
-                                                                        <div class="col-md-4">
-                                                                            @* <b> @Html.DisplayNameFor(model => activity.Description)</b>*@
-                                                                            <p>@Html.DisplayFor(model => activity.Description)</p>
-                                                                        </div>
-                                                                        <div class="col-md-2">
-                                                                            @*<b>@Html.DisplayNameFor(model => activity.StartDate)</b>*@
-                                                                            <p>@Html.DisplayFor(model => activity.DeadLine)</p>
-                                                                        </div>
-                                                                        <div class="col-md-2">
-                                                                            @*<b>@Html.DisplayNameFor(model => activity.StartDate)</b>*@
-                                                                            <p>@Html.DisplayFor(model => activity.StartDate)</p>
-                                                                        </div>
-                                                                        <div class="col-md-2">
-                                                                            @*<b>@Html.DisplayNameFor(model => activity.EndDate)</b>*@
-                                                                            <p>@Html.DisplayFor(model => activity.EndDate)</p>
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <p>
-                                                                                @Html.ActionLink("Ladda dokument >>", "Create", "Documents", new { id = activity.Id, c = "activity" }, null)
-                                                                                @Html.ActionLink("Redigera aktivitet >>", "Edit", "Activities", new { id = activity.Id }, null)
+                                                                        <div class="panel panel-info col-md-12 ">
+                                                                            <div class="row col-md-12">
+                                                                                <div class="col-md-3" style="padding-left:1px;">
+                                                                                    @*<b>@Html.DisplayNameFor(model => activity.Name)</b>*@
+                                                                                    @Html.ActionLink(activity.Name, "Edit", "Activities", new { id = activity.Id }, new { @class = "glyphicon glyphicon-edit" })
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    @*<b>@Html.DisplayNameFor(model => activity.StartDate)</b>*@
+                                                                                    <p>@Html.DisplayFor(model => activity.DeadLine)</p>
+                                                                                </div>
+                                                                                <div class="col-md-2">
+                                                                                    @*<b>@Html.DisplayNameFor(model => activity.StartDate)</b>*@
+                                                                                    <p>@Html.DisplayFor(model => activity.StartDate)</p>
+                                                                                </div>
+                                                                                <div class="col-md-2">
+                                                                                    @*<b>@Html.DisplayNameFor(model => activity.EndDate)</b>*@
+                                                                                    <p>@Html.DisplayFor(model => activity.EndDate)</p>
+                                                                                </div>
+                                                                                <div class="col-md-2">
+                                                                                    @Html.ActionLink("Dokument", "Create", "Documents", new { id = activity.Id, c = "activity" }, new { @class = "glyphicon glyphicon-plus" })
+                                                                                    @{
+                                                                                        if (activity.DeadLine != null)
+                                                                                        {
+                                                                                            <div>
+                                                                                             <!-- modal go -->
+                                                                                                <!-- Button trigger modal -->
+                                                                                               <script>
+                                                                                                   function printDiv(printableDiv) {
+                                                                                                       var DocumentContainer = document.getElementById(printableDiv);
+                                                                                                       var WindowObject = window.open("", "PrintWindow",
+                                                                                                           "width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes");
+                                                                                                       WindowObject.document.write();
+                                                                                                       WindowObject.document.write('<link rel="stylesheet" type="text/css" href="path-to-my-stylesheet.css">')
+                                                                                                       WindowObject.document.writeln(DocumentContainer.innerHTML);
+                                                                                                      // WindowObject.document.close();
+                                                                                                       //WindowObject.focus();
+                                                                                                       WindowObject.print();
+                                                                                                       WindowObject.close();
+                                                                                                   }
+                                                                                               </script>
+                                                                                                <a href="#myModal" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-list-alt"></span>Inlämnade</a>
 
-                                                                                @Html.ActionLink("Visa inlämningsuppgifter", "Index", "AssignmentSubmit", new { activityId = activity.Id}, null)
-                                                                            </p>
-                                                                        </div>
-                                                                        <div class="col-md-12">
+                                                                                                <!-- Modal -->
+                                                                                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                                                                    <div class="modal-dialog" role="document">
+                                                                                                        <div class="modal-content">
+                                                                                                            <div class="modal-header">
+                                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                                                                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                                                                                            </div>
+                                                                                                            <div id="modal-body" class="modal-body">
+                                                                                                                @{ 
+                                                                                                                    foreach(var doc in activity.Documents)
+                                                                                                                    {
+                                                                                                                       <div>
+                                                                                                                           <span> @doc.User.FirstName + @doc.User.LastName </span> : 
+                                                                                                                           <span> @doc.Name </span>
+                                                                                                                       </div>
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            </div>
+                                                                                                            <div class="modal-footer">
+                                                                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                                                                <button type="button" class="btn btn-primary" onclick="printDiv('modal-body')"><span class="glyphicon glyphicon-print"></span></button>
+                                                                                                                
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                        <!-- modal stop-->
+                                                                                        </div>
+                                                                                        }
+                                                                                    }
+
+                                                                                </div>
+                                                                           </div>
+                                                                       
+                                                                           <div class="col-md-12" style="padding-left:1px;">
+                                                                               <b> Beskrivning: </b>
+                                                                               @Html.DisplayFor(model => activity.Description)
+                                                                           </div>
+                                                                        <div class="col-md-12" style="padding-left:0px;">
                                                                             @{
                                                                                 if (activity.DeadLine != null)
                                                                                 {
+                                                                                    <br />
                                                                                     @Html.Partial("_ActivityStatus", activity);
                                                                                     @*@Html.ActionLink("Ladda upp fil", "Create", "Documents", new { id = activity.Id, c = "activity", }, null)*@
 
                                                                                 }
                                                                             }
                                                                         </div>
-                                                                        <div class="col-md-12">
+                                                                        <div class="col-md-12" style="padding-left:0px;">
                                                                             @{
                                                                                 if (@activity.Documents.Count > 0)
                                                                                 {
+                                                                                    <br />
                                                                                     <h4 class="panel-title">Dokument</h4>
-                                                                                    <div class="col-md-12">
+                                                                                    <div class="col-md-12 " style="padding-left:1px;">
                                                                                         @foreach (var doc in activity.Documents)
                                                                                         {
                                                                                             @Html.Partial("_DocumentsList", doc);
@@ -175,11 +243,15 @@
                                                                                 }
                                                                             }
                                                                         </div>
-                                                                                }
+                                                                      </div>
+                                                                      
+                                                                     }
                                                                 </div>
                                                             </div>
-                                                                                    }
-                                                                                }
+                                                           
+                                                        }
+                                                    }
+                                                   
                                                     <!-- Module tab stop -->
                                                 </div>
                                             </div>
@@ -191,15 +263,17 @@
                                 <h3><br /></h3>
                                 <div class="col-md-12">
                                     <div class="row">
+                                        <p>@Html.ActionLink("Elev för kurs: " + Model.Name, "Create", "User", new { courseId = Model.Id, role = "Elev" }, new { @class = "glyphicon glyphicon-plus" })</p>
                                         @foreach (var student in Model.Students)
                                         {
-                                            <div class="col-sm-3 col-md-3">
+                                            <div class="col-sm-3 col-md-3" style="padding-left:0px;">
                                                 <div class="red-banner"></div>
                                                 <div class="table-bordered text-center">
                                                     <div class="round-icon-img green-back">
                                                         @{
                                                             string[] initialsName = new string[] { student.FirstName, student.LastName };
                                                             String initials = String.Join(" ", initialsName.Select(i => i[0].ToString()).ToArray());
+                                                           // var init = student.FirstName.Substring(0, 1) + " " + student.LastName.Substring(0, 1); enklare så kanske?
                                                         }
                                                         @initials
                                                     </div>
@@ -212,18 +286,19 @@
                                             </div>
                                           }
                                     </div>
-                                    <p>@Html.ActionLink("Registrera Elev för kurs: " + Model.Name + " >>", "Create", "User", new { courseId = Model.Id, role = "Elev" }, null)</p>
+                                    
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="Section3" role="tabpanel">
                                 <h3>Document</h3>
-                                <div class="col-md-12">
+                                <div class="col-md-12" style="padding-left:0px;">
+                                    <p>@Html.ActionLink("Dokument", "Create", "Documents", new { id = Model.Id, c = "course" }, new { @class = "glyphicon glyphicon-plus" })</p>
                                     @foreach (var doc in Model.Documents)
                                     {
                                         @Html.Partial("_DocumentsList", doc);
                                     }
                                 </div>
-                                <p>@Html.ActionLink("Ladda dokument >>", "Create", "Documents", new { id = Model.Id, c = "course" }, null)</p>
+                                
                             </div>
                         </div>
                     </div>
