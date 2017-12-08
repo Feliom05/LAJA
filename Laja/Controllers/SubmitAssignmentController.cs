@@ -3,28 +3,24 @@ using Laja.ViewModels;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
-using Laja.Models;
-using Laja.Services;
-
-
-using System.Net;
-
 
 namespace Laja.Controllers
 {
     [Authorize(Roles = "Lärare")]
-    public class AssignmentSubmitController : Controller
+    public class SubmitAssignmentController : Controller
     {
+
         private readonly ApplicationDbContext db;
 
-        public AssignmentSubmitController()
+        public SubmitAssignmentController()
         {
             db = new ApplicationDbContext();
         }
 
-        // GET: AssignmentSubmit
-        public ActionResult Index(int activityId)
+        // GET: SubmitAssignment
+        public PartialViewResult Index(int activityId)
         {
+
             var activity = db.Activities.Find(activityId);
 
             var moduleId = db.Activities.Find(activityId).ModuleId;
@@ -49,10 +45,7 @@ namespace Laja.Controllers
                 Documents = activityDocs
             };
 
-
-            return View(assignmentSubmit);
+            return PartialView("_SubmitAssignment", assignmentSubmit);
         }
-
-
     }
 }

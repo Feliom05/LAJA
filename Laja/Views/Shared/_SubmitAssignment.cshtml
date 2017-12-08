@@ -1,0 +1,24 @@
+﻿@model Laja.ViewModels.AssignmentSubmitViewModel
+
+
+<ul>
+@foreach (var student in Model.Students)
+{
+    <li>
+        @student.FirstName @student.LastName
+
+
+        <ul>
+            @foreach (var document in Model.Documents)
+            {
+                if (document.UserId == student.Id)
+                {
+                <li>@document.Description)</li>
+                }
+            }
+
+
+        </ul>
+    </li>
+}
+</ul>
