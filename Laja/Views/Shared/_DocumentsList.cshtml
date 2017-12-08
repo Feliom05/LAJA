@@ -6,6 +6,13 @@
 
         <div class="col-md-4" style="padding-left:0px;">
             @Html.ActionLink((string)ViewBag.Text, "Download", "Documents", new { ImageName = Model.FileName.ToString() }, new { @class = "btn btn-link" })
+            @{
+                if (@Model.Description != null)
+                {
+                    <span class="glyphicon glyphicon-comment" data-toggle="tooltip" data-placement="top" title="@Model.Description"></span>
+                }
+            }
+            
         </div>
     }
 }

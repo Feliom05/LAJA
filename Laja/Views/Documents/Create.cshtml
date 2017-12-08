@@ -75,11 +75,11 @@
     <div>
         @if (User.IsInRole("Lärare"))
         {
-            @Html.ActionLink("BttF", "Index", "Teacher", new { @courseId = ViewBag.CourseId }, null)
+            @Html.ActionLink("Tillbaka", "Index", "Teacher", new { @courseId = ViewBag.CourseId }, new { @class = "glyphicon glyphicon-hand-left" })
         }
         else
         {
-            @Html.ActionLink("BttF", "Index", "Student", new { @courseId = ViewBag.CourseId }, null)
+            @Html.ActionLink("Tillbaka", "Index", "Student", new { @courseId = ViewBag.CourseId }, new { @class = "glyphicon glyphicon-hand-left" })
         }
     </div>
 
