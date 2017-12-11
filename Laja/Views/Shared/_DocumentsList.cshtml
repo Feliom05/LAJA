@@ -1,18 +1,22 @@
 ﻿@{
-    ViewBag.Text = Model.FileName.Substring(0, @Model.FileName.IndexOf('_')).ToString();
-    if (User.Identity.Name == Model.User.UserName)
+    //ViewBag.Text = Model.FileName.Substring(0, @Model.FileName.IndexOf('_')).ToString();
+    ViewBag.Text = Model.Description;
+    if (User.Identity.Name == Model.User.UserName || Model.IsShared)
     {
         var fileName = @Model.FileName.Substring(0, @Model.FileName.IndexOf('_')).ToString();
 
-        <div class="col-md-4" style="padding-left:0px;">
-            @Html.ActionLink((string)ViewBag.Text, "Download", "Documents", new { ImageName = Model.FileName.ToString() }, new { @class = "btn btn-link" })
-            @{
-                if (@Model.Description != null)
-                {
-                    <span class="glyphicon glyphicon-comment" data-toggle="tooltip" data-placement="top" title="@Model.Description"></span>
-                }
-            }
-            
-        </div>
+<div class="col-md-4" style="padding-left:0px;">
+    @Html.ActionLink((string)ViewBag.Text, "Download", "Documents", new { ImageName = Model.FileName.ToString() }, new { @class = "btn btn-link" })   
+    @{if (Model.IsShared)
+        {<span class="glyphicon glyphicon-share" title="Delat dokument" ></span> }
+      }
+    @{
+        if (@Model.FeedBack != null)
+        {
+            <span class="glyphicon glyphicon-comment" data-toggle="tooltip" data-placement="top" title="@Model.FeedBack"></span>
+        }
+      }
+
+</div>
     }
 }

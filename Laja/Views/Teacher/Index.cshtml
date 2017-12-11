@@ -162,20 +162,7 @@
                                                                                             <div>
                                                                                              <!-- modal go -->
                                                                                                 <!-- Button trigger modal -->
-                                                                                               <script>
-                                                                                                   function printDiv(printableDiv) {
-                                                                                                       var DocumentContainer = document.getElementById(printableDiv);
-                                                                                                       var WindowObject = window.open("", "PrintWindow",
-                                                                                                           "width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes");
-                                                                                                       WindowObject.document.write();
-                                                                                                       WindowObject.document.write('<link rel="stylesheet" type="text/css" href="path-to-my-stylesheet.css">')
-                                                                                                       WindowObject.document.writeln(DocumentContainer.innerHTML);
-                                                                                                      // WindowObject.document.close();
-                                                                                                       //WindowObject.focus();
-                                                                                                       WindowObject.print();
-                                                                                                       WindowObject.close();
-                                                                                                   }
-                                                                                               </script>
+
                                                                                                 <a href="#myModal_@activity.Id" data-toggle="modal" data-target="#myModal_@activity.Id"><span class="glyphicon glyphicon-list-alt"></span>Inlämnade</a>
 
                                                                                                 <!-- Modal -->
@@ -198,20 +185,7 @@
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <script>
-                                                                                                    function PrintContent(Printable) {
-                                                                                                        var DocumentContainer = document.getElementById(Printable);
-                                                                                                        var WindowObject = window.open("", "PrintWindow",
-                                                                                                            "width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes");
-                                                                                                        WindowObject.document.writeln(DocumentContainer.innerHTML);
-                                                                                                        WindowObject.document.close();
-                                                                                                        setTimeout(function () {
-                                                                                                            WindowObject.focus();
-                                                                                                            WindowObject.print();
-                                                                                                            WindowObject.close();
-                                                                                                        }, 500);
-                                                                                                    }
-                                                                                                </script>
+
                                                                                         <!-- modal stop-->
                                                                                         </div>
                                                                                         }
@@ -314,3 +288,18 @@
         </div>
     </div>
 </div>
+
+<script>
+    function printDiv(printableDiv) {
+        var DocumentContainer = document.getElementById(printableDiv);
+        var WindowObject = window.open("", "PrintWindow",
+            "width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes");
+        WindowObject.document.write();
+        WindowObject.document.write('<link rel="stylesheet" type="text/css" href="path-to-my-stylesheet.css">')
+        WindowObject.document.writeln(DocumentContainer.innerHTML);
+        // WindowObject.document.close();
+        //WindowObject.focus();
+        WindowObject.print();
+        WindowObject.close();
+    }
+</script>
