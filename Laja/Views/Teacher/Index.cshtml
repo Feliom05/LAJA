@@ -1,4 +1,5 @@
-﻿@model Laja.Models.Course
+﻿@using Microsoft.AspNet.Identity
+@model Laja.Models.Course
 
 @{
     ViewBag.Title = "Kursöversikt Lärare";
@@ -7,19 +8,15 @@
 <div>
     <hr />
     <div class="container">
-        <div class="col-md-2">
-            <b> @Html.DisplayNameFor(model => model.Name)</b>
-            <p> @Html.ActionLink(Model.Name, "Edit", "Courses", new { id = Model.Id }, new { @class = "glyphicon glyphicon-edit" })</p>
-        </div>
         <div class="col-md-6">
             <b> @Html.DisplayNameFor(model => model.Description)</b>
             <p>@Html.DisplayFor(model => model.Description)</p>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <b>@Html.DisplayNameFor(model => model.StartDate)</b>
             <p>@Html.DisplayFor(model => model.StartDate)</p>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <b>@Html.DisplayNameFor(model => model.EndDate)</b>
             <p>@Html.DisplayFor(model => model.EndDate)</p>
         </div>
