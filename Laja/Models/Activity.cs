@@ -10,7 +10,7 @@ namespace Laja.Models
     {
         public int Id { get; set; }
 
-        [Display(Name = "Aktivitetsnamn")]
+        [Display(Name = "Aktivitetsnamn:")]
         [Required]
         [StringLength(255)]
         [Index("IX_UniqeActivityName", 1, IsUnique = true)]
@@ -23,25 +23,26 @@ namespace Laja.Models
         [Display(Name = "Aktivitets beskrivning")]
         public string Description { get; set; }
 
-        [Display(Name = "Startdatum")]
+        [Display(Name = "Startdatum:")]
         [Required]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
 
-        [Display(Name = "Slutdatum")]
+        [Display(Name = "Slutdatum:")]
         [Required]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
 
-        [Display(Name ="Deadline")]
+        [Display(Name = "Deadline:")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm}", ApplyFormatInEditMode = true, NullDisplayText = "-")]
         public DateTime? DeadLine { get; set; }
 
         public bool SubmitRequired { get; set; }
 
+        [Display(Name = "Aktivets typ:")]
         public int ActivityTypeId { get; set; }
 
         //Navigation

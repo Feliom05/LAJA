@@ -234,6 +234,10 @@
     <Content Include="Images\Activity.png" />
     <Content Include="Images\Doc.ico" />
     <Content Include="Images\Education.jpg" />
+    <Content Include="Images\LajaEducation.png" />
+    <Content Include="Images\LajaEducation_mini.png" />
+    <Content Include="Images\LoggaLajaEducation.png" />
+    <Content Include="Images\LoggaRakText.png" />
     <Content Include="Images\Module.png" />
     <Content Include="Images\Student.png" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />

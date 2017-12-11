@@ -1,25 +1,22 @@
-﻿@model Laja.Models.Course
+﻿@using Microsoft.AspNet.Identity
+@model Laja.Models.Course
 
 @{
-    ViewBag.Title = "Lärare";
+    ViewBag.Title = "Kurs @Name";
 }
-<h2>Lärare</h2>
+<h2>@Html.DisplayFor(model => model.Name)</h2>
 <div>
     <hr />
     <div class="container">
-        <div class="col-md-2">
-            <b> @Html.DisplayNameFor(model => model.Name)</b>
-            <p>@Html.DisplayFor(model => model.Name)</p>
-        </div>
         <div class="col-md-6">
             <b> @Html.DisplayNameFor(model => model.Description)</b>
             <p>@Html.DisplayFor(model => model.Description)</p>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <b>@Html.DisplayNameFor(model => model.StartDate)</b>
             <p>@Html.DisplayFor(model => model.StartDate)</p>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <b>@Html.DisplayNameFor(model => model.EndDate)</b>
             <p>@Html.DisplayFor(model => model.EndDate)</p>
         </div>

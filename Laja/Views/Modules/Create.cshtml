@@ -4,7 +4,7 @@
     ViewBag.Title = "Registrera Modul";
 }
 
-<h2>Registera Modul för @ViewBag.CourseName : Start @ViewBag.CourseStart - Slut @ViewBag.CourseEnd</h2>
+<h2>Registera Modul för @ViewBag.CourseName : @ViewBag.CourseStart - @ViewBag.CourseEnd</h2>
 
 
 @using (Html.BeginForm())
@@ -74,7 +74,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="button" value="Tillbaka till ..." class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Teacher", new { courseId = ViewBag.CourseSelectedId })'" /> |
+                <input type="button" value="Tillbaka till kurs" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Teacher", new { courseId = ViewBag.CourseSelectedId })'" /> |
                 <input type="submit" value="Skapa" class="btn btn-default" />
             </div>
         </div>
