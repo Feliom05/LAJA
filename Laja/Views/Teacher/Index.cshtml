@@ -184,7 +184,7 @@
                                                                                                         <div class="modal-content">
                                                                                                             <div class="modal-header">
                                                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                                                                                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                                                                                                <h4 class="modal-title" id="myModalLabel">Inlämning</h4>
                                                                                                             </div>
                                                                                                             <div id="modal-body_@activity.Id" class="modal-body">
                                                                                                                 @Html.Action("Index", "SubmitAssignment", new { activityId = activity.Id });
@@ -192,12 +192,26 @@
                                                                                                             </div>
                                                                                                             <div class="modal-footer">
                                                                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                                                                <button type="button" class="btn btn-primary" onclick="printDiv('modal-body')"><span class="glyphicon glyphicon-print"></span></button>
+                                                                                                                <button type="button" class="btn btn-primary" onclick="PrintContent('Printable_@activity')"><span class="glyphicon glyphicon-print"></span></button>
                                                                                                                 
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
+                                                                                                <script>
+                                                                                                    function PrintContent(Printable) {
+                                                                                                        var DocumentContainer = document.getElementById(Printable);
+                                                                                                        var WindowObject = window.open("", "PrintWindow",
+                                                                                                            "width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes");
+                                                                                                        WindowObject.document.writeln(DocumentContainer.innerHTML);
+                                                                                                        WindowObject.document.close();
+                                                                                                        setTimeout(function () {
+                                                                                                            WindowObject.focus();
+                                                                                                            WindowObject.print();
+                                                                                                            WindowObject.close();
+                                                                                                        }, 500);
+                                                                                                    }
+                                                                                                </script>
                                                                                         <!-- modal stop-->
                                                                                         </div>
                                                                                         }

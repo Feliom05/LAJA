@@ -1,5 +1,6 @@
 ﻿using Laja.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Data.Entity;
 using System.IO;
@@ -16,12 +17,53 @@ namespace Laja.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Documents
+        
         public ActionResult Index()
         {
-            var documents = db.Documents.Include(d => d.Activity).Include(d => d.Course).Include(d => d.DocType).Include(d => d.Module).Include(d => d.User);
-            return View(documents.ToList());
+            if (User.IsInRole("Lärare"))
+            {
+                var documents = db.Documents.Include(d => d.Activity).Include(d => d.Course).Include(d => d.DocType).Include(d => d.Module).Include(d => d.User);
+                return View(documents.ToList());
+            }
+            else if(User.IsInRole("Elev"))
+            {
+                var userName = User.Identity.GetUserName();
+                var documents = db.Documents.Include(d => d.Activity).Include(d => d.Course).Include(d => d.DocType).Include(d => d.Module).Include(d => d.User).Where(u=>u.User.UserName==userName);
+                return View(documents.ToList());                
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
+        
+        public ActionResult Assignments()
+        {
+            if (User.IsInRole("Lärare"))
+            {
+                ApplicationDbContext context = new ApplicationDbContext();
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
+                var documents = db.Documents.Include(d => d.Activity).Include(d => d.Course).Include(d => d.DocType).Include(d => d.Module).Include(d => d.User);
+                var deadLineDocuments = documents.Where(d => d.Activity.DeadLine != null).ToList();
+                var listdocs = deadLineDocuments.Where(e => UserManager.GetRoles(e.UserId).Contains("Elev"));
+                return View(listdocs.ToList());
+            }
+            else if (User.IsInRole("Elev"))
+            {
+                ApplicationDbContext context = new ApplicationDbContext();
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+                var documents = db.Documents.Include(d => d.Activity).Include(d => d.Course).Include(d => d.DocType).Include(d => d.Module).Include(d => d.User);
+                var deadLineDocuments = documents.Where(d => d.Activity.DeadLine != null).ToList();
+                var listdocs = deadLineDocuments.Where(e => UserManager.GetRoles(e.UserId).Contains("Elev")).Where(f=>f.IsShared=true);
+                return View(listdocs.ToList());
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
 
         // GET: Documents/Details/5
         public ActionResult Details(int? id)
@@ -44,6 +86,8 @@ namespace Laja.Controllers
 
             TempData.Remove("c");
             TempData.Add("c", c);
+            //isShared = ViewBag.IsShard;
+
 
             //Candidate for refactoring - To find the Course ID to be used by "Back To" in the Create View
 
@@ -51,7 +95,7 @@ namespace Laja.Controllers
 
             //int courseIdToBeUsedForBack = findCourseIdforDoc(id, c);
 
- 
+
             ViewBag.CourseId = findCourseIdforDoc(id, c);
 
             return View();
@@ -67,11 +111,11 @@ namespace Laja.Controllers
         public ActionResult Create(Document document, HttpPostedFileBase upload1, int? id, string c)
         {
             ViewBag.Message = "";
-           
+
             foreach (string upload in Request.Files)
             {
-                
-                    if (Request.Files[upload].FileName != "")
+
+                if (Request.Files[upload].FileName != "")
                 {
                     string path = AppDomain.CurrentDomain.BaseDirectory + "/App_Data/Documents/";
                     string filename = Path.GetFileName(Request.Files[upload].FileName);
@@ -89,6 +133,9 @@ namespace Laja.Controllers
                                 break;
                             case "activity":
                                 document.ActivityId = id;
+                                var act = db.Activities.Find(id);
+                                if (act.DeadLine != null && User.IsInRole("Elev"))
+                                    document.DeadLineFixed = true;
                                 break;
                             default:
                                 break;
@@ -105,7 +152,7 @@ namespace Laja.Controllers
                         Request.Files[upload].SaveAs(Path.Combine(folder, filename));
                         var filePath = Path.Combine(folder, filename);
                         String RelativePath = filePath.Replace(Request.ServerVariables["APPL_PHYSICAL_PATH"], String.Empty);
-                        document.Name = RelativePath;
+                        document.Path = RelativePath;
                         db.Documents.Add(document);
                         db.SaveChanges();
                     }
@@ -133,7 +180,7 @@ namespace Laja.Controllers
             {
                 // Candidate to be refactored
                 int? backToId = findCourseIdforDoc(id, TempData["c"].ToString());
-              
+
 
                 if (User.IsInRole("Lärare"))
                 {
@@ -177,7 +224,7 @@ namespace Laja.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Description,Name,FileName,CreationTime,UserId,CourseId,ModuleId,ActivityId,DocTypeId")] Document document)
+        public ActionResult Edit([Bind(Include = "Id,Description,Name,FileName,FeedBack,CreationTime,UserId,CourseId,ModuleId,ActivityId,DocTypeId")] Document document)
         {
             if (ModelState.IsValid)
             {
@@ -231,8 +278,15 @@ namespace Laja.Controllers
                 var days = activity.DeadLine.Value.Subtract(DateTime.Now).Days;
                 var hours = activity.DeadLine.Value.Subtract(DateTime.Now).Hours;
                 var min = activity.DeadLine.Value.Subtract(DateTime.Now).Minutes;
-                if (days <= 0)
+                if (days == 0)
                 {
+                    TempData.Add("days", 0);
+                    TempData.Add("hoursR", hours);
+                    TempData.Add("minR", min);
+                }
+                else if (days < 0)
+                {
+                    TempData.Add("days", days);
                     TempData.Add("hoursR", hours);
                     TempData.Add("minR", min);
                 }
@@ -246,10 +300,15 @@ namespace Laja.Controllers
         }
         public FileResult Download(string ImageName)
         {
-            var userName = User.Identity.GetUserName();
-            var FileVirtualPath = "~/App_Data/Documents/"+userName+"/" + ImageName;
-            return File(FileVirtualPath, "application/force-download", ImageName.Substring(0, ImageName.IndexOf('_')).ToString());
-            
+            var theFile = db.Documents.Where(a => a.FileName == ImageName).FirstOrDefault();
+            if (theFile != null)
+            {
+                var userName = theFile.User.UserName;
+                var FileVirtualPath = "~/App_Data/Documents/" + userName + "/" + ImageName;
+                return File(FileVirtualPath, "application/force-download", ImageName.Substring(0, ImageName.IndexOf('_')).ToString());
+            }
+            return null;
+
         }
         protected override void Dispose(bool disposing)
         {
