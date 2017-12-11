@@ -15,8 +15,13 @@ namespace Laja.Models
         [DisplayFormat(NullDisplayText = "-")]
         public string Description { get; set; }
 
-        [Display(Name = "Dokumentets namn:")]
-        public string Name { get; set; }
+        public bool DeadLineFixed { get; set; }
+
+        [Display(Name = "Dela")]
+        public bool IsShared { get; set; }
+
+        [Display(Name = "Dokumentets plats:")]
+        public string Path { get; set; }
 
         [Required]
         [StringLength(255)]
@@ -24,7 +29,10 @@ namespace Laja.Models
         public string FileName { get; set; }
         public DateTime CreationTime { get; set; }
         public string UserId { get; set; }
-        //public string FeedBack { get; set; }
+
+        [Display(Name = "Återkoppling")]
+        [DisplayFormat(NullDisplayText = "-")]
+        public string FeedBack { get; set; }
         
         public int? CourseId { get; set; }        
         public int? ModuleId { get; set; }        

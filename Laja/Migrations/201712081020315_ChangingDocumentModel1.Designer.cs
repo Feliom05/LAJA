@@ -7,13 +7,13 @@ namespace Laja.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class InitDatabaseV2 : IMigrationMetadata
+    public sealed partial class ChangingDocumentModel1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitDatabaseV2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangingDocumentModel1));
         
         string IMigrationMetadata.Id
         {
-            get { return "201712051909003_InitDatabaseV2"; }
+            get { return "201712081020315_ChangingDocumentModel1"; }
         }
         
         string IMigrationMetadata.Source
