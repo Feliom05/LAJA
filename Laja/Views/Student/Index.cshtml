@@ -130,11 +130,12 @@
                                                                                 @*<b>@Html.DisplayNameFor(model => activity.StartDate)</b>*@
                                                                                 @*<p>@Html.DisplayFor(model => activity.DeadLine)</p>*@
                                                                                 @{if (activity.DeadLine != null)
-                                                                                    {
-                                                                                        var deadline = activity.DeadLine;
-                                                                                        <span>@deadline</span>
+                                                                                 {
+                                                                                    
+                                                                                    @Html.DisplayFor(model => activity.DeadLine)
                                                                             
-                                                                                   @Html.Partial("_ActivityStatus", activity);
+
+                                                                                    @Html.Partial("_ActivityStatus", activity);
 }
                                                                                 }
 
