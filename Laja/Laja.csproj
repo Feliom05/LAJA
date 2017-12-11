@@ -204,6 +204,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712080945449_ChangingDocumentModel.cs" />
+    <Compile Include="Migrations\201712080945449_ChangingDocumentModel.Designer.cs">
+      <DependentUpon>201712080945449_ChangingDocumentModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712081020315_ChangingDocumentModel1.cs" />
+    <Compile Include="Migrations\201712081020315_ChangingDocumentModel1.Designer.cs">
+      <DependentUpon>201712081020315_ChangingDocumentModel1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -403,6 +411,7 @@
     <Content Include="Views\DocTypes\Index.cshtml" />
     <Content Include="Views\Shared\_ActivityStatus.cshtml" />
     <Content Include="Views\Shared\_DocumentsList.cshtml" />
+    <Content Include="Views\Documents\Assignments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -419,6 +428,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201712080945449_ChangingDocumentModel.resx">
+      <DependentUpon>201712080945449_ChangingDocumentModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712081020315_ChangingDocumentModel1.resx">
+      <DependentUpon>201712081020315_ChangingDocumentModel1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
