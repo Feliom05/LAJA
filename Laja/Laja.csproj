@@ -246,6 +246,7 @@
     <Content Include="Images\LoggaRakText.png" />
     <Content Include="Images\Module.png" />
     <Content Include="Images\Student.png" />
+    <Content Include="Images\Deadline.png" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
