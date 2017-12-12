@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNet.Identity
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+@using Microsoft.AspNet.Identity
 @model Laja.Models.Course
 
 @{
@@ -83,7 +84,7 @@
                                                     
                                                     <div class="col-md-12">
                                                         <div class="col-md-11" style="padding-left:1px;">
-                                                            <b> Beskrivning: </b>
+                                                            @Html.ActionLink("Beskrivning:", "Edit", "Modules", new { id = module.Id }, new { @class = "glyphicon glyphicon-edit" })
                                                             @Html.DisplayFor(model => module.Description)
                                                         </div>
                                                         <div class="col-md-1">
@@ -285,18 +286,22 @@
         </div>
     </div>
 </div>
-
 <script>
-    function printDiv(printableDiv) {
-        var DocumentContainer = document.getElementById(printableDiv);
-        var WindowObject = window.open("", "PrintWindow",
-            "width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes");
-        WindowObject.document.write();
-        WindowObject.document.write('<link rel="stylesheet" type="text/css" href="path-to-my-stylesheet.css">')
-        WindowObject.document.writeln(DocumentContainer.innerHTML);
-        // WindowObject.document.close();
-        //WindowObject.focus();
-        WindowObject.print();
-        WindowObject.close();
-    }
+     function PrintContent(Printable) {
+         var DocumentContainer = document.getElementById(Printable);
+         var WindowObject = window.open("", "PrintWindow",
+             "width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes");
+         WindowObject.document.writeln(DocumentContainer.innerHTML);
+         WindowObject.document.close();
+         setTimeout(function () {
+             WindowObject.focus();
+             WindowObject.print();
+             WindowObject.close();
+         }, 500);
+     }
+</script>
+<script>
+     $(document).ready(function () {
+         $('[data-toggle="popover"]').popover();
+     });
 </script>

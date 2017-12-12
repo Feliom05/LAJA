@@ -1,12 +1,73 @@
-﻿@{
+﻿<style>
+    #rcorners4 {
+        border-radius: 10px;
+        background: #eeeeee;
+    }
+
+   
+</style>
+@{
     ViewBag.Title = "Startsida";
 }
-<div class="jumbotron">
-    <h2 class="text-center">Vällkommen till Laja Education</h2>
-    <p class="lead"></p>
-    <p class="text-center">
-        <img src="~/Images/Education.jpg" />
-    </p>
+<br />
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+
+            <img src="~/Images/Course2.jpg" />
+            <div class="carousel-caption">
+
+            </div>
+        </div>
+        <div class="item">
+
+            <img src="~/Images/Course3.jpg" />
+            <div class="carousel-caption">
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<br /><hr />
+<div class="row">
+    @foreach (var cuorse in ViewBag.Courses)
+    {
+        <div class="col-md-3">
+            <div class="thumbnail" id="rcorners4">
+                
+                
+                <div class="caption" >
+                    <h3>@cuorse.Name</h3>
+                    <p><span>@cuorse.StartDate.ToShortDateString()</span> &nbsp;&nbsp;<span class="glyphicon glyphicon-arrow-right"></span>&nbsp;&nbsp; <span>@cuorse.StartDate.ToShortDateString()</span></p>
+                    <p>@cuorse.Description<p>
+                    <a href="#" class="btn btn-danger" role="button">mer info.</a></p>
+                </div>
+            </div>
+        </div>
+       
+    }
+   
+    
 </div>
 <div class="row">
     <div class="col-md-12">

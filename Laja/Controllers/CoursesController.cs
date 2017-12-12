@@ -121,7 +121,7 @@ namespace Laja.Controllers
                 if (validationService.CheckCoursePeriodAgainstModules(course))
                 {
                     ViewBag.Error = "Kursens start eller slutdatum får inte vara före eller efter den första och sista modulen.";
-                    return View(course);
+                    //return View(course);
                 }
 
 
