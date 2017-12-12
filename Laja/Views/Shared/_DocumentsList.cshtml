@@ -1,4 +1,5 @@
 ﻿@{
+    
     ViewBag.Text = Model.FileName.Substring(0, @Model.FileName.IndexOf('_')).ToString();
     if (User.Identity.Name == Model.User.UserName)
     {
@@ -9,7 +10,7 @@
             @{
                 if (@Model.Description != null)
                 {
-                    <span class="glyphicon glyphicon-comment" data-toggle="tooltip" data-placement="top" title="@Model.Description"></span>
+                       <a href="#" data-toggle="popover" title="Återkoppling" data-content="@Model.FeedBack" data-placement="top"><span class="glyphicon glyphicon-comment"></span></a>
                 }
             }
             

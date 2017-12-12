@@ -1,4 +1,5 @@
-﻿@model Laja.Models.Course
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+@model Laja.Models.Course
 
 @{
     ViewBag.Title = "Kursöversikt Lärare";
@@ -85,7 +86,7 @@
                                                     
                                                     <div class="col-md-12">
                                                         <div class="col-md-11" style="padding-left:1px;">
-                                                            <b> Beskrivning: </b>
+                                                            @Html.ActionLink("Beskrivning:", "Edit", "Modules", new { id = module.Id }, new { @class = "glyphicon glyphicon-edit" })
                                                             @Html.DisplayFor(model => module.Description)
                                                         </div>
                                                         <div class="col-md-1">
@@ -179,7 +180,8 @@
                                                                                                                     {
                                                                                                                        <div>
                                                                                                                            <span> @doc.User.FirstName + @doc.User.LastName </span> : 
-                                                                                                                           <span> @doc.Name </span>
+                                                                                                                           <span> @doc.FeedBack </span>
+                                                                                                                           <div><a href="#">Lämna f</a></div>
                                                                                                                        </div>
                                                                                                                     }
                                                                                                                 }
@@ -192,20 +194,7 @@
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <script>
-                                                                                                    function PrintContent(Printable) {
-                                                                                                        var DocumentContainer = document.getElementById(Printable);
-                                                                                                        var WindowObject = window.open("", "PrintWindow",
-                                                                                                            "width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes");
-                                                                                                        WindowObject.document.writeln(DocumentContainer.innerHTML);
-                                                                                                        WindowObject.document.close();
-                                                                                                        setTimeout(function () {
-                                                                                                            WindowObject.focus();
-                                                                                                            WindowObject.print();
-                                                                                                            WindowObject.close();
-                                                                                                        }, 500);
-                                                                                                    }
-                                                                                                </script>
+                                                                                               
                                                                                         <!-- modal stop-->
                                                                                         </div>
                                                                                         }
@@ -308,3 +297,22 @@
         </div>
     </div>
 </div>
+<script>
+     function PrintContent(Printable) {
+         var DocumentContainer = document.getElementById(Printable);
+         var WindowObject = window.open("", "PrintWindow",
+             "width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes");
+         WindowObject.document.writeln(DocumentContainer.innerHTML);
+         WindowObject.document.close();
+         setTimeout(function () {
+             WindowObject.focus();
+             WindowObject.print();
+             WindowObject.close();
+         }, 500);
+     }
+</script>
+<script>
+     $(document).ready(function () {
+         $('[data-toggle="popover"]').popover();
+     });
+</script>
