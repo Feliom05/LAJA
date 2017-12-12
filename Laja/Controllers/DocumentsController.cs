@@ -230,7 +230,7 @@ namespace Laja.Controllers
             {
                 db.Entry(document).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Teacher", new { courseId = document.CourseId });
             }
             ViewBag.ActivityId = new SelectList(db.Activities, "Id", "Name", document.ActivityId);
             ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name", document.CourseId);
