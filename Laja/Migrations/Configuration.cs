@@ -5,7 +5,6 @@ namespace Laja.Migrations
     using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
@@ -22,7 +21,82 @@ namespace Laja.Migrations
             AddUsers(context);
             AddTeacherRole(context);
 
+            var course = new Course
+            {
+                Name = "ASP .NET",
+                Description = "Lär dig .NET på 21 dagar",
+                StartDate = new DateTime(2017, 08, 30),
+                EndDate = new DateTime(2017, 12, 15)
+            };
+            context.Courses.AddOrUpdate(k => k.Id,
+                course);
+
+            context.SaveChanges();
+
+            var modul = new Module
+            {
+                Name = "Slutprojekt",
+                Description = "Laja Education",
+                StartDate = new DateTime(2017, 12, 01),
+                EndDate = new DateTime(2017, 12, 15),
+                CourseId = course.Id
+            };
+
+            context.Modules.AddOrUpdate(m => m.Id,
+                modul);
+
+            context.SaveChanges();
+
+            var actType = new ActivityType
+            {
+                Name = "Inlämningsuppgift"
+            };
+
+            context.ActivityTypes.AddOrUpdate(a => a.Id, actType);
+
+            context.SaveChanges();
+
+            var act = new Activity
+            {
+                Name = "Inlämningsuppgift",
+                Description = "inlupp 1.0",
+                StartDate = new DateTime(2017, 12, 02),
+                EndDate = new DateTime(2017, 12, 04),
+                DeadLine = new DateTime(2017, 12, 05),
+                ModuleId = modul.Id,
+                ActivityTypeId = actType.Id
+
+            };
+
+            context.Activities.AddOrUpdate(a => a.Id, act);
+
+            context.SaveChanges();
+
+
+            //var modul = AddModules(context);
+            //AddCourse(context, modul);
         }
+
+        //private void AddCourse(ApplicationDbContext context, List<Module> module)
+        //{
+        //    var kurs = new List<Course>()
+        //    {
+        //        new Course { Id = 1, Description = "ASP .NET", StartDate = new DateTime(2017, 08, 30),
+        //            EndDate = new DateTime(2017, 08, 30)}
+        //    };
+        //}
+
+        //private List<Module> AddModules(ApplicationDbContext context)
+        //{
+        //    var modul = new List<Module>()
+        //    {
+        //        new Module { Id = 1, Name = "ASP .NET", StartDate = new DateTime(2017, 08, 30),
+        //            EndDate = new DateTime(2017, 08, 30)}
+        //    };
+
+        //    return modul;
+        //}
+
         private void AddRoles(ApplicationDbContext context)
         {
             var roleStore = new RoleStore<IdentityRole>(context);
@@ -72,7 +146,7 @@ namespace Laja.Migrations
         {
             var userStore = new UserStore<ApplicationUser>(context);
             var userManager = new UserManager<ApplicationUser>(userStore);
-            var adminRole = userManager.FindByName("larare2@laja.se");            
+            var adminRole = userManager.FindByName("larare2@laja.se");
             if (adminRole != null)
             {
                 var result = userManager.AddToRole(adminRole.Id, "Lärare");

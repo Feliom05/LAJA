@@ -42,7 +42,7 @@ namespace Laja.Controllers
         }
 
         // GET: Courses/Create
-        [Authorize(Roles ="Lärare")]
+        [Authorize(Roles = "Lärare")]
         public ActionResult Create()
         {
             return View();
@@ -58,7 +58,7 @@ namespace Laja.Controllers
         {
             if (ModelState.IsValid)
             {
-               
+
                 var NameExists = validationService.UniqName(course);
                 if (NameExists)
                 {
@@ -106,7 +106,7 @@ namespace Laja.Controllers
             if (ModelState.IsValid)
             {
 
-               
+
                 var NameExists = validationService.UniqName(course);
                 if (NameExists)
                 {
@@ -118,7 +118,7 @@ namespace Laja.Controllers
                     ViewBag.Error = "Slut datum måste vara efter startdatum.";
                     return View(course);
                 }
-                if (!validationService.CheckCoursePeriodAgainstModules(course))
+                if (validationService.CheckCoursePeriodAgainstModules(course))
                 {
                     ViewBag.Error = "Kursens start eller slutdatum får inte vara före eller efter den första och sista modulen.";
                     //return View(course);
@@ -159,7 +159,7 @@ namespace Laja.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-       
+
 
         protected override void Dispose(bool disposing)
         {

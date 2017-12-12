@@ -48,6 +48,11 @@ namespace Laja.Services
         public bool UniqName(Course course)
         {
             bool isUniqe = false;
+            //var targetCourse = db.Courses.Find(course.Id);
+            //var a = targetCourse.Name.ToLower() == course.Name.ToLower();
+            //var b = targetCourse.Id == course.Id;
+            //isUniqe = (a && b);
+            //isUniqe = (targetCourse.Name.ToLower() == course.Name.ToLower() && targetCourse.Id != course.Id);
             isUniqe = db.Courses.Any(c => c.Name.ToLower() == course.Name.ToLower() && c.Id != course.Id);
             return isUniqe;
         }
@@ -65,9 +70,11 @@ namespace Laja.Services
             if (course.StartDate == null || course.EndDate == null)
                 return false;
 
-            var savedModuels = db.Courses.Find(course.Id).Modules.ToList();
+            var savedModuels = db.Modules.Where(m => m.CourseId == course.Id).ToList();  //Courses.AsNoTracking().Find(course.Id).Modules.ToList();
             foreach (var module in savedModuels)
             {
+                var temp1 = EndDateIsEqualAfterStartDate(module.StartDate, course.StartDate);
+                var temp2 = EndDateIsEqualAfterStartDate(module.EndDate, course.EndDate);
                 if (!EndDateIsEqualAfterStartDate(module.StartDate, course.StartDate) || !EndDateIsEqualAfterStartDate(module.EndDate, course.EndDate))
                     return false;
 

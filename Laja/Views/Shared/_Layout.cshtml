@@ -19,7 +19,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink(appName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @*@Html.ActionLink(appName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                <a href="@Url.Action("Index", "Home")"><img src="~/Images/LoggaRakText.png" /></a>
             </div>
             <div class="navbar-collapse collapse">
                 <nav aria-label="Page navigation example">
