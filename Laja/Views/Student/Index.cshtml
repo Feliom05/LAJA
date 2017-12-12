@@ -218,14 +218,16 @@
                             }
                         </div>
                         <div class="tab-pane fade" id="Section3" role="tabpanel">
-                            <h4>Dokument</h4>
+                            @*<h4>Dokument</h4>*@
                             <div class="col-md-12">
+                                <p>@Html.ActionLink("Dokument", "Create", "Documents", new { id = Model.Id, c = "course" }, new { @class = "glyphicon glyphicon-plus" })</p>
                                 @foreach (var doc in Model.Documents)
-                            {
-                                @Html.Partial("_DocumentsList", doc);
-                        }
+    {
+                            @Html.Partial("_DocumentsList", doc);
+}
                             </div>
-                            @Html.ActionLink("Ladda dokument >>", "Create", "Documents", new { id = Model.Id, c = "course" }, null)
+
+                            @*@Html.ActionLink("Ladda dokument >>", "Create", "Documents", new { id = Model.Id, c = "course" }, null)*@
                         </div>
                     </div>
                 </div>

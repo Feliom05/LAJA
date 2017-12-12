@@ -17,7 +17,7 @@ namespace Laja.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Documents
-        
+
         public ActionResult Index()
         {
             if (User.IsInRole("Lärare"))
@@ -25,18 +25,18 @@ namespace Laja.Controllers
                 var documents = db.Documents.Include(d => d.Activity).Include(d => d.Course).Include(d => d.DocType).Include(d => d.Module).Include(d => d.User);
                 return View(documents.ToList());
             }
-            else if(User.IsInRole("Elev"))
+            else if (User.IsInRole("Elev"))
             {
                 var userName = User.Identity.GetUserName();
-                var documents = db.Documents.Include(d => d.Activity).Include(d => d.Course).Include(d => d.DocType).Include(d => d.Module).Include(d => d.User).Where(u=>u.User.UserName==userName);
-                return View(documents.ToList());                
+                var documents = db.Documents.Include(d => d.Activity).Include(d => d.Course).Include(d => d.DocType).Include(d => d.Module).Include(d => d.User).Where(u => u.User.UserName == userName);
+                return View(documents.ToList());
             }
             else
             {
                 return RedirectToAction("Index", "Home");
             }
         }
-        
+
         public ActionResult Assignments()
         {
             if (User.IsInRole("Lärare"))
@@ -56,7 +56,7 @@ namespace Laja.Controllers
 
                 var documents = db.Documents.Include(d => d.Activity).Include(d => d.Course).Include(d => d.DocType).Include(d => d.Module).Include(d => d.User);
                 var deadLineDocuments = documents.Where(d => d.Activity.DeadLine != null).ToList();
-                var listdocs = deadLineDocuments.Where(e => UserManager.GetRoles(e.UserId).Contains("Elev")).Where(f=>f.IsShared=true);
+                var listdocs = deadLineDocuments.Where(e => UserManager.GetRoles(e.UserId).Contains("Elev")).Where(f => f.IsShared = true);
                 return View(listdocs.ToList());
             }
             else
@@ -159,7 +159,7 @@ namespace Laja.Controllers
                     else
                     {
                         ViewBag.Message = "File type not allowed, please try another file!";
-                         return View(document);
+                        return View(document);
                     }
                 }
             }
@@ -206,6 +206,11 @@ namespace Laja.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            var targetDocument = db.Documents.AsNoTracking().FirstOrDefault(d => d.Id == id);
+
+            ViewBag.BackCourseId = findCourseIdforDoc(targetDocument.ActivityId, "activity");
+
             Document document = db.Documents.Find(id);
             if (document == null)
             {
@@ -228,9 +233,23 @@ namespace Laja.Controllers
         {
             if (ModelState.IsValid)
             {
+
+
                 db.Entry(document).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", "Teacher", new { courseId = document.CourseId });
+
+
+                if (document.ActivityId != null)
+                {
+                    var courseId = findCourseIdforDoc(document.ActivityId, "activity");
+
+                    if (courseId > 0)
+                    {
+                        return RedirectToAction("Index", "Teacher", new { courseId = courseId });
+                    }
+                }
+
+
             }
             ViewBag.ActivityId = new SelectList(db.Activities, "Id", "Name", document.ActivityId);
             ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name", document.CourseId);
@@ -310,7 +329,7 @@ namespace Laja.Controllers
             return null;
 
         }
-      
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -350,6 +369,61 @@ namespace Laja.Controllers
                     }
             }
             return courseIdToBeUsedForBack;
+        }
+
+        // GET: Documents/Edit/5
+        public ActionResult SaveFeedBack(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var targetDocument = db.Documents.AsNoTracking().FirstOrDefault(d => d.Id == id);
+
+            ViewBag.BackCourseId = findCourseIdforDoc(targetDocument.ActivityId, "activity");
+
+            Document document = db.Documents.Find(id);
+            if (document == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.ActivityId = new SelectList(db.Activities, "Id", "Name", document.ActivityId);
+            ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name", document.CourseId);
+            ViewBag.DocTypeId = new SelectList(db.DocTypes, "Id", "Extension", document.DocTypeId);
+            ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name", document.ModuleId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", document.UserId);
+            return View(document);
+        }
+        // POST: Documents/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveFeedBack([Bind(Include = "Id,FeedBack")] Document document)
+        {
+            if (document.FeedBack != "")
+            {
+
+                var doc = db.Documents.Find(document.Id);
+                doc.FeedBack = Request.Form["feedBack"];
+                db.Entry(doc).State = EntityState.Modified;
+                db.SaveChanges();
+
+                if (doc.ActivityId != null)
+                {
+                    var courseId = findCourseIdforDoc(doc.ActivityId, "activity");
+
+                    if (courseId > 0)
+                    {
+                        return RedirectToAction("Index", "Teacher", new { courseId = courseId });
+                    }
+                }
+
+
+            }
+
+            return View();
         }
     }
 

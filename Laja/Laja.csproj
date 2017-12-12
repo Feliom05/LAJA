@@ -426,6 +426,7 @@
     <Content Include="Views\AssignmentSubmit\Index.cshtml" />
     <Content Include="Views\Shared\_ActivityDocList.cshtml" />
     <Content Include="Views\Shared\_SubmitAssignment.cshtml" />
+    <Content Include="Views\Documents\SaveFeedBack.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
