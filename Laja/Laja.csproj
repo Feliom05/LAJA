@@ -238,6 +238,10 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\Activity.png" />
+    <Content Include="Images\Course1.jpg" />
+    <Content Include="Images\Course2.jpg" />
+    <Content Include="Images\Course3.jpg" />
+    <Content Include="Images\Deadline.png" />
     <Content Include="Images\Doc.ico" />
     <Content Include="Images\Education.jpg" />
     <Content Include="Images\LajaEducation.png" />
@@ -245,8 +249,8 @@
     <Content Include="Images\LoggaLajaEducation.png" />
     <Content Include="Images\LoggaRakText.png" />
     <Content Include="Images\Module.png" />
+    <Content Include="Images\modules.jpg" />
     <Content Include="Images\Student.png" />
-    <Content Include="Images\Deadline.png" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -418,9 +422,10 @@
     <Content Include="Views\DocTypes\Index.cshtml" />
     <Content Include="Views\Shared\_ActivityStatus.cshtml" />
     <Content Include="Views\Shared\_DocumentsList.cshtml" />
+    <Content Include="Views\Documents\Assignments.cshtml" />
     <Content Include="Views\AssignmentSubmit\Index.cshtml" />
-    <Content Include="Views\Shared\_SubmitAssignment.cshtml" />
     <Content Include="Views\Shared\_ActivityDocList.cshtml" />
+    <Content Include="Views\Shared\_SubmitAssignment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
