@@ -26,6 +26,8 @@ namespace Laja.Controllers
         {
             var activities = db.Activities.Include(a => a.ActivityType).Include(a => a.Module);
             return View(activities.ToList());
+
+           
         }
 
         // GET: Activities/Details/5

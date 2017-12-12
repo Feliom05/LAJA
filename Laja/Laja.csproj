@@ -199,14 +199,19 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\SubmitAssignmentController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201712051909003_InitDatabaseV2.cs" />
-    <Compile Include="Migrations\201712051909003_InitDatabaseV2.Designer.cs">
-      <DependentUpon>201712051909003_InitDatabaseV2.cs</DependentUpon>
+    <Compile Include="Migrations\201712080945449_ChangingDocumentModel.cs" />
+    <Compile Include="Migrations\201712080945449_ChangingDocumentModel.Designer.cs">
+      <DependentUpon>201712080945449_ChangingDocumentModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712081020315_ChangingDocumentModel1.cs" />
+    <Compile Include="Migrations\201712081020315_ChangingDocumentModel1.Designer.cs">
+      <DependentUpon>201712081020315_ChangingDocumentModel1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -221,6 +226,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ValidationService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AssignmentSubmitViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -232,6 +238,10 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\Activity.png" />
+    <Content Include="Images\Course1.jpg" />
+    <Content Include="Images\Course2.jpg" />
+    <Content Include="Images\Course3.jpg" />
+    <Content Include="Images\Deadline.png" />
     <Content Include="Images\Doc.ico" />
     <Content Include="Images\Education.jpg" />
     <Content Include="Images\LajaEducation.png" />
@@ -239,6 +249,7 @@
     <Content Include="Images\LoggaLajaEducation.png" />
     <Content Include="Images\LoggaRakText.png" />
     <Content Include="Images\Module.png" />
+    <Content Include="Images\modules.jpg" />
     <Content Include="Images\Student.png" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
@@ -411,6 +422,10 @@
     <Content Include="Views\DocTypes\Index.cshtml" />
     <Content Include="Views\Shared\_ActivityStatus.cshtml" />
     <Content Include="Views\Shared\_DocumentsList.cshtml" />
+    <Content Include="Views\Documents\Assignments.cshtml" />
+    <Content Include="Views\AssignmentSubmit\Index.cshtml" />
+    <Content Include="Views\Shared\_ActivityDocList.cshtml" />
+    <Content Include="Views\Shared\_SubmitAssignment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -427,6 +442,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201712080945449_ChangingDocumentModel.resx">
+      <DependentUpon>201712080945449_ChangingDocumentModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712081020315_ChangingDocumentModel1.resx">
+      <DependentUpon>201712081020315_ChangingDocumentModel1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

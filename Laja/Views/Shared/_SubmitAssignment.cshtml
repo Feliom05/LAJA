@@ -1,0 +1,22 @@
+﻿@model Laja.ViewModels.AssignmentSubmitViewModel
+
+
+<ul>
+    @foreach (var student in Model.Students)
+    {
+        <li>
+            @student.FirstName @student.LastName
+            <ul>
+                @foreach (var document in Model.Documents)
+            {
+                if (document.UserId == student.Id)
+                {
+                <li>
+                @Html.Partial("_ActivityDocList", document) @Html.ActionLink("Återkoppling", "Edit", "Documents", new { @id = document.Id }, new { @class = "btn btn-link" })</li>
+                @*<li>@Html.ActionLink("Skriv in kommentarer", "Edit", "Documents", new { id = document.Id }, null)</li>*@
+                 }
+             }
+            </ul>
+        </li>
+    }
+</ul>

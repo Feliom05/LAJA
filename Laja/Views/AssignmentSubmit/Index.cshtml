@@ -1,0 +1,29 @@
+﻿@model Laja.ViewModels.AssignmentSubmitViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@Model.ActivityName</h2>
+
+
+
+
+    @foreach (var student in Model.Students)
+    {
+        <p>@student.FirstName</p>
+        
+
+        foreach (var document in Model.Documents)
+        {
+            if (document.UserId == student.Id)
+            {
+                <p>@document.Description</p>
+            }
+        }
+
+    }
+
+
+
+
+

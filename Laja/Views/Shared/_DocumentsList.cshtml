@@ -1,10 +1,22 @@
 ﻿@{
-
-    if (User.Identity.Name == Model.User.UserName)
+    //ViewBag.Text = Model.FileName.Substring(0, @Model.FileName.IndexOf('_')).ToString();
+    ViewBag.Text = Model.Description;
+    if (User.Identity.Name == Model.User.UserName || Model.IsShared)
     {
         var fileName = @Model.FileName.Substring(0, @Model.FileName.IndexOf('_')).ToString();
-        <div class="col-md-2">
-            <a href="@Model.Name" download="@fileName">@Model.FileName.Substring(0, @Model.FileName.IndexOf('_'))</a>
-        </div>
+
+<div class="col-md-4" style="padding-left:0px;">
+    @Html.ActionLink((string)ViewBag.Text, "Download", "Documents", new { ImageName = Model.FileName.ToString() }, new { @class = "btn btn-link" })   
+    @{if (Model.IsShared)
+        {<span class="glyphicon glyphicon-share" title="Delat dokument" ></span> }
+      }
+    @{
+        if (@Model.FeedBack != null)
+        {
+            <span class="glyphicon glyphicon-comment" data-toggle="popover" data-placement="top" title="Återkoppling" data-content="@Model.FeedBack"></span>
+        }
+      }
+
+</div>
     }
 }

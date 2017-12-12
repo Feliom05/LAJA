@@ -1,15 +1,17 @@
-﻿@Html.Action("ActivityHasDocuments", "Documents", new { activity= Model })
+﻿@Html.Action("ActivityHasDocuments", "Documents", new { activity = Model })
 
-<b>Tid kvar - Inlämningsuppgift</b>
-@{
+    @{
 
-    if (TempData["days"] != null)
-    {
-<p class="alert-info">Dag: @TempData["days"]  Tim: @TempData["hours"]  Min: @TempData["min"] </p>
-    }
-    else
-    {
-
-<p class="alert-danger">Tim: @TempData["hoursR"]  Min: @TempData["minR"] </p>
-        }                                                                                
+        if ((int)TempData["days"] > 0)
+        {
+            <span class="alert-success" style="border-style:double;color:black">Tid kvar: Dag: @TempData["days"]  Tim: @TempData["hours"]  Min: @TempData["min"] </span>
+        }
+        else if ((int)TempData["days"] == 0)
+        {
+            <span class="alert-warning" style="border-style:double;color:black">Tid kvar: Tim: @TempData["hoursR"]  Min: @TempData["minR"] </span>
+        }
+        else
+        {
+            <span class="alert-danger" style="border-style:double;color:black">Tiden ute: Dag: @TempData["days"] Tim: @TempData["hoursR"]  Min: @TempData["minR"] </span>
+        }
     }
