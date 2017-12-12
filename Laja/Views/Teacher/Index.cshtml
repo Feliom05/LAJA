@@ -93,18 +93,20 @@
                                                     
                                                     <div class="col-md-12">
                                                         @{
-                                                            if (module.Documents.Count > 0)
-                                                            {
-                                                                <br />
-                                                                <h4 class="panel-title"><b>Dokument</b></h4>
-                                                                <div class="col-md-12">
-                                                                    @foreach (var doc in module.Documents)
-                                                                    {
-                                                                        @Html.Partial("_DocumentsList", doc);
-                                                                    }
-                                                                </div>
-                                                            }
+        if (module.Documents.Count > 0)
+        {
+                                                    <br />
+                                                    <h4 class="panel-title"><b>Dokument</b></h4>
+                                                    <div class="col-md-12">
+                                                        @foreach (var doc in module.Documents)
+    {
+                                                    @Html.Partial("_DocumentsList", doc);
+}
+                                                    </div>
+}
                                                         }
+                                                        @Html.ActionLink("Aktivitet", "Create", "Activities", new { moduleId = module.Id }, new { @class = "glyphicon glyphicon-plus" })
+
                                                     </div>
                                                     <!-- Module tab go -->
                                                     <p><br /> <br /></p>
@@ -115,7 +117,6 @@
                                                         if (module.Activities.Count > 0)
                                                         {
                                                             <br />
-                                                            @Html.ActionLink("Aktivitet", "Create", "Activities", new { moduleId = module.Id }, new { @class = "glyphicon glyphicon-plus" })
                                                             <div class="col-md-12">
                                                                 @*<div class="col-md-4" style="padding-left:1px;">
                                                                     <b>Name</b>
