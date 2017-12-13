@@ -92,6 +92,7 @@
 
 
                                                 @{
+
                                             if (module.Documents.Count > 0)
                                             {
                                                 <br />
@@ -207,21 +208,21 @@
                                                     </div>
                                                     <div class="col-md-12" style="padding-left:0px;">
                                                         @{
-                                                    if (@activity.Documents.Count > 0)
-                                                    {
-                                                        <hr />
+                                                            //if (@activity.Documents.Count >= 0)
+                                                           // {
+                                                                <hr />
 
-                                                        <div class="col-md-12 " style="padding-left:1px;">
-                                                            @Html.ActionLink("Dokument", "Create", "Documents", new { id = activity.Id, c = "activity" }, new { @class = "glyphicon glyphicon-plus" })
-                                                        </div>
-                                                        <div class="col-md-12 " style="padding-left:1px;">
-                                                            @foreach (var doc in activity.Documents)
-                                                    {
-                                                        @Html.Partial("_DocumentsList", doc);
-                                            }
-                                                        </div>
+                                                                <div class="col-md-12 " style="padding-left:1px;">
+                                                                    @Html.ActionLink("Dokument", "Create", "Documents", new { id = activity.Id, c = "activity" }, new { @class = "glyphicon glyphicon-plus" })
+                                                                </div>
+                                                                <div class="col-md-12 " style="padding-left:1px;">
+                                                                @foreach (var doc in activity.Documents)
+                                                                {
+                                                                   @Html.Partial("_DocumentsList", doc);
+                                                                }
+                                                                </div>
 
-                                            }
+                                                           // }
                                                         }
                                                     </div>
                                                 </div>

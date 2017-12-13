@@ -55,10 +55,7 @@ namespace Laja.Controllers
 
                 ViewBag.CourseStart = course.StartDate.ToShortDateString();
                 ViewBag.CourseEnd = course.EndDate.ToShortDateString();
-
             }
-
-
             return View();
         }
 
@@ -73,7 +70,7 @@ namespace Laja.Controllers
             if (ModelState.IsValid)
             {
 
-                var moduleExists = validationService.UniqName(module);
+                var moduleExists = validationService.UniqueName(module);
                 if (moduleExists)
                 {
                     ViewBag.Error = "Modulnamnet används redan. Var god ange ett annat namn, tack.";
@@ -89,15 +86,6 @@ namespace Laja.Controllers
                 db.Modules.Add(module);
                 db.SaveChanges();
                 return RedirectToAction("Index", "Teacher", new { @CourseId = module.CourseId });
-                //}
-                //else
-                //{
-                //    ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name", module.CourseId);
-                //    ViewBag.Error = "Modulenamnet används redan inom samma kurs. Var god ange ett annat namn, tack.";
-                //    return View(module);
-                //}
-
-
             }
 
             ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name", module.CourseId);

@@ -107,7 +107,7 @@ namespace Laja.Services
             return (documents > 0) ? true : false;
         }
 
-        public bool UniqName(Module module)
+        public bool UniqueName(Module module)
         {
             bool isNotUniqe = false;
 
@@ -120,8 +120,6 @@ namespace Laja.Services
                     break;
                 }
             }
-
-            //isUniqe = (db.Modules.Any(c => c.Name.ToLower() == module.Name.ToLower() && (c.CourseId != module.CourseId));
             return isNotUniqe;
         }
 
@@ -139,7 +137,7 @@ namespace Laja.Services
             return true;
         }
 
-        public bool CheckModulePeriodAgainstCourse(Module module)
+        public bool CheckModulePeriodAgainstCourse(Module module)   
         {
             var targetCourse = db.Courses.Find(module.CourseId);
             if (EndDateIsEqualAfterStartDate(targetCourse.StartDate, module.StartDate) && EndDateIsEqualAfterStartDate(module.EndDate, targetCourse.EndDate))
