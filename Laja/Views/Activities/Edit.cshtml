@@ -86,16 +86,16 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="button" value="Tillbaka till ..." class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Teacher", new { courseId = Model.ModuleId })'" /> |
+                <input type="button" value="Tillbaka till aktivitet" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Teacher", new { @courseId = ViewBag.CourseId})'" /> |
 
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Spara" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @*@Html.ActionLink("Back to List", "Index")*@
 </div>
 
 @section Scripts {

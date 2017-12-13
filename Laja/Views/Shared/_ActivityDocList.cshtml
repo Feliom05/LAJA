@@ -1,6 +1,6 @@
 ﻿@{
-    ViewBag.Text = Model.FileName.Substring(0, @Model.FileName.IndexOf('_')).ToString();
-
+    //ViewBag.Text = Model.FileName.Substring(0, @Model.FileName.IndexOf('_')).ToString();
+    ViewBag.Text = Model.Description;
 
     var fileName = @Model.FileName.Substring(0, @Model.FileName.IndexOf('_')).ToString();
 

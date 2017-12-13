@@ -126,6 +126,7 @@ namespace Laja.Controllers
             ViewBag.ModuleStart = module.StartDate.ToShortDateString();
             ViewBag.ModuleEnd = module.EndDate.ToShortDateString();
             //ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name", activity.ModuleId);
+            ViewBag.CourseId = module.CourseId;
             return View(activity);
         }
 

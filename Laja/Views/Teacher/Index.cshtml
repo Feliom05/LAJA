@@ -81,21 +81,23 @@
                                         <div class="panel-body">
 
                                             <div class="col-md-12">
-                                                <div class="col-md-11" style="padding-left:1px;">
+                                                <div class="col-md-12" style="padding-left:1px;">
                                                     @Html.ActionLink("Beskrivning:", "Edit", "Modules", new { id = module.Id }, new { @class = "glyphicon glyphicon-edit" })
                                                     @Html.DisplayFor(model => module.Description)
                                                 </div>
-                                                <div class="col-md-1">
-                                                    @Html.ActionLink("Dokument", "Create", "Documents", new { id = module.Id, c = "module" }, new { @class = "glyphicon glyphicon-plus" })
-                                                </div>
+
                                             </div>
 
                                             <div class="col-md-12">
+
+
                                                 @{
                                             if (module.Documents.Count > 0)
                                             {
                                                 <br />
-                                                <h4 class="panel-title"><b>Dokument</b></h4>
+
+                                                
+                                                <p>@Html.ActionLink("Dokument", "Create", "Documents", new { id = module.Id, c = "module" }, new { @class = "glyphicon glyphicon-plus" })</p>
                                                 <div class="col-md-12">
                                                     @foreach (var doc in module.Documents)
                                             {

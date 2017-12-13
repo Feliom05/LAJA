@@ -120,7 +120,7 @@
                                                             <div class="row col-md-12">
                                                                 <div class="col-md-4" style="padding-left:1px;">
                                                                     @*<b>@Html.DisplayNameFor(model => activity.Name)</b>*@
-                                                                    <p>@Html.DisplayFor(model => activity.Name)</p>
+                                                                    <p><b>@Html.DisplayFor(model => activity.Name)</b></p>
                                                                 </div>
 
                                                                 <div class="col-md-3">
@@ -165,7 +165,7 @@
                                                                 if (activity.Documents.Count > 0)
                                                                 {
                                                                     <hr />
-                                                                    <h6 class="panel-title">Dokument</h6>
+                                                                    <span>Dokument</span>
 
                                                                     <div class="col-md-12" style="padding-left:1px;">
                                                                         @foreach (var doc in activity.Documents)

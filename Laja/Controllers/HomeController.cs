@@ -22,7 +22,7 @@ namespace Laja.Controllers
             }
             else
             {
-                ViewBag.Courses = db.Courses.Include(c => c.Modules).Include(c => c.Students).ToList();
+                ViewBag.Courses = db.Courses.Include(c => c.Modules).Include(c => c.Students).OrderBy(c => c.StartDate).ToList();
                 return View();
             }
         }
