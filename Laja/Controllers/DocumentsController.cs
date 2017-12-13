@@ -351,6 +351,51 @@ namespace Laja.Controllers
             }
             return courseIdToBeUsedForBack;
         }
+
+        // GET: Documents/Edit/5
+        public ActionResult SaveFeedBack(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Document document = db.Documents.Find(id);
+            if (document == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.ActivityId = new SelectList(db.Activities, "Id", "Name", document.ActivityId);
+            ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name", document.CourseId);
+            ViewBag.DocTypeId = new SelectList(db.DocTypes, "Id", "Extension", document.DocTypeId);
+            ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name", document.ModuleId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName", document.UserId);
+            return View(document);
+        }
+
+        // POST: Documents/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveFeedBack([Bind(Include = "Id,FeedBack")] Document document)
+        {
+            if (document.FeedBack != "")
+            {
+               
+                var doc = db.Documents.Find(document.Id);
+                doc.FeedBack = Request.Form["feedBack"];
+                db.Entry(doc).State = EntityState.Modified;
+                db.SaveChanges();
+                
+                return RedirectToAction("Index");
+            }
+          
+            return View();
+        }
+
+
+       
+
     }
 
 }

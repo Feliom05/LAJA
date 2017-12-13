@@ -1,6 +1,6 @@
 ﻿@{
     //ViewBag.Text = Model.FileName.Substring(0, @Model.FileName.IndexOf('_')).ToString();
-    ViewBag.Text = Model.Description;
+    ViewBag.Text = Model.Description ?? "-";
     if (User.Identity.Name == Model.User.UserName || Model.IsShared)
     {
         var fileName = @Model.FileName.Substring(0, @Model.FileName.IndexOf('_')).ToString();
@@ -13,9 +13,9 @@
     @{
         if (@Model.FeedBack != null)
         {
-            <span class="glyphicon glyphicon-comment" data-toggle="tooltip" data-placement="top" title="@Model.FeedBack"></span>
+            <span class="glyphicon glyphicon-comment" data-toggle="popover" data-placement="top" title="Återkoppling" data-content="@Model.FeedBack"></span>
         }
-      }
+    }
 
 </div>
     }

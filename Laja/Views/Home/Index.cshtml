@@ -9,7 +9,6 @@
 @{
     ViewBag.Title = "Startsida";
 }
-<br />
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -50,17 +49,17 @@
 
 <br /><hr />
 <div class="row">
-    @foreach (var cuorse in ViewBag.Courses)
+    @foreach (var course in ViewBag.Courses)
     {
         <div class="col-md-3">
             <div class="thumbnail" id="rcorners4">
                 
                 
                 <div class="caption" >
-                    <h3>@cuorse.Name</h3>
-                    <p><span>@cuorse.StartDate.ToShortDateString()</span> &nbsp;&nbsp;<span class="glyphicon glyphicon-arrow-right"></span>&nbsp;&nbsp; <span>@cuorse.StartDate.ToShortDateString()</span></p>
-                    <p>@cuorse.Description<p>
-                    <a href="#" class="btn btn-danger" role="button">mer info.</a></p>
+                    <h3>@course.Name</h3>
+                    <p><span>@course.StartDate.ToShortDateString()</span> &nbsp;&nbsp;»»»&nbsp;&nbsp; <span>@course.StartDate.ToShortDateString()</span></p>
+                    <p>@course.Description<p>
+                    <a href="~/Teacher?courseid=@course.Id" class="btn btn-danger" role="button" >mer info.</a></p>
                 </div>
             </div>
         </div>

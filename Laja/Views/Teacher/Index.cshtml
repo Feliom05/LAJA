@@ -183,8 +183,11 @@
                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                                                                    <h4 class="modal-title" id="myModalLabel">Inlämning</h4>
                                                                                                </div>
+
                                                                                                <div id="modal-body_@activity.Id" class="modal-body">
-                                                                                                   @Html.Action("Index", "SubmitAssignment", new { activityId = activity.Id });
+                                                                                                   <div id="Printable_@activity">
+                                                                                                       @Html.Action("Index", "SubmitAssignment", new { activityId = activity.Id });
+                                                                                                   </div>
 
                                                                                                </div>
                                                                                                <div class="modal-footer">
