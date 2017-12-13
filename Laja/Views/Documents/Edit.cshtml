@@ -105,7 +105,16 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <div>
+        @if (User.IsInRole("Lärare"))
+    {
+        @Html.ActionLink("Tillbaka", "Index", "Teacher", new { @courseId = ViewBag.BackCourseId }, null)
+}
+else
+{
+    @Html.ActionLink("Tillbaka", "Index", "Student", new { @courseId = ViewBag.BackCourseId }, null)
+}
+    </div>
 </div>
 
 @section Scripts {

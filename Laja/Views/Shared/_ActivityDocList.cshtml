@@ -1,11 +1,16 @@
 ﻿@{
     ViewBag.Text = Model.FileName.Substring(0, @Model.FileName.IndexOf('_')).ToString();
-    
-    
-        var fileName = @Model.FileName.Substring(0, @Model.FileName.IndexOf('_')).ToString();
 
-        <div>
-            @Html.ActionLink((string)ViewBag.Text, "Download", "Documents", new { ImageName = Model.FileName.ToString() }, new { @class = "btn btn-link" }) 
-        </div>
+
+    var fileName = @Model.FileName.Substring(0, @Model.FileName.IndexOf('_')).ToString();
+
+<div>
+    @Html.ActionLink((string)ViewBag.Text, "Download", "Documents", new { ImageName = Model.FileName.ToString() }, new { @class = "btn btn-link" })
+    @{if (@Model.FeedBack != null)
+        {
+    <span class="glyphicon glyphicon-comment" data-toggle="popover" data-placement="top" title="Återkoppling" data-content="@Model.FeedBack"></span>
+            }
+        }
+</div>
     
 }
