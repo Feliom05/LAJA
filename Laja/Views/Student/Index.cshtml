@@ -25,14 +25,15 @@
             </div>
         </div>
         <br /><br />
+       
         <div class="row">
             <div class="col-md-12">
                 <div class="tab" role="tabpanel">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
-                        <li class="active" role="presentation"><a role="tab" aria-controls="home" href="#Section1" data-toggle="tab">Moduler <img style="width:25px; height:25px;" src="~/Images/Modules.jpg" /></a></li>
-                        <li role="presentation"><a role="tab" aria-controls="Students" href="#Section2" data-toggle="tab">Elever <img style="width:25px; height:25px;" src="~/Images/Student.png" /></a></li>
-                        <li role="presentation"><a role="tab" aria-controls="Documents" href="#Section3" data-toggle="tab">Dokument <img style="width:25px; height:25px;" src="~/Images/Doc.ico" /></a></li>
+                        <li class="active" role="presentation"><a role="tab" aria-controls="home" href="#Section1" data-toggle="tab">Moduler <img style="width:20px; height:20px;" src="~/Images/Modules.jpg" /></a></li>
+                        <li role="presentation"><a role="tab" aria-controls="Students" href="#Section2" data-toggle="tab">Elever <img style="width:20px; height:20px;" src="~/Images/Student.png" /></a></li>
+                        <li role="presentation"><a role="tab" aria-controls="Documents" href="#Section3" data-toggle="tab">Dokument <img style="width:20px; height:20px;" src="~/Images/Doc.ico" /></a></li>
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content tabs">
@@ -65,8 +66,8 @@
                                             </div>
                                             <div class="col-md-4">
 
-                                                <img style="width:25px; height:25px;" src="~/Images/Activity.png" /> Aktiviteter &nbsp;<span class="badge">@module.Activities.Count()</span>&nbsp;&nbsp;
-                                                <img style="width:25px; height:25px;" src="~/Images/Doc.ico" />Dokument &nbsp;<span class="badge">@module.Documents.Count()</span>
+                                                <img style="width:20px; height:20px;" src="~/Images/Activity.png" /> &nbsp;<span class="badge">@module.Activities.Count()</span>&nbsp;&nbsp;
+                                                <img style="width:20x; height:20px;" src="~/Images/Doc.ico" /> &nbsp;<span class="badge">@module.Documents.Count()</span>
 
 
                                             </div>
@@ -75,21 +76,34 @@
                                     <div id="@($"collapse{module.Id.ToString()}")" class="panel-collapse collapse out @activeModule" role="tabpanel" aria-labelledby="@($"heading{module.Id.ToString()}")">
                                         <div class="panel-body">
                                             <div class="col-md-12" style="padding-left:1px;">
-                                                <b> Beskrivning: </b>
-                                                @Html.DisplayFor(model => module.Description)
+                                               <div class="col-md-10">
+                                                   <b> Beskrivning: </b>
+                                                   @Html.DisplayFor(model => module.Description)
+                                               </div>
+                                               <div class="col-md-2">
+                                                   @{
+                                                       if (module.Documents.Count > 0)
+                                                       {
+                                                        <a href="#ModDoc_@module.Id" data-toggle="collapse" style="text-decoration:none;"><img style="width:20px; height:20px;" src="~/Images/Doc.ico" />»»</a>
+
+                                                       }
+                                                }
+                                               </div>
                                             </div>
                                             <div class="col-md-12">
                                                 @{
-                                                if (module.Documents.Count > 0)
-                                                {
-                                                    <br />
-                                                    <h4 class="panel-title">Dokument</h4>
-                                                    <div class="col-md-12">
-                                                        @foreach (var doc in module.Documents)
+                                                    if (module.Documents.Count > 0)
                                                     {
-                                                        @Html.Partial("_DocumentsList", doc);
-                                                }
+                                                     <br />
+                                                     <div id="ModDoc_@module.Id" class="collapse">
+                                                        <div class="col-md-12 " style="padding-left:1px;">
+                                                            @foreach (var doc in module.Documents)
+                                                            {
+                                                                @Html.Partial("_DocumentsList", doc)
+                                                            }
+                                                        </div>
                                                     </div>
+                                                   
                                             }
                                                 }
                                             </div>
@@ -99,86 +113,100 @@
                                             if (module.Activities.Count > 0)
                                             {
                                                 <br />
-                                                <h4 class="panel-title">Aktiviteter</h4>
+                                                
                                                 <div class="col-md-12">
-                                                    @*<div class="col-md-4" style="padding-left:1px;">
-                                                        <b>Name</b>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <b>DeadLine</b>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <b>Startdatum</b>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <b>Slutdatum</b>
-                                                    </div>*@
                                                     <div class="panel-body panel-info" style="padding-left:0px;">
-                                                        @foreach (var activity in module.Activities.OrderBy(a => a.StartDate))
-                                                    {
-                                                        <div class="panel panel-info col-md-12 ">
-                                                            <div class="row col-md-12">
-                                                                <div class="col-md-4" style="padding-left:1px;">
-                                                                    @*<b>@Html.DisplayNameFor(model => activity.Name)</b>*@
-                                                                    <p>@Html.DisplayFor(model => activity.Name)</p>
-                                                                </div>
-
-                                                                <div class="col-md-3">
-                                                                    @*<b>@Html.DisplayNameFor(model => activity.StartDate)</b>*@
-
-                                                                    <span> @activity.StartDate.ToShortDateString() </span>&nbsp; »»&nbsp; <span> @activity.EndDate.ToShortDateString()</span>
-                                                                </div>
-
-
-                                                                <div class="col-md-5">
-                                                                    @*<b>@Html.DisplayNameFor(model => activity.StartDate)</b>*@
-                                                                    @*<p>@Html.DisplayFor(model => activity.DeadLine)</p>*@
-                                                                    @{if (activity.DeadLine != null)
-                                                                    {
-                                                                        <img style="width:25px; height:25px;" src="~/Images/Deadline.png" alt="Deadline" title="Deadline" /> @Html.DisplayFor(model => activity.DeadLine)
-                                                                        @Html.Partial("_ActivityStatus", activity);
-                                                                }
-                                                                    }
-
-                                                                </div>
-
-                                                            </div>
-
-                                                            <div class="col-md-12" style="padding-left:1px;">
-                                                                <div class="col-md-7">
-                                                                    @*<b> Beskrivning: </b>*@
-                                                                    @Html.DisplayFor(model => activity.Description)
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    @{
-                                                                    if (activity.DeadLine != null)
-                                                                    {
-                                                                        @*@Html.Partial("_ActivityStatus", activity);*@
-                                                                        @*<b>Fil Inlämning</b>*@
-                                                                        @Html.ActionLink("Ladda upp inlämningsuppgift", "Create", "Documents", new { id = activity.Id, c = "activity", }, new { @class = "glyphicon glyphicon-plus" })
-                                                                }
-                                                                    }
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12" style="padding-left:0px;">
-                                                                @{
-                                                                if (activity.Documents.Count > 0)
-                                                                {
-                                                                    <hr />
-                                                                    <h6 class="panel-title">Dokument</h6>
-
-                                                                    <div class="col-md-12" style="padding-left:1px;">
-                                                                        @foreach (var doc in activity.Documents)
-                                                                    {
-                                                                        @Html.Partial("_DocumentsList", doc)
-                                                                }
-                                                                    </div>
+                                                        <ul class="nav nav-tabs" role="tablist">
+                                                            @foreach (var activity in module.Activities.OrderBy(a => a.StartDate))
+                                                            {
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link active" data-toggle="tab" href="#@activity.Name.Replace('#', '_').Replace(' ', '_').Replace('-','_')@activity.Id">@activity.Name</a>
+                                                                </li>
                                                             }
-                                                                }
-                                                            </div>
+                                                        </ul>
+                                                        <div class="tab-content">
+                                                            @foreach (var activity in module.Activities.OrderBy(a => a.StartDate))
+                                                            {
+
+                                                                <div id="@activity.Name.Replace('#', '_').Replace(' ', '_').Replace('-','_')@activity.Id" class="container tab-pane">
+                                                                   
+                                                                        <div class="row col-md-12" >
+                                                                            <div class="col-md-3" style="padding-left:0px;">
+                                                                                @*<b>@Html.DisplayNameFor(model => activity.Name)</b>*@
+                                                                                <p>@Html.DisplayFor(model => activity.Description)</p>
+                                                                            </div>
+
+                                                                            <div class="col-md-3">
+                                                                                @*<b>@Html.DisplayNameFor(model => activity.StartDate)</b>*@
+
+                                                                                <span> @activity.StartDate.ToShortDateString() </span>&nbsp; »»&nbsp; <span> @activity.EndDate.ToShortDateString()</span>
+                                                                            </div>
+
+
+                                                                            <div class="col-md-3">
+                                                                               
+                                                                                @{
+                                                                                    if (activity.DeadLine != null)
+                                                                                    {
+                                                                                        var days = DateTime.Parse(activity.DeadLine.Value.ToString()).Subtract(DateTime.Now).Days;
+                                                                                        var hours = days * 60;
+                                                                                        <span>Deadline: </span>
+                                                                                        if (days > 0)
+                                                                                        {
+                                                                                          <span class="alert-success" style="border-style:double;color:black">@Html.DisplayFor(model => activity.DeadLine)</span>
+                                                                                        }
+                                                                                        else if (days == 0 && hours > 0)
+                                                                                        {
+                                                                                            <span class="alert-warning" style="border-style:double;color:black">@Html.DisplayFor(model => activity.DeadLine)</span>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <span class="alert-danger" style="border-style:double;color:black">@Html.DisplayFor(model => activity.DeadLine)</span>
+                                                                                        }
+                                                                                        @*@Html.Partial("_ActivityStatus", activity);*@
+                                                                                    }
+                                                                                }
+
+                                                                            </div>
+                                                                             <div class="col-md-2">
+                                                                                    @{
+                                                                                        if (activity.DeadLine != null)
+                                                                                        {
+                                                                                            @*@Html.Partial("_ActivityStatus", activity);*@
+                                                                                            @*<b>Fil Inlämning</b>*@
+                                                                                            @Html.ActionLink("Lämna in uppgift", "Create", "Documents", new { id = activity.Id, c = "activity", }, new { @class = "glyphicon glyphicon-plus" })
+                                                                                        }
+                                                                                    }
+                                                                                </div>
+
+                                                                            </div>
+                                                                        <div class="col-md-12" style="padding-left:0px;">
+                                                                           @{
+
+                                                                               if (activity.Documents.Count > 0)
+                                                                               {
+                                                                               
+                                                                                    <a href="#ActDoc_@activity.Id"  data-toggle="collapse" style="text-decoration:none;"><img style="width:20px; height:20px;" src="~/Images/Doc.ico" />»»</a>
+                                                                                    <div id="ActDoc_@activity.Id" class="collapse">
+                                                                                        <div class="col-md-12 " style="padding-left:1px;">
+                                                                                            @foreach (var doc in activity.Documents)
+                                                                                            {
+                                                                                                @Html.Partial("_DocumentsList", doc)
+                                                                                            }
+                                                                                        </div>
+                                                                                    </div>
+                                                                                }
+                                                                               }
+                                                                                </div>
+
+
+                                                                </div>
+
+
+                                                            }
                                                         </div>
 
-                                                }
+                                                   
                                                     </div>
                                                 </div>
                                         }

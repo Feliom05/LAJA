@@ -5,8 +5,8 @@
     {
         var fileName = @Model.FileName.Substring(0, @Model.FileName.IndexOf('_')).ToString();
 
-<div class="col-md-4" style="padding-left:0px;">
-    @Html.ActionLink((string)ViewBag.Text, "Download", "Documents", new { ImageName = Model.FileName.ToString() }, new { @class = "btn btn-link" })   
+<div class="col-md-3"  style="padding-left:0px;">
+    @Html.ActionLink((string)ViewBag.Text.Trim(), "Download", "Documents", new { ImageName = Model.FileName.ToString() }, new { @class = "btn btn-link" })   
     @{if (Model.IsShared)
         {<span class="glyphicon glyphicon-share" title="Delat dokument" ></span> }
       }

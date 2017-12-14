@@ -57,9 +57,9 @@
                 
                 
                 <div class="caption" >
-                    <h3>@cuorse.Name</h3>
-                    <p><span>@cuorse.StartDate.ToShortDateString()</span> &nbsp;&nbsp;»»»&nbsp;&nbsp; <span>@cuorse.StartDate.ToShortDateString()</span></p>
-                    <p>@cuorse.Description<p>
+                    <h3>@course.Name</h3>
+                    <p><span>@course.StartDate.ToShortDateString()</span> &nbsp;&nbsp;»»»&nbsp;&nbsp; <span>@course.StartDate.ToShortDateString()</span></p>
+                    <p>@course.Description<p>
                     <a href="#" class="btn btn-danger" role="button">mer info.</a></p>
                 </div>
             </div>
@@ -80,20 +80,20 @@
                     <th>Start</th>
                     <th>Slut</th>
                 </tr>
-                @foreach (var cuorse in ViewBag.Courses)
+                @foreach (var course in ViewBag.Courses)
                 {
                     <tr>
                         <td>
-                            @cuorse.Name
+                            @course.Name
                         </td>
                         <td>
-                            @cuorse.Description
+                            @course.Description
                         </td>
                         <td>
-                            @cuorse.StartDate.ToShortDateString()
+                            @course.StartDate.ToShortDateString()
                         </td>
                         <td>
-                            @cuorse.EndDate.ToShortDateString()
+                            @course.EndDate.ToShortDateString()
                         </td>
                     </tr>
                 }

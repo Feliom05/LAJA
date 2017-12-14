@@ -59,7 +59,7 @@ namespace Laja.Controllers
             if (ModelState.IsValid)
             {
 
-                var NameExists = validationService.UniqName(course);
+                var NameExists = validationService.UniqueName(course);
                 if (NameExists)
                 {
                     ViewBag.Error = "Kursnamnet används redan. Var god ange ett annat namn, tack.";
@@ -107,7 +107,7 @@ namespace Laja.Controllers
             {
 
 
-                var NameExists = validationService.UniqName(course);
+                var NameExists = validationService.UniqueName(course);
                 if (NameExists)
                 {
                     ViewBag.Error = "Kursnamnet används redan. Var god ange ett annat namn, tack.";

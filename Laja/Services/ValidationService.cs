@@ -45,16 +45,11 @@ namespace Laja.Services
             return (documents > 0) ? true : false;
         }
 
-        public bool UniqName(Course course)
+        public bool UniqueName(Course course)
         {
-            bool isUniqe = false;
-            //var targetCourse = db.Courses.Find(course.Id);
-            //var a = targetCourse.Name.ToLower() == course.Name.ToLower();
-            //var b = targetCourse.Id == course.Id;
-            //isUniqe = (a && b);
-            //isUniqe = (targetCourse.Name.ToLower() == course.Name.ToLower() && targetCourse.Id != course.Id);
-            isUniqe = db.Courses.Any(c => c.Name.ToLower() == course.Name.ToLower() && c.Id != course.Id);
-            return isUniqe;
+            bool isUnique = false;
+            isUnique = db.Courses.Any(c => c.Name.ToLower() == course.Name.ToLower() && c.Id != course.Id);
+            return isUnique;
         }
 
         public bool CheckPeriod(Course course)
@@ -107,22 +102,22 @@ namespace Laja.Services
             return (documents > 0) ? true : false;
         }
 
-        public bool UniqName(Module module)
+        public bool UniqueName(Module module)
         {
-            bool isNotUniqe = false;
+            bool isNotUnique = false;
 
             var moduleNames = db.Modules.Where(m => m.CourseId == module.CourseId).ToList();
             foreach (var mod in moduleNames)
             {
                 if (mod.Name == module.Name)
                 {
-                    isNotUniqe = true;
+                    isNotUnique = true;
                     break;
                 }
             }
 
             //isUniqe = (db.Modules.Any(c => c.Name.ToLower() == module.Name.ToLower() && (c.CourseId != module.CourseId));
-            return isNotUniqe;
+            return isNotUnique;
         }
 
         public bool CheckModulePeriodAgainstActivities(Module module)
@@ -162,11 +157,11 @@ namespace Laja.Services
             return (documents > 0) ? true : false;
         }
        
-        public bool UniqName(Activity activity)
+        public bool UniqueName(Activity activity)
         {
-            bool isUniqe = false;
-            isUniqe = db.Activities.Any(c => c.Name.ToLower() == activity.Name.ToLower() && c.ModuleId != activity.ModuleId);
-            return isUniqe;
+            bool isUnique = false;
+            isUnique = db.Activities.Any(c => c.Name.ToLower() == activity.Name.ToLower() && c.ModuleId != activity.ModuleId);
+            return isUnique;
         }
 
         public bool CheckPeriod(Activity activity)

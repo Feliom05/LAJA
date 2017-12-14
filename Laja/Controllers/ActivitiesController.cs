@@ -80,7 +80,7 @@ namespace Laja.Controllers
         {
             if (ModelState.IsValid)
             {
-                var activityExists = validationService.UniqName(activity);
+                var activityExists = validationService.UniqueName(activity);
                 if (activityExists)
                 {
                     ViewBag.Error = "Aktitivtetnamnet används redan. Var god ange ett annat namn, tack.";

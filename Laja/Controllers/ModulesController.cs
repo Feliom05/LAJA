@@ -73,7 +73,7 @@ namespace Laja.Controllers
             if (ModelState.IsValid)
             {
 
-                var moduleExists = validationService.UniqName(module);
+                var moduleExists = validationService.UniqueName(module);
                 if (moduleExists)
                 {
                     ViewBag.Error = "Modulnamnet används redan. Var god ange ett annat namn, tack.";
@@ -135,7 +135,7 @@ namespace Laja.Controllers
             if (ModelState.IsValid)
             {
 
-                //var moduleExists = validationService.UniqName(module);
+                //var moduleExists = validationService.UniqueName(module);
                 //if (moduleExists)
                 //{
                 //    ViewBag.Error = "Modulnamnet används redan. Var god ange ett annat namn, tack.";

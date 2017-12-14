@@ -92,17 +92,17 @@
 
                                             <div class="col-md-12">
                                                 @{
-                                            if (module.Documents.Count > 0)
-                                            {
-                                                <br />
-                                                <h4 class="panel-title"><b>Dokument</b></h4>
-                                                <div class="col-md-12">
-                                                    @foreach (var doc in module.Documents)
-                                            {
-                                                @Html.Partial("_DocumentsList", doc);
-                                    }
-                                                </div>
-                                    }
+                                                    if (module.Documents.Count > 0)
+                                                    {
+                                                        <br />
+                                                        <h4 class="panel-title"><b>Dokument</b></h4>
+                                                        <div class="col-md-12">
+                                                        @foreach (var doc in module.Documents)
+                                                        {
+                                                          @Html.Partial("_DocumentsList", doc);
+                                                        }
+                                                        </div>
+                                                    }
                                                 }
                                                 @Html.ActionLink("Aktivitet", "Create", "Activities", new { moduleId = module.Id }, new { @class = "glyphicon glyphicon-plus" })
 
@@ -132,7 +132,7 @@
                                             </div>*@
                                                 <div class="panel-body" style="padding-left:0px;">
 
-                                                    @foreach (var activity in module.Activities.OrderBy(a => a.StartDate))
+                                            @foreach (var activity in module.Activities.OrderBy(a => a.StartDate))
                                             {
                                                 <div class="panel panel-info col-md-12 ">
                                                     <div class="row col-md-12">
@@ -146,18 +146,16 @@
                                                         </div>
                                                         <div class="col-md-5">
                                                             @*<b>@Html.DisplayNameFor(model => activity.StartDate)</b>*@
-                                                            @{if (activity.DeadLine != null)
-                                                        {
-                                                            <img style="width:25px; height:25px;" src="~/Images/Deadline.png" alt="Deadline" title="Deadline" /> @Html.DisplayFor(model => activity.DeadLine)
-                                                            @Html.Partial("_ActivityStatus", activity);
-                                                }
+                                                            @{
+                                                                if (activity.DeadLine != null)
+                                                                {
+                                                                    <img style="width:25px; height:25px;" src="~/Images/Deadline.png" alt="Deadline" title="Deadline" /> @Html.DisplayFor(model => activity.DeadLine)
+                                                                    @Html.Partial("_ActivityStatus", activity);
+                                                                }
                                                             }
 
                                                             @*<p>@Html.DisplayFor(model => activity.DeadLine)</p>*@
                                                         </div>
-
-
-
                                                     </div>
 
                                                     <div class="col-md-12" style="padding-left:1px;">
@@ -205,21 +203,21 @@
                                                     </div>
                                                     <div class="col-md-12" style="padding-left:0px;">
                                                         @{
-                                                    if (@activity.Documents.Count > 0)
-                                                    {
-                                                        <hr />
+                                                            //if (@activity.Documents.Count > 0)
+                                                            //{
+                                                                <hr />
 
-                                                        <div class="col-md-12 " style="padding-left:1px;">
-                                                            @Html.ActionLink("Dokument", "Create", "Documents", new { id = activity.Id, c = "activity" }, new { @class = "glyphicon glyphicon-plus" })
-                                                        </div>
-                                                        <div class="col-md-12 " style="padding-left:1px;">
-                                                            @foreach (var doc in activity.Documents)
-                                                    {
-                                                        @Html.Partial("_DocumentsList", doc);
-                                            }
-                                                        </div>
+                                                                <div class="col-md-12 " style="padding-left:1px;">
+                                                                    @Html.ActionLink("Dokument", "Create", "Documents", new { id = activity.Id, c = "activity" }, new { @class = "glyphicon glyphicon-plus" })
+                                                                </div>
+                                                                <div class="col-md-12 " style="padding-left:1px;">
+                                                                @foreach (var doc in activity.Documents)
+                                                                {
+                                                                   @Html.Partial("_DocumentsList", doc);
+                                                                }
+                                                                </div>
 
-                                            }
+                                                           // }
                                                         }
                                                     </div>
                                                 </div>
