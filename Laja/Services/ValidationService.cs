@@ -137,7 +137,7 @@ namespace Laja.Services
             return true;
         }
 
-        public bool CheckModulePeriodAgainstCourse(Module module)   
+        public bool CheckModulePeriodAgainstCourse(Module module)
         {
             var targetCourse = db.Courses.Find(module.CourseId);
             if (EndDateIsEqualAfterStartDate(targetCourse.StartDate, module.StartDate) && EndDateIsEqualAfterStartDate(module.EndDate, targetCourse.EndDate))
@@ -159,7 +159,7 @@ namespace Laja.Services
             documents = db.Activities.Find(activity.Id).Documents.Count();
             return (documents > 0) ? true : false;
         }
-       
+
         public bool UniqName(Activity activity)
         {
             bool isUniqe = false;
@@ -192,6 +192,8 @@ namespace Laja.Services
             else
                 return true;
         }
+
+
         private bool EndDateIsAfterStartDate(DateTime startDate, DateTime endDate)
         {
             if (endDate.Subtract(startDate).TotalDays <= 0)

@@ -33,16 +33,16 @@
 
                                 <li>@Html.ActionLink("Kurser", "Index", "Courses")</li>
                                 <li>@Html.ActionLink("Registrera lärare", "Create", "User", new { @Role = "Lärare" }, null)</li>
-                                <li>@Html.ActionLink("Dokument", "Index", "Documents")</li>
-                                <li>@Html.ActionLink("Inlämningsuppgifter", "Assignments", "Documents")</li>
+                                //<li>@Html.ActionLink("Dokument", "Index", "Documents")</li>
+                                //<li>@Html.ActionLink("Inlämningsuppgifter", "Assignments", "Documents")</li>
                             }
                             else
                             {
                                 if (User.IsInRole("Elev"))
                                 {
                                     <li>@Html.ActionLink("Min sida", "Index", "Student")</li>
-                                    <li>@Html.ActionLink("Dokument", "Index", "Documents")</li>
-                                    <li>@Html.ActionLink("Inlämningsuppgifter", "Assignments", "Documents")</li>
+                                    //<li>@Html.ActionLink("Dokument", "Index", "Documents")</li>
+                                    //<li>@Html.ActionLink("Inlämningsuppgifter", "Assignments", "Documents")</li>
                                 }
                             }
                         }

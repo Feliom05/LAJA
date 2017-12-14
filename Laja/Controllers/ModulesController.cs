@@ -45,7 +45,6 @@ namespace Laja.Controllers
         [Authorize(Roles = "Lärare")]
         public ActionResult Create(int? courseId)
         {
-            //ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name");
             if (courseId != null)
             {
                 ViewBag.CourseSelectedId = courseId;
@@ -60,8 +59,6 @@ namespace Laja.Controllers
         }
 
         // POST: Modules/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize(Roles = "Lärare")]
         [HttpPost]
         [ValidateAntiForgeryToken]

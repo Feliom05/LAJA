@@ -86,15 +86,6 @@ namespace Laja.Controllers
 
             TempData.Remove("c");
             TempData.Add("c", c);
-            //isShared = ViewBag.IsShard;
-
-
-            //Candidate for refactoring - To find the Course ID to be used by "Back To" in the Create View
-
-
-
-            //int courseIdToBeUsedForBack = findCourseIdforDoc(id, c);
-
 
             ViewBag.CourseId = findCourseIdforDoc(id, c);
 
